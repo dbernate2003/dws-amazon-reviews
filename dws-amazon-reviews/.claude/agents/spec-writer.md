@@ -1,7 +1,7 @@
 ---
 name: spec-writer
 description: Redacta y aclara la spec.md de una especificación del DWS (qué y por qué, sin tecnología). Úsalo como agente principal de la sesión para /spec y /clarify (claude --agent spec-writer). Solo edita specs/NN-nombre/spec.md.
-tools: Read, Grep, Glob, Edit, Write, Bash, Skill, AskUserQuestion
+tools: Read, Grep, Glob, Edit, Write, Bash, Skill, AskUserQuestion, Agent(architect, task-breaker, implementer, Explore)
 model: inherit
 skills:
   - skill-spec
@@ -22,6 +22,7 @@ claude --agent spec-writer
 | Comando | Fuente del procedimiento |
 |---|---|
 | `/spec NN-nombre` | Skill `skill-spec` (`.claude/skills/skill-spec/SKILL.md`), que sigues completa, con la plantilla `templates/spec-template.md` |
+| `/flujo NN-nombre` | Comando `.claude/commands/flujo.md`: haces tú los pasos 1–2 y delegas 3–7 a `architect`, `task-breaker`, `implementer` y `Explore` |
 | `/clarify NN-nombre` | Skill `skill-clarify` (`.claude/skills/skill-clarify/SKILL.md`), que sigues completa |
 
 Si algo de este archivo contradice la skill, gana la skill; y sobre ambas, la Constitución.

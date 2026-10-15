@@ -71,13 +71,13 @@ Copia la estructura de `PLANTILLA_SPEC` tal cual (encabezado, secciones 1 a 7 y 
 | Sección | Cómo llenarla |
 |---|---|
 | Encabezado | Rama = `NN-nombre`. Responsable y segundo validador desde `GESTION/roles.md`; si no figuran, `[NECESITA ACLARACIÓN]`. «Depende de» = spec anterior del orden XII. Principios aplicables (siempre incluye XII y XIII). ADR relacionados. Versión vigente de la Constitución · `Borrador`. |
-| 1. Resumen | Qué, para quién, por qué ahora, en lenguaje de negocio. Los «resultados esperados» llevan ID `CE-NN-MM` (la plantilla dice `SC-xx`; manda la convención de la Constitución) y son medibles (cifra, archivo, consulta o comando), sin tecnología. Incluye un criterio de éxito de legibilidad (tabla XIII-C). |
-| 2. Requisitos | EARS: una oración, un patrón, sujeto con nombre, `DEBE` como único modal, prioridad `[D]/[S]/[P]` y *Verif.:* (test, consulta o comando). IDs `RF-NN-MM` y `RQ-NN-MM`. Cubre con el patrón «No deseado» los datos inválidos, los duplicados y la re-ejecución del mismo paso (IX). Añade una subsección «Requisitos no funcionales de legibilidad (Const. XIII)» con IDs `RNF-NN-MM` que citen `(Const. XIII.n)` según los artefactos que produzca la entrega (SQL, DDL, pruebas, documentos), sin tecnología. |
+| 1. Resumen | Qué, para quién, por qué ahora, en lenguaje de negocio. Los «resultados esperados» llevan ID `CE-NN-MM` y son medibles (cifra, archivo, consulta o comando), sin tecnología. Conserva el criterio de éxito de legibilidad de la plantilla (tabla XIII-C). |
+| 2. Requisitos | EARS: una oración, un patrón, sujeto con nombre, `DEBE` como único modal, prioridad `[D]/[S]/[P]` y *Verif.:* (test, consulta o comando). IDs `RF-NN-MM` y `RQ-NN-MM`. Cubre con el patrón «No deseado» los datos inválidos, los duplicados y la re-ejecución del mismo paso (IX). En §2.3 deja los `RNF-NN-MM` de legibilidad que correspondan a los artefactos que produce la entrega y borra los que no apliquen. |
 | 3. Datos y dominio | Conceptos de negocio, nivel de detalle y relaciones. Los campos de la fuente citan su documentación; lo que la fuente NO trae se dice. Sin tablas ni columnas de base de datos. |
 | 4. Restricciones propias | Solo cifras de esta entrega, con valor y unidad. Lo que fija la Constitución (costo $0, local, datos no versionados…) no se repite. Cifra desconocida = pendiente, no estimación. |
-| 5. Fuera de alcance | Lo que no se construye y a qué spec pertenece. Supuestos y restricciones heredadas citando el principio. En «Supuestos» lista «Principios transversales aplicables» con XIII como mínimo (tabla XIII-C). |
+| 5. Fuera de alcance | Lo que no se construye y a qué spec pertenece. Supuestos y restricciones heredadas citando el principio. Conserva «Principios transversales aplicables» con XIII como mínimo y ajusta los IDs que cita. |
 | 6. Preguntas y decisiones | Una fila `DQ-MM` por cada `[NECESITA ACLARACIÓN]`. Los ADR pendientes globales van como «Escalada a ADR». |
-| 7. Criterios de finalización | Los cinco primeros de la plantilla no se quitan (espejan la compuerta). Añade los propios, verificables. |
+| 7. Criterios de finalización | Los seis primeros de la plantilla no se quitan (espejan la compuerta). Añade los propios, verificables. |
 | Revisión final | Marca solo lo que de verdad cumple. |
 
 Reglas de redacción, y por qué:

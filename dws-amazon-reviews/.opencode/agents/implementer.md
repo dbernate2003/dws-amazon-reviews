@@ -1,6 +1,6 @@
 ---
 description: Ejecuta las tareas de task.md: SQL en src/, tests en tests/ y README de la capa. No cierra la especificación. Úsalo con /implement.
-mode: primary
+mode: all
 temperature: 0.1
 permission:
   edit:

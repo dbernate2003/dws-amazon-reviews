@@ -1,6 +1,6 @@
 ---
 description: Desglosa el plan.md de una especificación del DWS en tareas verificables (task.md) y las refleja en specs/README.md y docs/gestion/tareas.md. Atiende /tasks con la skill .opencode/skills/tasks.md.
-mode: primary
+mode: all
 temperature: 0.1
 permission:
   edit:
