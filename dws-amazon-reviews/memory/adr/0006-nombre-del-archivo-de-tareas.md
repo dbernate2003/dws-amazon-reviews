@@ -1,25 +1,25 @@
 # ADR-0006 — Nombre del archivo de tareas
 
-- **Estado:** Pendiente
+- **Estado:** Decidido por el responsable (2026-10-14, `/clarify` de `00-preguntas-negocio`) · **falta su firma**
 - **Fecha:** 2026-10-12
-- **Resolver antes de:** `01-ingesta-bronce`
+- **Resolver antes de:** `/tasks` de `00-preguntas-negocio`
 - **Responsable (firma):** pendiente
 
 ## Contexto
 
-Cada especificación mantiene su propio archivo de tareas en `specs/NN-nombre/` (Principio X). La constitución deja abierto cómo se llama.
+Cada especificación mantiene su propio archivo de tareas en `specs/NN-nombre/` (Principio X). La constitución dejaba abierto cómo se llama.
 
 ## Opciones consideradas
 
 | Opción | A favor | En contra |
 |---|---|---|
-| `task.md` | | |
-| `tasks.md` | | |
+| `task.md` | Singular, como `spec.md` y `plan.md` | Spec Kit usa `tasks.md` |
+| `tasks.md` | Es el nombre de GitHub Spec Kit | Plural, distinto de `spec.md` y `plan.md` |
 
 ## Decisión
 
-Pendiente. El `task-breaker` no crea el archivo mientras este ADR siga pendiente.
+`task.md`, en singular, en `specs/NN-nombre/task.md`.
 
 ## Consecuencias
 
-Al decidir: actualizar `templates/task-list-template.md`, `.opencode/agents/task-breaker.md`, `.opencode/agents/implementer.md`, `.opencode/commands/tasks.md` y `specs/README.md` con el nombre elegido.
+Actualizar con ese nombre (lo último que se hace, cuando todo lo demás esté ajustado): `templates/task-list-template.md`, `.opencode/agents/task-breaker.md`, `.opencode/agents/implementer.md`, `.opencode/commands/tasks.md`, `specs/README.md`, la constitución y el `README.md` raíz.

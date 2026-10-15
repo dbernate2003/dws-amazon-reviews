@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git branch *)",
+      "Bash(ls *)",
+      "Bash(pytest *)"
+    ],
+    "ask": [
+      "Bash(psql *)",
+      "Bash(duckdb *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git checkout *)",
+      "Bash(bash scripts/new-spec.sh *)"
+    ],
+    "deny": [
+      "Edit(.env)",
+      "Edit(data/**)",
+      "Edit(memory/constitution.md)",
+      "Edit(src/**/*.py)",
+      "Edit(scripts/**/*.py)",
+      "Bash(git push *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(git reset --hard *)",
+      "Bash(rm *)",
+      "Bash(Remove-Item *)",
+      "Bash(del *)"
+    ]
+  }
+}

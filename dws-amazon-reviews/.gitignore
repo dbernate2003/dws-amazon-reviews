@@ -1,0 +1,33 @@
+# Datos: nunca se versionan (Principio VII). Viven en data/ y se respaldan en Google Drive.
+data/*
+!data/.gitkeep
+
+# Formatos de datos, donde sea que aparezcan
+*.gz
+*.parquet
+*.csv
+*.twbx
+
+# Secretos: la contraseña real vive solo en el .env local
+.env
+.env.*
+!.env.example
+
+# Python (solo existe en tests/)
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# OpenCode (dependencias locales de plugins)
+.opencode/node_modules/
+.opencode/bun.lock
+.opencode/package-lock.json
+
+# Sistema operativo y editores
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/

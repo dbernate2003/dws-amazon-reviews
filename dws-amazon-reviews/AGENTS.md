@@ -1,69 +1,66 @@
-# AGENTS.md — DWS de Reseñas de Amazon
+# AGENTS.md — dws-amazon-reviews
 
-Reglas del proyecto para OpenCode. La fuente de verdad es `memory/constitution.md` (v1.0.0): **léela completa antes de actuar**. Si algo de este archivo la contradice, gana la constitución.
+> **ALTO: lee primero `memory/constitution.md`.** Este archivo y el `README.md` se leen DESPUÉS de la constitución (principio XIV). Si algo de aquí la contradice, gana la constitución.
 
-## Qué es
+<!-- Contexto corto para los agentes de OpenCode (task-breaker, implementer) y para Claude Code. Lo que va entre <...> es un dato que la constitución todavía no fija: complétalo o ciérralo con un ADR. -->
 
-Data Warehouse sobre reseñas de Amazon (SNAP, Stanford), construido desde cero con Spec-Driven Development. Kimball para el modelo de Oro, Medallion para las capas (`raw` → `silver` → `gold`, un esquema de PostgreSQL por capa), PostgreSQL local, costo $0.
+## Orden de lectura
+1. `memory/constitution.md` (v1.1.0)
+2. `AGENTS.md` (este archivo) y `README.md`
+3. `spec.md`, `plan.md` y tareas de la especificación activa en `specs/NN-nombre/`
 
-## Mapa del repositorio
+## Proyecto
+Data Warehouse sobre reseñas de Amazon (SNAP, Stanford; McAuley y Leskovec, 2013), construido desde cero con Spec-Driven Development. El modelo analítico usa Kimball y las capas son esquemas Medallion de PostgreSQL local: `raw` (Bronce), `silver` (Plata) y `gold` (Oro), cada una exportada a `.parquet` con DuckDB. La fuente es `all_3y.txt.gz` (9.707.634 reseñas, 2010-03-04 a 2013-03-04) y Tableau lee solo `gold`. Todo corre en local y con costo $0.
 
-| Ruta | Qué vive ahí |
-|---|---|
-| `memory/` | Constitución y ADR globales (`memory/adr/`). Dice qué construir y por qué. |
-| `specs/NN-nombre/` | `spec.md` (qué y por qué), `plan.md` (cómo), archivo de tareas y `adr/` de esa entrega. |
-| `src/bronze`, `src/silver`, `src/gold` | SQL numerado (`01_`, `02_`…) de cada capa + `README.md` + `NN_export_parquet.sql`. |
-| `src/exploration/` | SQL del EDA sobre `raw` y el catálogo de reglas (`R01`, `R02`…). |
-| `tests/` | Único lugar donde vive Python (pytest). |
-| `docs/gestion/` | `roles.md` y `tareas.md`. |
-| `templates/` | Plantillas de spec, plan, tareas, ADR y README de capa. |
-| `scripts/` | Utilidades de apoyo (sin Python). |
-| `data/` | Datos locales. Ignorada por Git. |
-| `.opencode/` | Agentes y comandos de este set-up. |
-
-## Flujo (Principio XII)
-
-`/specify` → `/plan` → `/tasks` → `/implement` → verificación humana → Pull Request. `/check` audita en cualquier momento (solo lectura).
-
-Orden de especificaciones: `01-ingesta-bronce` → `02-exploracion-eda` → `03-etl-plata` → `04-modelo-oro` → `05-dashboards-bi`. Una no empieza hasta que la anterior pasa sus tests. Si algo cambia, se actualiza primero la spec y luego se regeneran plan y tareas.
-
-Agentes (cambia entre ellos con Tab): `spec-writer`, `architect`, `task-breaker`, `implementer`.
-
-## Reglas que no se rompen
-
-- **SQL puro.** Ingesta, EDA y ETL en SQL sobre PostgreSQL. DuckDB solo exporta a Parquet. Python solo en `tests/`.
-- **`raw` es inmutable.** Nunca `UPDATE`, `DELETE` ni `TRUNCATE` sobre `raw` una vez cargado y validado; se corrige en Plata.
-- **Sin regla no hay transformación.** Toda transformación del ETL nace de una regla del EDA (código, acción: descarta / corrige / marca, conteo en la bitácora) y tiene su test.
-- **Cuadre exacto.** Filas que entran = filas que salen + rechazadas + eliminadas. Sin tolerancia.
-- **Datos y secretos fuera de Git.** Nada de `.gz`, `.parquet`, `.csv`, `.twbx` ni `.env`. La conexión sale de variables de entorno (`PGHOST`, `PGDATABASE`, `PGUSER`; la contraseña solo en el `.env` local). Ningún SQL con credenciales, tampoco el `ATTACH` de DuckDB.
-- **Scripts numerados y portables.** Se corren en orden, sin rutas absolutas ni nada atado a una máquina.
-- **Nombres:** un esquema por capa; tablas y campos en `snake_case`.
-- **Fuera de alcance:** Airflow, Dagster, dbt, nube, Notion, revisión cruzada de PR y reutilizar nada del modelo anterior.
-
-## Lo que un agente nunca hace
-
-- Resolver por su cuenta una decisión pendiente (tabla de abajo). Se detiene y lo dice.
-- Dar una especificación por cerrada. La cierra el responsable de la capa tras verificar con sus propias consultas (Principio XI).
-- Enmendar `memory/constitution.md`. Las enmiendas entran por Pull Request.
-- Hacer `git push` o `git merge`. Eso es de las personas.
-
-## Compuerta de cierre de una especificación
-
-1. Tests en verde. 2. Cuadre exacto. 3. Verificación humana con SQL. 4. README de la capa actualizado. 5. Pull Request integrado a `main`.
-
-## Decisiones pendientes
-
-| ADR | Pendiente | Resolver antes de |
+## Especificaciones (en este orden)
+| N.º | Nombre | Qué entrega |
 |---|---|---|
-| 0006 | Nombre del archivo de tareas: `task.md` o `tasks.md` | `01-ingesta-bronce` |
-| 0007 | Ubicación de `memory/` y cómo la leen los agentes | `01-ingesta-bronce` |
-| 0008 | Herramienta del paso `clave: valor` → archivo delimitado por `\|` (choca con el principio V) | `01-ingesta-bronce` |
-| 0009 | Dónde vive la bitácora de calidad y el registro de incidencias | `03-etl-plata` |
-| 0010 | Umbral de latencia de las consultas principales | `04-modelo-oro` |
-| 0011 | Cómo llega Oro a Tableau Public | `05-dashboards-bi` |
+| 00 | `00-preguntas-negocio` | Preguntas de negocio validadas (insumo del grano y de los tableros) |
+| 01 | `01-ingesta-bronce` | Carga de la fuente en `raw` |
+| 02 | `02-exploracion-eda` | Hallazgos y reglas `R01`, `R02`… |
+| 03 | `03-etl-plata` | Capa `silver` |
+| 04 | `04-modelo-oro` | Modelo Kimball en `gold` |
+| 05 | `05-dashboards-bi` | Tableros de Tableau |
+| 06 | `06-reproducibilidad-integracion` | Reproducibilidad de punta a punta |
 
-Su estado real está en `memory/adr/`. Mientras uno diga «Pendiente», nadie lo da por resuelto.
+Nombre estándar: `NN-nombre` en minúsculas, sin tildes, con guiones y dos dígitos desde `00` (principio XIII).
 
-## Idioma
+## Comandos
+- Cargar el entorno (Git Bash): `set -a; source .env; set +a` (`.env` define `PGHOST`, `PGDATABASE`, `PGUSER` y tu contraseña local; no se versiona).
+- Ejecutar un script: `psql -f src/<capa>/NN_nombre.sql`. La carga usa `\copy` dentro de `02_load.sql`.
+- Orden de ejecución por capa:
+  - `src/bronze/`: `01_ddl` → `02_load` → `03_export_parquet`
+  - `src/silver/`: `01_ddl` → `02_etl` → `03_export_parquet`
+  - `src/gold/`: `01_ddl` → `02_etl` → `03_indexes` → `04_export_parquet`
+- Exploración: `psql -f src/exploration/<archivo>.sql` (solo sobre `raw`).
+- Exportar a Parquet: `duckdb < src/<capa>/NN_export_parquet.sql` (sale a `data/parquet/<capa>/`).
+- Tests: `pytest tests/`
+- Lint/formato: <no definido en la constitución; no añadir herramienta sin ADR>
+- Nueva especificación: `bash scripts/new-spec.sh NN-nombre` (crea la rama y copia las plantillas a `specs/NN-nombre/`). El script rechaza nombres que no cumplan `^[0-9]{2}-[a-z0-9]+(-[a-z0-9]+)*$`.
 
-Documentación, specs y respuestas en español. Identificadores SQL en `snake_case`.
+## Estilo y convenciones
+- Lenguajes: SQL (PostgreSQL) para ingesta, exploración y ETL; DuckDB solo para exportar a Parquet; Python solo en `tests/` (pytest).
+- Nombres: un esquema por capa; tablas y campos en `snake_case`; scripts numerados `NN_nombre.sql`; especificaciones `NN-nombre`.
+- Idioma: documentación y mensajes en español; identificadores en español sin tildes (p. ej. `silver.resena`).
+- Reglas del EDA: código `R01`, `R02`…, con acción `descarta`, `corrige` o `marca` y su conteo en la bitácora de calidad.
+- Kimball: grano en una frase, claves subrogadas, fila especial para datos faltantes, medidas clasificadas como aditivas, semiaditivas o no aditivas.
+- Cada capa lleva un `README.md` hecho con `templates/layer-readme.md` (DDL, reglas aplicadas y volumetría).
+- Cada `spec.md` y `plan.md` declara en su encabezado la versión de la constitución con la que se escribió.
+
+## Reglas
+- Lee `memory/constitution.md` ANTES que este archivo, el `README.md` y la spec activa (`specs/NN-nombre/`). Si algo las contradice, gana la constitución.
+- Dónde va cada cosa: lo que se ejecuta, en `src/` y `tests/`; qué y por qué, en `memory/` y `specs/`; gestión, en `docs/gestion/`.
+- `spec.md` dice qué y por qué, sin tecnología; `plan.md` dice cómo e incluye su Constitution Check. Una spec no empieza hasta que la anterior pasa su compuerta de cierre.
+- No toques `raw`: después de cargado y validado, ningún `UPDATE`, `DELETE` ni `TRUNCATE`. Las correcciones van en Plata.
+- No versiones datos (`.gz`, `.parquet`, `.csv`, `.twbx`, `.env`) ni pongas credenciales en ningún archivo, incluido el `ATTACH` de DuckDB.
+- No añadas sin preguntar: Airflow, Dagster o dbt, nube, Notion, servicios de pago, Python fuera de `tests/`, ni transformaciones que no nazcan de una regla del EDA.
+- No reutilices dimensiones, nombres de tablas de Oro ni requerimientos del modelo anterior.
+- No resuelvas por tu cuenta los pendientes ADR 0006–0011 de la constitución: propón el ADR y espera al responsable.
+- No crees ni renombres especificaciones fuera de la lista del principio XII: eso exige enmendar la constitución.
+- Trabaja en la rama de la especificación activa y deja commits por fase.
+
+## Al terminar cualquier tarea
+- Corre `pytest tests/` y confirma que el cuadre de filas da exacto: entran = salen + rechazadas + eliminadas. (En `00-preguntas-negocio` no hay código: aplica su lista de validación.)
+- Actualiza el `README.md` de la capa (DDL, reglas, volumetría) y la bitácora de calidad.
+- Registra la tarea en `docs/gestion/tareas.md` con su evidencia (archivo o commit).
+- No des la especificación por cerrada: entrega al responsable las consultas SQL para que verifique conteos, cuadres y muestras.

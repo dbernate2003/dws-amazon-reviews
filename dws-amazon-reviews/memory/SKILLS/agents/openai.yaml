@@ -1,0 +1,4 @@
+interface:
+  display_name: "clarify (Spec Gap Finder)"
+  short_description: "Finds gaps in a spec before planning: up to 5 questions, one at a time, with each answer recorded in the spec"
+  default_prompt: "Use $clarify to find gaps and voids in the spec of specs/00-preguntas-negocio before running /plan."

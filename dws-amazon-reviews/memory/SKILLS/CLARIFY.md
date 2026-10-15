@@ -11,7 +11,7 @@ Está adaptada a este repositorio: manda la constitución, y lo único que se ed
 
 ## 0. Variables (se declaran ANTES de usar esta habilidad)
 
-El comando `.opencode/commands/clarify.md` las fija primero y después remite a este archivo. Si no están definidas, las fijas tú con estos valores y lo dices.
+Esta habilidad se invoca como `/clarify <NN-nombre>` (por ejemplo, `/clarify 00-preguntas-negocio`). El argumento es la carpeta de la especificación y es la ÚNICA que se trabaja. Si no hay argumento, pregunta cuál (una sola pregunta) y no adivines. Declara las variables antes de seguir y dilo en una línea.
 
 ```text
 SPECS=specs
@@ -22,9 +22,9 @@ Todo lo demás se deriva de esas dos. Con ellas encuentras cada elemento del rep
 
 | Variable | Valor | Para qué |
 |---|---|---|
-| `SPEC_FILE` | `$SPEC/spec.md` | Lo único que se edita. |
+| `SPEC_FILE` | `$SPEC/spec.md` | Lo único que se edita. Si la carpeta no tiene `spec.md` pero sí otro `.md`, no lo edites: repórtalo (el nombre estándar es `spec.md`). |
 | `PLAN_FILE` | `$SPEC/plan.md` | Solo lectura. Si existe, quedará obsoleto con cada cambio (principio XII). |
-| `TASKS_FILE` | `$SPEC/task.md` o `$SPEC/tasks.md` | Solo lectura. El nombre lo decide el ADR-0006; usa el que exista. |
+| `TASKS_FILE` | `$SPEC/task.md` | Solo lectura. El nombre lo fija el ADR-0006. |
 | `SPEC_ADR` | `$SPEC/adr/` | ADR propios de la especificación. |
 | `SPECS_INDEX` | `$SPECS/README.md` | Lista y orden de las especificaciones. |
 | `CONSTITUCION` | `memory/constitution.md` | Se lee primero (XIV). |
@@ -58,21 +58,20 @@ Todo lo demás se deriva de esas dos. Con ellas encuentras cada elemento del rep
 
 ### Paso 3 — Escanear brechas
 
-Marca cada categoría como **Claro**, **Parcial** o **Ausente**. Las secciones son las de `PLANTILLA_SPEC`.
+Marca cada categoría como **Claro**, **Parcial** o **Ausente**. Las secciones son las de `PLANTILLA_SPEC` (Resumen, Requisitos, Datos y dominio, Restricciones propias, Fuera de alcance, Preguntas abiertas, Criterios de finalización); en una spec anterior a la plantilla, busca su equivalente.
 
 | Categoría | Dónde mirar | Es una brecha si… |
 |---|---|---|
-| Alcance y objetivo | §1, §6 | No se puede decir en una frase qué entrega y qué deja fuera; los resultados `SC-xx` no tienen cifra, archivo o comando. |
-| Casos de uso y aceptación | §2 | Falta prioridad P1/P2/P3, o un criterio no es comprobable («rápido», «adecuado»). |
-| Requisitos funcionales | §3 | Un RF no está en EARS, no enlaza a un caso de uso o no dice cómo se verifica. |
-| Datos y dominio | §3 entidades | No se define una entidad, su grano, sus llaves o su relación con otra; un campo no coincide con la fuente. |
-| No funcionales | §4 | Una categoría sin métrica (valor y unidad) ni «No aplica: motivo»; costo distinto de $0 sin ADR (VIII). |
-| Casos límite y calidad de datos | §5 | Faltan errores, límites, datos inválidos, concurrencia o **re-ejecución del mismo paso** (IX). |
-| Dependencias y ADR | encabezado, §7 | «Depende de» no ha pasado su compuerta, o hay un ADR pendiente que la bloquea. |
-| Trazabilidad (XV) | §2, §3, §8 | Algún RF, regla o criterio no se puede seguir hasta su verificación o evidencia. |
+| Alcance y objetivo | Resumen, Fuera de alcance | No se puede decir en una frase qué entrega y qué deja fuera; los resultados `SC-xx` no tienen cifra, archivo o comando. |
+| Requisitos | Requisitos | Un RF o RQ no está en EARS, no dice cómo se verifica, o una prioridad (D/S/P) falta donde hace falta ordenar. |
+| Datos y dominio | Datos y dominio | No se define una entidad, su grano, sus llaves o su relación con otra; un campo no coincide con la fuente. |
+| Restricciones propias | Restricciones propias | Una categoría sin métrica (valor y unidad) ni «No aplica: motivo»; costo distinto de cero sin ADR (VIII). |
+| Calidad de datos y re-ejecución | Requisitos (patrón «No deseado») | Faltan datos inválidos, duplicados o la **re-ejecución del mismo paso** (IX) donde la spec mueve o transforma datos. |
+| Dependencias y ADR | Encabezado, Preguntas abiertas | «Depende de» no ha pasado su compuerta, o hay un ADR pendiente que la bloquea. |
+| Trazabilidad (XV) | Requisitos, Criterios de finalización | Algún RF, regla o criterio no se puede seguir hasta su verificación o evidencia. |
 | Constitución | toda la spec | Aparece tecnología (V, XII), datos versionados (VII), o algo de «Fuera de alcance» de la constitución. |
 | Terminología y marcadores | toda la spec | Dos nombres para la misma cosa; más de 3 `[NECESITA ACLARACIÓN]`; marcadores sin fila en la sección de preguntas; `[CORCHETES]` sin reemplazar. |
-| Cierre y tamaño | §8 | La lista de cierre no refleja la compuerta; la spec se sale de 160–180 líneas (si pasa de 300, avisa: dividirla exige enmendar la constitución). |
+| Cierre y tamaño | Criterios de finalización | La lista de cierre no refleja la compuerta; la spec pasa de 250 líneas (si pasa de 300, avisa: dividirla exige enmendar la constitución). |
 
 **Brechas del repositorio.** Se **reportan, no se preguntan ni se editan**, porque no viven en la spec:
 
@@ -80,12 +79,13 @@ Marca cada categoría como **Claro**, **Parcial** o **Ausente**. Las secciones s
 - La spec anterior no tiene su compuerta cerrada en `GESTION/tareas.md`.
 - Hay ADR «Pendiente» que debían resolverse antes de esta spec.
 - La spec no figura en `SPECS_INDEX` ni tiene su entrada en `GESTION/tareas.md`.
-- La spec no sigue `PLANTILLA_SPEC` (secciones distintas, o sin tabla de preguntas). Reportarlo basta: reestructurarla es decisión del responsable.
+- La spec no sigue `PLANTILLA_SPEC` (secciones distintas, requisitos que no están en EARS o sin su verificación, sin tabla de preguntas abiertas, o fuera de las 160–250 líneas). La plantilla no lleva casos de usuario ni casos límite: no los reportes como faltantes. Es una brecha de peso: ponla en el informe con la lista de lo que falta, y ofrece la reestructuración como decisión del responsable. No la hagas por tu cuenta.
+- Hay ADR sin firma del responsable aunque su decisión ya esté tomada.
 - `PLAN_FILE` o `TASKS_FILE` ya existen y quedarán obsoletos.
 
 ### Paso 4 — Armar la cola de preguntas (máximo 5)
 
-Ordena las brechas por **impacto × incertidumbre**. Una pregunta entra solo si su respuesta cambia el plan, los tests, el modelo de datos o un criterio de aceptación. Quedan fuera:
+Ordena las brechas por **impacto × incertidumbre**. Una pregunta entra solo si su respuesta cambia el plan, los tests, el modelo de datos o un criterio de finalización. Quedan fuera:
 
 - **Tecnología** (motor, herramienta, librería): es del `plan.md` o de un ADR.
 - Lo que la constitución ya decidió.
@@ -121,10 +121,10 @@ Responde con la letra, con «sí» (acepto la recomendada) o con tu propia respu
 
 Guarda después de **cada** respuesta, no al final: si la sesión se corta, no se pierde nada.
 
-1. En la sección de preguntas abiertas (`§7 DISCOVERY QUESTIONS`; en una spec anterior a la plantilla, «Puntos abiertos»), pasa la fila a **Resuelta** con la decisión, o a **Escalada a ADR** con su número. Si la pregunta no tenía fila, créala.
+1. En la sección de preguntas abiertas («Preguntas abiertas y decisiones»; en una spec anterior a la plantilla, «Puntos abiertos»), pasa la fila a **Resuelta** con la decisión, o a **Escalada a ADR** con su número. Si la pregunta no tenía fila, créala.
 2. Añade en «Decisiones tomadas»: `Decisión · Motivo · Consecuencia`, con la fecha `AAAA-MM-DD`.
-3. Aplica la respuesta donde corresponde (RF, CA, CL, requisito no funcional, entidad). Reemplaza la frase vaga; no dejes las dos versiones.
-4. Si surge un requisito nuevo, dale el siguiente `RF-xx`, enlázalo a su caso de uso y dile cómo se verifica (XV).
+3. Aplica la respuesta donde corresponde (RF, RQ, restricción, entidad). Reemplaza la frase vaga; no dejes las dos versiones.
+4. Si surge un requisito nuevo, dale el siguiente `RF-xx` en EARS y dile cómo se verifica (XV).
 5. Quita el `[NECESITA ACLARACIÓN]` que ya no aplica y actualiza «Última actualización».
 
 ### Paso 7 — Validar tras cada escritura
@@ -151,11 +151,14 @@ Brechas del repositorio (no se editaron): …
 Siguiente paso: /plan <nombre>   (o /clarify otra vez si queda algo de impacto alto)
 ```
 
-Si no hay ambigüedad que importe, dilo («sin brechas de impacto significativo») y propón `/plan`. No inventes preguntas para llegar a cinco.
+Antes de dar por aclarada la spec, repasa las 11 categorías del paso 3: si alguna queda en Parcial o Ausente con impacto, no digas «aclarada». Si no hay ambigüedad que importe, dilo («sin brechas de impacto significativo») y propón `/plan`. No inventes preguntas para llegar a cinco.
 
 ## 3. Reglas, con su porqué
 
-- **Solo editas `SPEC_FILE`.** Lo demás se reporta; así `/clarify` no puede deshacer decisiones tomadas en otro sitio.
+- **Una sola especificación por invocación**, la del argumento. Nunca toques la de otra carpeta.
+
+- **Solo editas `SPEC_FILE`.** Lo demás se reporta; así `/clarify` no puede deshacer decisiones tomadas en otro sitio. Si la persona te pide expresamente cambiar otro archivo en la misma conversación, hazlo como una tarea aparte, fuera de esta habilidad.
+- **Una pregunta por turno**, salvo que la persona pida ver todas juntas; en ese caso respeta su pedido y registra cada respuesta al recibirla.
 - **No inventes cifras ni campos.** Se usan las de la constitución o la fuente; si no están, se pregunta o queda «Pendiente». Una cifra inventada se vuelve un test que pasa por la razón equivocada.
 - **No resuelvas ADR pendientes ni los des por resueltos.** Resolverlos exige ADR firmado por el responsable.
 - **Aclarar no es rediseñar.** Si una respuesta cambia el alcance o la lista de specs, detente: eso es enmendar la constitución.
