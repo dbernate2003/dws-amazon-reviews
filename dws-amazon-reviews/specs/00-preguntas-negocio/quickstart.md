@@ -15,10 +15,27 @@
 | 03 | Regenerar plan y tareas y correr `/analyze` | Ejecuta `/plan` y `/tasks` sobre la spec vigente y la segunda pasada de `/analyze` en modo completo; si hay un hallazgo crítico o alto, se corrige y se repite | `spec.md`, `plan.md`, `task.md` | `plan.md`, `task.md` y `checklists/analisis.md` | Todos | Sí |
 | 04 | Producir los documentos | Redacta `research.md`, `docs/glosario.md`, `quickstart.md`, `matriz-trazabilidad.md` y `checklists/validacion.md` siguiendo `task.md` | `task.md`, `spec.md`, `plan.md` | Documentos de la spec y glosario | RF-00-01 a RF-00-11, RNF-00-02 a RNF-00-04 | Sí |
 | 05 | Validar las preguntas de negocio | El responsable y el segundo validador aprueban cada PN con el análisis de la spec §3 y dejan nombre, fecha y estado en la spec §11 | `spec.md` §3, §5 y §11; `matriz-trazabilidad.md` | Spec §11 con nombre, fecha y estado | RF-00-07, CE-00-03 | Sí |
-| 06 | Firmar el insumo de Oro | El responsable de Oro revisa y firma la spec §6.1 y §6.2 | `spec.md` §6 | `checklists/validacion.md` firmado | CE-00-04 | Sí |
+| 06 | Firmar el insumo del grano (responsable de la 00) | El responsable de la 00 revisa y firma la spec §6.1 y §6.2; el responsable de Oro la acepta después, en el `/clarify` de la 04 (DQ-34) | `spec.md` §6 | `checklists/validacion.md` firmado | CE-00-04 | Sí |
 | 07 | Ejecutar la verificación humana | Corre `V-00-01` a `V-00-09` sobre los documentos y anota el resultado de cada una | Documentos de la spec | Resultados en la evidencia de las tareas | Compuerta, condición 3 | Sí |
-| 08 | Hacer la lectura en frío | La persona del equipo que no escribió los artefactos lee una muestra y responde las cinco preguntas estándar sin consultar al autor | Muestra de la spec §9 | `checklists/legibilidad.md` firmado | RNF-00-01, CE-00-05 | Sí |
+| 08 | Hacer la lectura en frío | Un agente en contexto limpio (sin historial, anexo 2 de D-00-01) lee la muestra y responde las cinco preguntas estándar sin consultar al autor; el responsable revisa y firma | Muestra del plan §9 | `checklists/legibilidad.md` firmado | RNF-00-01, CE-00-05 | Sí |
 | 09 | Cerrar la especificación | Ejecuta `V-00-10` sobre los documentos ya leídos, recorre las seis condiciones de la compuerta (§14 del plan) e integra el Pull Request | Todo lo anterior | Pull Request a `main` con las condiciones marcadas | Compuerta de cierre | Sí |
+
+## Qué comprueba cada verificación (paso 07 y 09)
+
+Resumen del plan §10.2; no hay SQL: se cuenta en la spec y se compara con el documento.
+
+| ID | Qué comprueba |
+|---|---|
+| V-00-01 | Hay 12 PN en la spec §5 y 12 filas en la matriz, sin IDs repetidos |
+| V-00-02 | Los campos y las especificaciones destino de la matriz coinciden con la spec §3 y §11 |
+| V-00-03 | Toda PN «no viable» dice qué dato falta y qué se decidió |
+| V-00-04 | Ninguna PN identifica a una persona; PN09, PN10 y PN11 son solo agregadas |
+| V-00-05 | Cada PN tiene el tablero de la spec §7; T1 y T3 con al menos 3 PN, T2 con al menos 2 |
+| V-00-06 | Las marcas `corte_por_mes`, `cuenta_usuarios` y `solo_agregada` están en las PN correctas |
+| V-00-07 | Plan y tareas se basan en la versión vigente de la spec |
+| V-00-08 | Las 7 PN de prioridad D están «Validadas» con nombre y fecha |
+| V-00-09 | `checklists/validacion.md` está completa y firmada |
+| V-00-10 | Todo término está en el glosario y todo documento tiene encabezado e IDs que existen |
 
 ## Qué se obtiene al final
 
@@ -26,4 +43,4 @@
 - `matriz-trazabilidad.md` con 12 filas y ninguna columna obligatoria vacía.
 - `checklists/validacion.md` con la revisión por pregunta, el conteo por tablero, la revisión de §6.1 y §6.2 y las firmas.
 - `checklists/legibilidad.md` firmado y la spec §11 con las siete PN de prioridad D en «Validada».
-- Pull Request de la rama `00-preguntas-negocio` integrado a `main`.
+- Pull Request de la rama `00-preguntas-negocio-cierre` (PR #2) integrado a `main`.

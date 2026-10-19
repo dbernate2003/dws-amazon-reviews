@@ -45,7 +45,7 @@ Los campos salen de la columna «Disponible con los campos» de la spec §11 y d
 | PN08 | `helpfulness`, `score`, `text` | `viable con reserva` | La unidad en palabras está decidida (DQ-24); qué cuenta como palabra y los rangos de longitud se fijan en la spec 02 con la distribución real (DQ-24, U-00-18). |
 | PN09 | `userId` | `viable con reserva` | El corte del grupo más activo se fija en la spec 02 (DQ-17, U-00-12); además, las anónimas se excluyen y se informa cuántas (DQ-12, RF-00-08, RF-00-11). |
 | PN10 | `userId` | `viable con reserva` | Las anónimas se excluyen del conteo y se informa cuántas (DQ-12, RF-00-08, RF-00-11); la clasificación en la ventana completa ya está decidida (DQ-26). |
-| PN11 | `userId`, `profileName`, `score`, `helpfulness` | `viable con reserva` | La forma exacta de reconocer una reseña anónima se confirma en las specs 01 y 02 (DQ-12); la comparación se entrega agregada (RF-00-09). |
+| PN11 | `userId`, `profileName`, `score`, `helpfulness`, `time` | `viable con reserva` | La forma exacta de reconocer una reseña anónima se confirma en las specs 01 y 02 (DQ-12); la comparación se entrega agregada (RF-00-09). |
 | PN12 | `time`, `score` | `viable` | Fecha y calificación alcanzan para el corte por día de la semana. |
 
 **Resultado:** 12 de 12 PN son viables; 6 son `viable con reserva` por decisiones diferidas y **0 son `no viable con esta fuente`**. Por eso `V-00-03` se cumple sin filas que justificar.
@@ -62,7 +62,7 @@ Ninguna pregunta necesita identificar a una persona. Las tres preguntas sobre us
 | PN04 | No | Agregada por calificación y mes | Se mantiene. |
 | PN05 | No | Agregada por producto | Se mantiene. |
 | PN06 | No | Agregada por producto | Se mantiene. |
-| PN07 | No | Agregada por mes y calificación | Se mantiene. |
+| PN07 | No | Agregada por mes y calificación, en dos cortes separados sin cruzarlos (DQ-35) | Se mantiene. |
 | PN08 | No | Agregada por calificación y rango de longitud | Se mantiene. |
 | PN09 | No | Solo agregada (RF-00-09) | Se mantiene. |
 | PN10 | No | Solo agregada (RF-00-09) | Se mantiene. |
