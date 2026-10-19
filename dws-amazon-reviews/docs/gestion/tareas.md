@@ -20,7 +20,7 @@ Cada una empieza cuando la anterior pasa sus tests (Principio XII).
 
 | ID | Especificación | Bloqueada por | Responsable | Estado | Evidencia |
 |---|---|---|---|---|---|
-| S-00 | `00-preguntas-negocio` | U-00-09 `[POR DEFINIR: ADR-0012]` | Dario Andres Bernate Canas | en curso | `specs/00-preguntas-negocio/task.md` (29 de 42 al 2026-10-19); `research.md`, `quickstart.md`, `matriz-trazabilidad.md`, `checklists/validacion.md` y `docs/glosario.md`; faltan las firmas humanas (T-00-23, T-00-25, T-00-38 y T-00-55) |
+| S-00 | `00-preguntas-negocio` | U-00-09 `[POR DEFINIR: ADR-0012]` | Dario Andres Bernate Canas | en curso | `specs/00-preguntas-negocio/task.md` (29 de 42 al 2026-10-19); `research.md`, `quickstart.md`, `matriz-trazabilidad.md`, `checklists/validacion.md` y `docs/glosario.md`; PR #1 integrado a `main` (`567ad89`, 2026-10-19); faltan las firmas humanas (T-00-23, T-00-25, T-00-38 y T-00-55), el ADR-0012 y el PR de cierre de la rama `00-preguntas-negocio-cierre` |
 | S-01 | `01-ingesta-bronce` | S-00 (pausada hasta que cierre), ADR-0008, ADR-0012 | Dario Andres Bernate Canas | pendiente | `specs/01-ingesta-bronce/spec.md` (borrador pausado) |
 | S-02 | `02-exploracion-eda` | S-01 | por asignar | pendiente | |
 | S-03 | `03-etl-plata` | S-02, ADR-0009 | por asignar | pendiente | |
