@@ -193,18 +193,20 @@ Estados: **Propuesta** → **Validada** (el responsable y el segundo validador l
 
 | ID | Disponible con los campos | Aprobada por | Fecha | Estado |
 |---|---|---|---|---|
-| PN01 | `time` | | | Propuesta |
-| PN02 | `time`, `productId`, `userId` | | | Propuesta |
-| PN03 | `time`, `score` | | | Propuesta |
-| PN04 | `score`, `time` | | | Propuesta |
-| PN05 | `productId`, `score` | | | Propuesta |
+| PN01 | `time` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
+| PN02 | `time`, `productId`, `userId` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
+| PN03 | `time`, `score` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
+| PN04 | `score`, `time` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
+| PN05 | `productId`, `score` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
 | PN06 | `productId`, `score` | | | Propuesta |
-| PN07 | `helpfulness`, `time`, `score` | | | Propuesta |
+| PN07 | `helpfulness`, `time`, `score` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
 | PN08 | `helpfulness`, `score`, `text` | | | Propuesta |
 | PN09 | `userId` | | | Propuesta |
 | PN10 | `userId` | | | Propuesta |
-| PN11 | `userId`, `profileName`, `score`, `helpfulness` | | | Propuesta |
+| PN11 | `userId`, `profileName`, `score`, `helpfulness` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
 | PN12 | `time`, `score` | | | Propuesta |
+
+Nota: las siete preguntas de prioridad D (PN01 a PN05, PN07 y PN11) las aprobó Dario Andres Bernate Canas el 2026-10-19 en los dos roles que fija DQ-10 (responsable de la spec y segundo validador). Las de prioridad S y P siguen en «Propuesta» a propósito: la `00` se cierra con las D en «Validada» (sección 10, CE-00-03).
 
 ## 12. Preguntas abiertas y decisiones
 
