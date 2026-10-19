@@ -13,7 +13,7 @@ Ningún agente resuelve una decisión pendiente por su cuenta: se cierra con un 
 | 0009 | Bitácora de calidad y registro de incidencias | Pendiente | `03-etl-plata` | [0009](0009-bitacora-de-calidad-e-incidencias.md) |
 | 0010 | Umbral de latencia de las consultas principales | Pendiente | `04-modelo-oro` | [0010](0010-umbral-de-latencia.md) |
 | 0011 | Cómo llega Oro a Tableau Public | Pendiente | `05-dashboards-bi` | [0011](0011-oro-hacia-tableau-public.md) |
-| 0012 | Herramienta y umbrales de la verificación de legibilidad | Pendiente | `01-ingesta-bronce` | sin archivo todavía |
+| 0012 | Herramienta y umbrales de la verificación de legibilidad | Propuesto | `01-ingesta-bronce` | [0012](0012-verificacion-de-legibilidad.md) |
 | 0013 | Ponytail: modo de trabajo de los agentes (ahorro de tokens) | Aceptado · firmado 2026-10-19 | — | [0013](0013-ponytail-ahorro-de-tokens.md) |
 
 Los números 0001, 0002, 0004 y 0005 no aparecen en la constitución v1.0.0. Se crean aquí cuando existan, sin reutilizar el número.
