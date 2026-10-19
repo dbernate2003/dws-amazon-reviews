@@ -1,7 +1,7 @@
 # Especificación 00 — Preguntas de negocio
 
-**Rama:** `00-preguntas-negocio` | **Constitución:** v1.1.0 | **Fecha:** 2026-10-13
-**Estado:** Revisada por el responsable (Dario Andres Bernate Canas) el 2026-10-19 — aclaraciones de `/clarify` del 2026-10-14, 2026-10-15 y 2026-10-19; ADR-0006, ADR-0007 y D-00-01 firmados el 2026-10-19
+**Rama:** `00-preguntas-negocio-cierre` | **Constitución:** v1.1.0 | **Fecha:** 2026-10-13
+**Estado:** Revisada por el responsable (Dario Andres Bernate Canas) el 2026-10-19 — aclaraciones de `/clarify` del 2026-10-14, 2026-10-15 y 2026-10-19; ADR-0006, ADR-0007 y D-00-01 firmados el 2026-10-19; DQ-34 a DQ-36 (firmas sin Jose Julio, cortes de PN07 y ventana de datos) el 2026-10-19
 **Última actualización:** 2026-10-19
 **Responsable:** Dario Andres Bernate Canas | **Segundo validador:** Dario Andres Bernate Canas (ver `docs/gestion/roles.md`)
 
@@ -40,7 +40,7 @@ Según la documentación de SNAP, cada reseña de `all_3y.txt.gz` trae diez camp
 | `price` | Precio del producto; puede venir como «unknown» |
 | `userId` | Seudónimo de quien reseña (puede estar ausente en reseñas anónimas) |
 | `profileName` | Nombre público de perfil (mismo caso) |
-| `helpfulness` | Votos útiles sobre votos totales que recibió la reseña |
+| `helpfulness` | Votos útiles sobre votos totales que recibió la reseña, escritos como «útiles/totales» (p. ej. `3/5`: 3 votos útiles de 5) |
 | `score` | Calificación de 1 a 5 |
 | `time` | Fecha de la reseña (a nivel de día) |
 | `summary` | Título corto de la reseña |
@@ -48,7 +48,7 @@ Según la documentación de SNAP, cada reseña de `all_3y.txt.gz` trae diez camp
 
 **Lo que la fuente NO tiene:** categoría o marca del producto, ventas, devoluciones, país o ciudad del usuario, ni la hora de la reseña. El título y el precio sí vienen, pero quedan fuera del análisis (DQ-13).
 
-**Ventana de datos:** 2010-03-04 a 2013-03-04, 9.707.634 reseñas. El primer y el último mes están incompletos; cualquier pregunta cortada por mes DEBE tratarlos como meses parciales (RF-00-05).
+**Ventana de datos:** 2010-03-04 a 2013-03-04, 9.707.634 reseñas. La ventana es cerrada en ambos extremos (DQ-36): el 2010-03-04 y el 2013-03-04 cuentan. El primer y el último mes están incompletos; cualquier pregunta cortada por mes DEBE tratarlos como meses parciales (RF-00-05).
 
 ## 4. Quién pregunta
 
@@ -58,7 +58,7 @@ Rol de negocio simulado: **analista de experiencia del cliente de un marketplace
 
 ## 5. Preguntas de negocio (propuestas)
 
-Prioridad: **D** = debe estar en la primera entrega, **S** = debería, **P** = podría si hay tiempo.
+Prioridad: **D** = debe estar en la primera entrega, **S** = debería, **P** = podría si hay tiempo. Las tablas agrupan por tema; los IDs conservan el orden en que se propusieron (por eso PN12 va con «Volumen y tendencia»). El estado de cada PN (Propuesta o Validada) está en la sección 11.
 
 ### Volumen y tendencia
 
@@ -109,13 +109,13 @@ Todas las preguntas se pueden responder con **una reseña individual** como unid
 
 | ID | Qué se calcula | Se corta por |
 |---|---|---|
-| PN01 | Conteo de reseñas | Mes (y día para PN12) |
+| PN01 | Conteo de reseñas; la estacionalidad se lee comparando el mismo mes entre años | Mes |
 | PN02 | Conteo de productos distintos y de usuarios distintos | Mes |
-| PN03 | Promedio de calificación | Mes |
-| PN04 | Conteo de reseñas por calificación; porcentaje de extremas | Calificación, mes |
+| PN03 | Promedio de calificación (suma de calificaciones ÷ número de reseñas) | Mes |
+| PN04 | Conteo de reseñas por calificación; porcentaje de extremas (reseñas con 1 o 5 ÷ todas las reseñas del corte; intermedias = 2, 3 y 4) | Calificación, mes |
 | PN05 | Conteo de reseñas; promedio de calificación; ranking de los 10 productos con más reseñas (DQ-25); empates por mayor calificación promedio y después por identificador de producto (DQ-29) | Producto |
 | PN06 | Conteo y promedio, con umbral mínimo de volumen (DQ-11) y calificación promedio ≤ 2,5 (DQ-18) | Producto |
-| PN07 | Porcentaje con al menos un voto útil (reseñas con votos útiles ≥ 1 ÷ todas las reseñas del corte, DQ-22); razón votos útiles / votos totales | Mes, calificación |
+| PN07 | Porcentaje con al menos un voto útil (reseñas con votos útiles ≥ 1 ÷ todas las reseñas del corte, DQ-22); razón votos útiles / votos totales. Se presenta en dos cortes separados, por mes y por calificación, sin cruzarlos (DQ-35) | Mes, calificación |
 | PN08 | Razón de utilidad; longitud del texto en palabras (DQ-24) | Calificación, rango de longitud (rangos definidos en `02`, DQ-24) |
 | PN09 | Parte de las reseñas que aporta el grupo más activo (corte definido en `02`, DQ-17) | Usuario (solo agregado) |
 | PN10 | Conteo de usuarios con exactamente 1 reseña frente a usuarios recurrentes (2 o más reseñas), contadas en la ventana completa (DQ-26) | Usuario (solo agregado) |
@@ -126,7 +126,7 @@ Todas las preguntas se pueden responder con **una reseña individual** como unid
 
 - **Fecha** (día, semana, mes, año, día de la semana).
 - **Producto** (el identificador; el título solo como etiqueta legible en T2, sin análisis; el precio no se usa, DQ-13).
-- **Usuario**: quien escribe la reseña (identificado o anónimo). Las reseñas anónimas no cuentan como un usuario en PN02, PN09 y PN10 (DQ-04, DQ-15). No se confunde con el analista que consulta los tableros (sección 4).
+- **Usuario**: quien escribe la reseña (identificado o anónimo). Las reseñas anónimas no cuentan como un usuario en PN02, PN09 y PN10 (DQ-04, DQ-15); en todas las PN sí cuentan como reseñas. No se confunde con el analista que consulta los tableros (sección 4).
 - **Mes** con indicador de **mes parcial** (primer y último mes de la ventana; DQ-03).
 - **Calificación** (1 a 5).
 
@@ -134,7 +134,7 @@ Todas las preguntas se pueden responder con **una reseña individual** como unid
 
 - Los **conteos de productos distintos y de usuarios distintos** (PN02, PN10) no se pueden sumar entre cortes sin repetir elementos. `04-modelo-oro` DEBE tenerlo en cuenta al clasificar medidas.
 - Los **promedios y las razones** (PN03, PN07) se calculan como suma entre suma, no promediando promedios.
-- La **razón de utilidad** es la ponderada: suma de votos útiles ÷ suma de votos totales (DQ-02). El «% con al menos un voto útil» se mide aparte y su denominador son todas las reseñas del corte, incluidas las de cero votos totales (DQ-22). No existe cuando una reseña tiene cero votos totales; PN07 y PN08 exigen una regla clara en `02-exploracion-eda`. PN08 se calcula como suma ÷ suma por calificación y rango de longitud, sin mínimo de votos. Solo si una lectura futura muestra la razón por producto, entran los productos con un mínimo de votos totales, para que un 1 de 1 no se lea como 100 % de utilidad; el valor lo fija `02` con datos (DQ-23, DQ-27).
+- La **razón de utilidad** es la ponderada: suma de votos útiles ÷ suma de votos totales (DQ-02). El «% con al menos un voto útil» se mide aparte y su denominador son todas las reseñas del corte, incluidas las de cero votos totales (DQ-22). La razón de una sola reseña no existe cuando esa reseña tiene cero votos totales; PN07 y PN08 exigen una regla clara en `02-exploracion-eda`. PN08 se calcula como suma ÷ suma por calificación y rango de longitud, sin mínimo de votos. Solo si una lectura futura muestra la razón por producto, entran los productos con un mínimo de votos totales, para que un 1 de 1 no se lea como 100 % de utilidad; el valor lo fija `02` con datos (DQ-23, DQ-27).
 
 ## 7. Insumo de los tableros
 
@@ -174,7 +174,7 @@ Preguntas descartadas por falta de dato o de enfoque:
 
 *Perfil junior*, *sin ayuda* y *artefacto* tienen el significado del principio XIII de la constitución.
 
-- **RNF-00-01 (Por evento):** Cuando se entregue el catálogo de preguntas de negocio, cada pregunta DEBE poder ser entendida por una persona de perfil junior usando solo el catálogo y el glosario (Const. XIII, XIII.7). *Verif.:* lectura en frío firmada (CE-00-05).
+- **RNF-00-01 (Por evento):** Cuando se entregue el catálogo de preguntas de negocio, cada pregunta DEBE poder ser entendida por una persona de perfil junior —o, en la `00`, por un agente en contexto limpio con la firma del responsable (anexo 2 de D-00-01, DQ-34)— usando solo el catálogo y el glosario (Const. XIII, XIII.7). *Verif.:* lectura en frío firmada (CE-00-05).
 - **RNF-00-02 (Ubicuo):** El catálogo DEBE definir en el glosario cada término de dominio y cada sigla que use, con un solo nombre por concepto (Const. XIII.6). *Verif.:* términos fuera del glosario = 0.
 - **RNF-00-03 (Ubicuo):** Cada pregunta de negocio DEBE nombrar su medida, sus cortes y su nivel de detalle esperado con nombres completos, sin abreviaturas (Const. XIII.4). *Verif.:* inspección de las secciones 6.1 (nivel de detalle) y 6.2 (medida y cortes).
 - **RNF-00-04 (Ubicuo):** Cada documento de esta especificación DEBE citar los IDs de los requisitos que atiende (Const. XIII.5). *Verif.:* documentos sin ID = 0.
@@ -184,8 +184,8 @@ Preguntas descartadas por falta de dato o de enfoque:
 - **CE-00-01:** El 100 % de las preguntas cumple RF-00-01 a RF-00-04 y RF-00-09 (revisión por lista).
 - **CE-00-02:** Cada tablero tiene al menos tres preguntas, salvo T2, que puede tener dos.
 - **CE-00-03:** Todas las preguntas de prioridad D están **validadas** (sección 11): validación de negocio y documental. La confirmación con datos ocurre en `01` y `02`; si una pregunta resulta imposible de responder, se reabre `00` (RF-00-06).
-- **CE-00-04:** El insumo del grano (6.1) y la tabla de cálculos (6.2) quedan firmados por el responsable de Oro.
-- **CE-00-05 (legibilidad):** Una persona de perfil junior distinta del autor responde correctamente las cinco preguntas estándar del principio XIII.7 sobre una muestra del catálogo, sin consultar al autor. Evidencia: `checklists/legibilidad.md` firmado.
+- **CE-00-04:** El insumo del grano (6.1) y la tabla de cálculos (6.2) quedan firmados por el responsable de esta especificación; el responsable de Oro los acepta al aclarar `04-modelo-oro` (sección 13, DQ-34).
+- **CE-00-05 (legibilidad):** Una persona de perfil junior distinta del autor —o, en la `00`, un agente en contexto limpio con la firma del responsable (anexo 2 de D-00-01, DQ-34)— responde correctamente las cinco preguntas estándar del principio XIII.7 sobre una muestra del catálogo, sin consultar al autor. Evidencia: `checklists/legibilidad.md` firmado.
 
 ## 11. Validación
 
@@ -203,7 +203,7 @@ Estados: **Propuesta** → **Validada** (el responsable y el segundo validador l
 | PN08 | `helpfulness`, `score`, `text` | | | Propuesta |
 | PN09 | `userId` | | | Propuesta |
 | PN10 | `userId` | | | Propuesta |
-| PN11 | `userId`, `profileName`, `score`, `helpfulness` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
+| PN11 | `userId`, `profileName`, `score`, `helpfulness`, `time` | Dario Andres Bernate Canas | 2026-10-19 | Validada |
 | PN12 | `time`, `score` | | | Propuesta |
 
 Nota: las siete preguntas de prioridad D (PN01 a PN05, PN07 y PN11) las aprobó Dario Andres Bernate Canas el 2026-10-19 en los dos roles que fija DQ-10 (responsable de la spec y segundo validador). Las de prioridad S y P siguen en «Propuesta» a propósito: la `00` se cierra con las D en «Validada» (sección 10, CE-00-03).
@@ -244,8 +244,14 @@ Nota: las siete preguntas de prioridad D (PN01 a PN05, PN07 y PN11) las aprobó 
 | DQ-31 | ¿Se crea un validador automático en Python del catálogo de preguntas (D-00-03 del plan)? | Resuelta | No; basta la verificación humana V-00-01 |
 | DQ-32 | ¿Registrar aprobaciones en la sección 11 obliga a regenerar plan y tareas (RF-00-10)? | Resuelta | No: solo los cambios de PN, de requisitos o de las secciones 6 y 7 |
 | DQ-33 | ¿Qué compara la verificación de RF-00-06 tras acotar RF-00-10 (DQ-32)? | Resuelta | El último cambio de fondo (PN, requisitos, secciones 6 y 7), no la «Última actualización» |
+| DQ-34 | ¿Quién firma el insumo de Oro (CE-00-04) y quién lee en frío la `00`? | Resuelta | Firma el responsable de la `00`; Oro acepta en la `04`. La lectura en frío la hace un agente en contexto limpio (anexo 2 de D-00-01) |
+| DQ-35 | ¿PN07 se cruza por mes y por calificación o son dos cortes separados? | Resuelta | Dos cortes separados; no se cruzan |
+| DQ-36 | ¿El 2013-03-04 entra en la ventana de datos? | Resuelta | Sí: la ventana es cerrada en ambos extremos |
 
 ### Decisiones tomadas
+- **2026-10-19 · DQ-36:** la ventana de datos es cerrada en ambos extremos: el 2010-03-04 y el 2013-03-04 cuentan. *Motivo:* la fuente declara 9.707.634 reseñas entre esas fechas y el último mes se marca como parcial, no se recorta. *Consecuencia:* sección 3; RF-00-05 y los cortes por mes (PN01, PN02, PN03, PN04, PN07 y PN11).
+- **2026-10-19 · DQ-35:** PN07 se presenta en dos cortes separados, por mes y por calificación, sin cruzarlos. *Motivo:* el cruce mes × calificación fragmenta el denominador y produce celdas vacías; la pregunta se responde con la tendencia mensual y la comparación por calificación. *Consecuencia:* sección 6.2 y PN07 en el tablero T3 de la sección 7.
+- **2026-10-19 · DQ-34:** CE-00-04 lo firma el responsable de la `00` (Dario Andres Bernate Canas); el responsable de Oro (Jose Julio Gomez Palmera) acepta la sección 6 al aclarar `04-modelo-oro`. Jose Julio no firma ni verifica las especificaciones `00` a `03`. *Motivo:* la `00` es trabajo del responsable; Oro firma lo suyo cuando reciba las especificaciones hasta la `03` (decisión del responsable). *Consecuencia:* CE-00-04 y sección 13; plan C-00-21 y C-00-22, S-00-04 y §9; T-00-25, T-00-38 y T-00-55 cambian de responsable; anexo 2 de D-00-01.
 - **2026-10-19 · DQ-33:** la verificación de RF-00-06 compara el último cambio de una PN, de un requisito o de las secciones 6 y 7, igual que V-00-07, y no la «Última actualización» de la spec. *Motivo:* con DQ-32, las firmas de la sección 11 cambian la fecha de la spec sin cambiar el fondo; la verificación literal fallaría tras T-00-23 (hallazgo 1 de la pasada 3 de `/analyze`). *Consecuencia:* sección 9; plan y tareas actualizan su «Basada en».
 - **2026-10-19 · DQ-32:** RF-00-10 se acota: regenerar plan y tareas solo cuando cambie una PN, un requisito o las secciones 6 y 7; las aprobaciones, firmas y fechas de la sección 11 no lo exigen. *Motivo:* el fin de RF-00-10 es que plan y tareas no trabajen sobre una pregunta vieja, y una firma no cambia lo que se construye; sin el acote, V-00-07 fallaría por diseño tras T-00-23 y T-00-25 (hallazgo 1 de `/analyze` T-00-10). *Consecuencia:* sección 9; V-00-07 compara contra la fecha del último cambio de fondo.
 - **2026-10-19 · DQ-31 (D-00-03):** no se crea validador automático en Python para el catálogo de preguntas. *Motivo:* son 12 preguntas que cambian poco y la verificación humana V-00-01 las revisa en minutos. *Consecuencia:* la condición 1 de la compuerta se cumple con CE-00-01 a CE-00-04 y la sección 11 firmada (D-00-01), sin `pytest`; plan y tareas retiran las pruebas de Python de la 00.
@@ -286,7 +292,7 @@ Nota: las siete preguntas de prioridad D (PN01 a PN05, PN07 y PN11) las aprobó 
 **Compuerta de cierre** (las seis condiciones de la constitución; la variante de la `00` está firmada en `adr/D-00-01-compuerta-de-cierre-sin-datos.md`): (1) en lugar de tests, criterios CE-00-01 a CE-00-04 cumplidos y sección 11 firmada; (2) cuadre exacto: no aplica, `00` no mueve datos; (3) verificación humana del responsable; (4) documentación de la entrega actualizada (`plan.md` con su Constitution Check); (5) checklist de legibilidad firmado tras la lectura en frío (CE-00-05); (6) Pull Request integrado a `main`.
 
 **Qué heredan las siguientes especificaciones**
-- `01-ingesta-bronce`: confirmar los diez campos de la sección 3 y cómo aparecen las reseñas anónimas (campo ausente o valor repetido); documentar el DDL (esquema, tablas, campos, tipos y restricciones) y el flujo de los scripts SQL (orden, qué hace cada uno y qué produce).
+- `01-ingesta-bronce`: confirmar los diez campos de la sección 3 y cómo aparecen las reseñas anónimas (campo ausente o valor repetido); documentar el DDL (esquema, tablas, campos, tipos y restricciones) y el flujo de los scripts SQL (orden, qué hace cada uno y qué produce); verificar que la ventana incluya el 2013-03-04 completo (DQ-36) contra el conteo de 9.707.634.
 - `02-exploracion-eda`: regla de anonimato (con acción y conteo en la bitácora), `helpfulness` con cero votos totales, meses parciales, umbral de volumen de PN06 (DQ-11), mínimo de votos totales para una lectura de utilidad por producto (DQ-23, DQ-27), definición de palabra y rangos de longitud de PN08 (DQ-24) y corte del grupo más activo de PN09 (DQ-17); además, la regla que excluye las reseñas anónimas del conteo de usuarios (RF-00-08) y su conteo de excluidas (RF-00-11).
-- `04-modelo-oro`: sección 6 completa.
+- `04-modelo-oro`: sección 6 completa; su responsable la acepta o pide cambios en el `/clarify` de la `04` (DQ-34).
 - `05-dashboards-bi`: sección 7; la marca de «mes parcial» en T1 y T3 (RF-00-05) y el conteo de anónimas excluidas en PN02, PN09 y PN10 (RF-00-11).

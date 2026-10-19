@@ -31,6 +31,7 @@ La constitución (sección «Flujo de desarrollo y compuertas») exige seis cond
 ## Consecuencias
 
 - **Anexo (2026-10-19, firmado por el responsable):** el umbral U-00-08 de la lectura en frío es «5 de 5 preguntas estándar respondidas sin consultar al autor», como criterio provisional solo para la 00. El tiempo máximo (U-00-09) sigue pendiente del ADR-0012. Desde la 01 rige lo que decida el ADR-0012.
+- **Anexo 2 (2026-10-19, decisión del responsable, spec DQ-34):** en la `00` la lectura en frío (condición 5, Const. XIII.7) la hace un agente sin historial de la conversación ni acceso al resto del repositorio, que lee solo la muestra y responde las cinco preguntas estándar; el responsable revisa sus respuestas y firma `checklists/legibilidad.md`. *Motivo:* Jose Julio Gomez Palmera no firma ni verifica las especificaciones `00` a `03`, y no hay otra persona junior disponible. *Límite:* es una excepción a la palabra «persona» de XIII.7 y queda débil ante una revisión externa; se revisa en la misma fecha que esta decisión. CE-00-04 también cambia: firma el responsable de la `00` y Oro acepta en la `04`.
 - `specs/README.md` debe citar esta decisión como origen de la variante de la 00, no la constitución.
 - El plan de la 00 (§4 y §5.2) cita este archivo y deja D-00-01 como firmada.
 - Si otras specs sin datos (`02`, `05`) necesitan una variante, se evalúa la opción B.

@@ -1,7 +1,8 @@
 # Análisis de coherencia — 00-preguntas-negocio
 
-**Propósito:** auditoría de solo lectura de la coherencia entre Constitución, spec, plan y tareas (T-00-10, segunda pasada de D-00-02: `/analyze` corre antes y después de `/tasks`) | **Autor:** skill analyze (agente architect) | **Fecha:** 2026-10-19
-**Documentos analizados:** `memory/constitution.md` v1.1.0 · `spec.md`, `plan.md` y `task.md` (los tres del 2026-10-19) · `adr/D-00-01` · `memory/adr/` (README, 0003, 0006 a 0011, 0013) · `specs/README.md` · `AGENTS.md` · `README.md` · `docs/gestion/roles.md` y `tareas.md`
+**Propósito:** auditoría de solo lectura de la coherencia entre Constitución, spec, plan y tareas (T-00-10, segunda pasada de D-00-02: `/analyze` corre antes y después de `/tasks`) | **Autor:** skill analyze (agente architect) | **Fecha:** 2026-10-19 (pasadas 1 a 4)
+**Documentos analizados:** `memory/constitution.md` v1.1.0 · `spec.md`, `plan.md` y `task.md` (los tres del 2026-10-19) · `adr/D-00-01` · `memory/adr/` (README, 0003, 0006 a 0011, 0012 y 0013) · `checklists/legibilidad.md` · `specs/README.md` · `AGENTS.md` · `README.md` · `docs/gestion/roles.md` y `tareas.md`
+**IDs que atiende:** RNF-00-01, RNF-00-04 · Componente C-00-08 · Tareas T-00-10 y T-00-56 (Const. XIII.4, XIII.5)
 **Modo:** completo (existe `task.md`)
 
 ## Veredicto
@@ -86,3 +87,25 @@ T-00-10 exige «LISTO con 0 críticos y 0 altos». Esta pasada da NO LISTO (1 al
 - Si T-00-48 o T-00-25 cambian §6, ninguna tarea explícita regenera plan y tareas (lo cubre C-00-17 de forma condicional).
 - T-00-31 (V-00-10) corre después de la lectura en frío: lo que corrija no vuelve a pasar por ella.
 - U-00-09 sigue pendiente del ADR-0012.
+
+---
+
+# Pasada 4 — cierre (2026-10-19)
+
+**Autor:** skill analyze (agente architect) | **Documentos:** los mismos de la pasada 3 más `memory/adr/0012-verificacion-de-legibilidad.md` y `checklists/legibilidad.md` | **Modo:** completo
+
+## Veredicto
+
+**LISTO** para integrar el PR #2, con el commit y el push del estado corregido: 0 críticos, 0 altos y 0 medios documentales. Queda la condición 6 (Pull Request integrado) a cargo de T-00-39.
+
+## Qué cambió desde la pasada 3
+
+DQ-34 (firmas sin Jose Julio y lectura en frío por un agente en contexto limpio), DQ-35 (PN07 en dos cortes separados), DQ-36 (ventana cerrada en ambos extremos), ADR-0012 firmado, `checklists/legibilidad.md` lleno y firmado (2 de 2 bloques, 5 de 5), V-00-07, V-00-09 y V-00-10 ejecutadas y T-00-31, T-00-34, T-00-36 a T-00-38, T-00-52, T-00-54 y T-00-55 cerradas.
+
+## Hallazgos cerrados en esta pasada
+
+Rama de cierre en los encabezados; contradicción «se confirmó con el responsable» en la lectura en frío; DQ-34 en plan y tareas; RNF-00-01, CE-00-05 y G-37; DQ-35 en matriz y research; DQ-36 en spec §13, plan §7.9 y glosario; Constitution Check; estados y checkpoints; S-04 y S-05.
+
+## Bajos pendientes
+
+Los tres bajos se cerraron antes del commit (T-00-38 sin «provisional», G-19 del plan, historial de tareas) y V-00-10 se repitió. Sin efecto en la compuerta.

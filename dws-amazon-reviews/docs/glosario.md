@@ -4,7 +4,7 @@
 **Dependencias:** `specs/00-preguntas-negocio/spec.md` §3, §5, §6 y §12; `specs/00-preguntas-negocio/plan.md` §15.1 y §15.2; `specs/00-preguntas-negocio/task.md` T-00-12 y T-00-15.
 **IDs que atiende:** RNF-00-02 · Componente C-00-07 · D-00-04 · Tareas T-00-12 y T-00-15 (Const. XIII.4, XIII.6).
 
-> Las 39 entradas de `plan.md` §15.1 se siembran en T-00-12; las entradas G-40 a G-49 agregan las siglas y los términos de `spec.md` y `plan.md` que faltaban (T-00-15). Si un término cambia, se cambia aquí y en la spec que lo usa; el glosario no reemplaza a la spec.
+> Las 39 entradas de `plan.md` §15.1 se siembran en T-00-12; las entradas G-40 a G-49 agregan las siglas y los términos de `spec.md` y `plan.md` que faltaban (T-00-15). G-50 a G-59 se agregaron el 2026-10-19 tras la primera lectura en frío (T-00-38 y T-00-55), que no pudo resolver los IDs ni cómo se valida la spec. Si un término cambia, se cambia aquí y en la spec que lo usa; el glosario no reemplaza a la spec.
 
 ## Términos y siglas
 
@@ -28,7 +28,7 @@
 | G-16 | Nivel de detalle mínimo | Unidad más pequeña que exigen las preguntas: una reseña (spec §6.1); insumo del grano |
 | G-17 | Grano | Qué representa una fila de un hecho, dicho en una frase (lo declara la spec 04) |
 | G-18 | Campo de la fuente | Cada uno de los diez campos de la spec §3 |
-| G-19 | Ventana de datos | Periodo del 2010-03-04 al 2013-03-04 que cubre la fuente |
+| G-19 | Ventana de datos | Periodo del 2010-03-04 al 2013-03-04 que cubre la fuente; ambos extremos incluidos (DQ-36) |
 | G-20 | Reseña anónima | Reseña sin usuario identificable; la forma exacta de reconocerla `[POR DEFINIR en las specs 01 y 02, DQ-12]` |
 | G-21 | Usuario | Persona seudónima que escribe reseñas (campo `userId`); término único fijado por la spec DQ-20. No se usan «reseñador» ni «cliente» en ese sentido; «cliente» solo aparece en el rol «analista de experiencia del cliente» |
 | G-22 | Usuario de una sola vez | Usuario con exactamente 1 reseña en la ventana completa (PN10, DQ-26) |
@@ -46,7 +46,7 @@
 | G-34 | Matriz de trazabilidad | Documento con una fila por PN que la une con sus campos, su tablero y las especificaciones que la atienden |
 | G-35 | Lista de validación | Documento `checklists/validacion.md` con la evidencia de CE-00-01 a CE-00-04 |
 | G-36 | Perfil junior | Persona que conoce SQL básico y Python básico, pero no el repositorio ni el dataset (Const. XIII) |
-| G-37 | Lectura en frío | Revisión por una persona distinta del autor, que responde las cinco preguntas estándar sin consultarlo |
+| G-37 | Lectura en frío | Revisión por una persona distinta del autor, que responde las cinco preguntas estándar sin consultarlo; en la `00`, la hace un agente en contexto limpio con la firma del responsable (anexo 2 de D-00-01, DQ-34) |
 | G-38 | Capa (Bronce, Plata, Oro) | Cada etapa del modelo Medallion: `raw`, `silver`, `gold` |
 | G-39 | Regla del EDA (`Rnn`) | Hallazgo del EDA convertido en regla con acción (descarta, corrige o marca) y conteo en la bitácora |
 | G-40 | SQL | Lenguaje de consultas de PostgreSQL, el único motor del Data Warehouse |
@@ -59,3 +59,13 @@
 | G-47 | Kimball | Enfoque de modelado dimensional que organiza el análisis en hechos y dimensiones; lo usa la spec 04 |
 | G-48 | Medallion | Arquitectura por capas (Bronce, Plata y Oro) que separa los datos crudos de los datos listos para análisis |
 | G-49 | Compuerta de cierre | Conjunto de condiciones que una especificación DEBE cumplir antes de integrarse a `main`; en la spec 00 rige la variante de D-00-01 |
+| G-55 | Calificación | Estrellas de 1 a 5 que da la reseña (campo `score`); el promedio de calificación es la suma de calificaciones ÷ el número de reseñas |
+| G-56 | Votos totales | Todos los votos de utilidad que recibió una reseña, útiles o no (denominador de `helpfulness`) |
+| G-57 | Rango de longitud | Grupo de reseñas según su número de palabras (PN08); los rangos los fija la spec 02 (DQ-24) |
+| G-58 | Estacionalidad | Repetición de picos o valles en el mismo mes de cada año; en PN01 se lee comparando el mismo mes entre años |
+| G-59 | Grupo más activo | Usuarios con más reseñas en la ventana (PN09); el corte exacto lo fija la spec 02 (DQ-17). Se informa solo como total, nunca por usuario |
+| G-50 | Especificaciones del proyecto | `00` preguntas de negocio · `01` ingesta en Bronce · `02` exploración de datos (EDA) · `03` ETL a Plata · `04` modelo de Oro · `05` tableros de BI · `06` reproducibilidad e integración |
+| G-51 | Marcas de la matriz | `solo_agregada`: la PN se responde solo con totales, nunca por usuario (RF-00-09); `corte_por_mes`: se corta por mes y lleva la marca de mes parcial (RF-00-05); `cuenta_usuarios`: cuenta usuarios y excluye las anónimas, informando cuántas (RF-00-08, RF-00-11) |
+| G-52 | Requisitos de la spec 00 (resumen) | RF-00-01 ID, decisión y prioridad por PN · RF-00-02 solo campos de la fuente · RF-00-03 descartar lo que identifique personas · RF-00-04 tablero por PN · RF-00-05 mes parcial marcado · RF-00-06 la spec cambia primero · RF-00-07 estado por PN · RF-00-08 anónimas fuera del conteo de usuarios · RF-00-09 PN de usuarios solo agregadas · RF-00-10 regenerar plan y tareas si cambia el fondo · RF-00-11 informar las anónimas excluidas · RNF-00-01 a RNF-00-04 legibilidad, glosario, nombres completos e IDs citados · CE-00-01 a CE-00-05 criterios de éxito (texto en la spec §9 y §10) |
+| G-53 | Cómo se valida la spec 00 | No hay código ni SQL. El responsable aprueba cada PN en la spec §11; luego ejecuta las verificaciones `V-00-01` a `V-00-10` sobre los documentos (plan §10.2) y anota el resultado en `checklists/validacion.md`. Los pasos, en orden, están en `quickstart.md` |
+| G-54 | Umbral `U-00-nn` | Cifra con nombre que fija cuándo algo cumple (p. ej. U-00-08 = 5 de 5 aciertos en la lectura en frío); la tabla está en el plan §15.2 |

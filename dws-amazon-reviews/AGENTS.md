@@ -64,7 +64,7 @@ Nombre estándar: `NN-nombre` en minúsculas, sin tildes, con guiones y dos díg
 - No versiones datos (`.gz`, `.parquet`, `.csv`, `.twbx`, `.env`) ni pongas credenciales en ningún archivo, incluido el `ATTACH` de DuckDB.
 - No añadas sin preguntar: Airflow, Dagster o dbt, nube, Notion, servicios de pago, Python fuera de `tests/`, ni transformaciones que no nazcan de una regla del EDA.
 - No reutilices dimensiones, nombres de tablas de Oro ni requerimientos del modelo anterior.
-- No resuelvas por tu cuenta los pendientes ADR 0008–0012 de la constitución: propón el ADR y espera al responsable.
+- No resuelvas por tu cuenta los pendientes ADR 0008–0011 de la constitución (el ADR-0012 ya está firmado): propón el ADR y espera al responsable.
 - No crees ni renombres especificaciones fuera de la lista del principio XII: eso exige enmendar la constitución.
 - Trabaja en la rama de la especificación activa y deja commits por fase.
 

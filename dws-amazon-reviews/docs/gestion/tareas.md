@@ -20,9 +20,9 @@ Cada una empieza cuando la anterior pasa sus tests (Principio XII).
 
 | ID | Especificación | Bloqueada por | Responsable | Estado | Evidencia |
 |---|---|---|---|---|---|
-| S-00 | `00-preguntas-negocio` | U-00-09: 45 minutos por bloque (ADR-0012 propuesto el 2026-10-19, pendiente de firma) | Dario Andres Bernate Canas | en curso | `specs/00-preguntas-negocio/task.md` (32 de 42 al 2026-10-19); `research.md`, `quickstart.md`, `matriz-trazabilidad.md`, `checklists/validacion.md`, `checklists/legibilidad.md` y `docs/glosario.md`; spec §11 firmada (7 PN D); PR #1 integrado a `main` (`567ad89`, 2026-10-19); faltan la firma y la lectura en frío de Jose Julio (T-00-25, T-00-38 y T-00-55), la firma del ADR-0012 y el PR de cierre de la rama `00-preguntas-negocio-cierre` |
-| S-01 | `01-ingesta-bronce` | S-00 (pausada hasta que cierre), ADR-0008, ADR-0012 | Dario Andres Bernate Canas | pendiente | `specs/01-ingesta-bronce/spec.md` (borrador pausado) |
+| S-00 | `00-preguntas-negocio` | T-00-39: integrar el PR #2 (`00-preguntas-negocio-cierre`) | Dario Andres Bernate Canas | en curso (lista para merge) | `specs/00-preguntas-negocio/task.md` (41 de 42 al 2026-10-19); `research.md`, `quickstart.md`, `matriz-trazabilidad.md`, `checklists/validacion.md`, `checklists/legibilidad.md` y `docs/glosario.md`; spec §11 firmada (7 PN D); ADR-0012 firmado y DQ-34 a DQ-36; lectura en frío 2 de 2 bloques (5 de 5) y V-00-01 a V-00-10 ejecutadas; falta integrar el PR #2 |
+| S-01 | `01-ingesta-bronce` | S-00 (merge del PR #2), ADR-0008 | Dario Andres Bernate Canas | pendiente | `specs/01-ingesta-bronce/spec.md` (borrador pausado) |
 | S-02 | `02-exploracion-eda` | S-01 | por asignar | pendiente | |
 | S-03 | `03-etl-plata` | S-02, ADR-0009 | por asignar | pendiente | |
-| S-04 | `04-modelo-oro` | S-03, ADR-0010 | por asignar | pendiente | |
-| S-05 | `05-dashboards-bi` | S-04, ADR-0011 | por asignar | pendiente | |
+| S-04 | `04-modelo-oro` | S-03, ADR-0010 | Jose Julio Gomez Palmera | pendiente | |
+| S-05 | `05-dashboards-bi` | S-04, ADR-0011 | Jose Julio Gomez Palmera | pendiente | |

@@ -1,6 +1,6 @@
 # Lista de validación — 00-preguntas-negocio
 
-**Propósito:** reunir la evidencia de CE-00-01 a CE-00-04 y la firma del responsable de Oro sobre el insumo del grano y la tabla de cálculos (D-00-06) | **Autor:** agente principal (OpenCode), por encargo de Dario Andres Bernate Canas | **Fecha:** 2026-10-19 | **Constitución:** v1.1.0
+**Propósito:** reunir la evidencia de CE-00-01 a CE-00-04 y la firma del insumo de Oro (el insumo del grano y la tabla de cálculos) por el responsable de la 00 (D-00-06, spec DQ-34) | **Autor:** agente principal (OpenCode), por encargo de Dario Andres Bernate Canas | **Fecha:** 2026-10-19 | **Constitución:** v1.1.0
 **Dependencias:** `spec.md` §5, §6, §7, §10 y §11; `plan.md` §7.3, §10.2 y §14; `matriz-trazabilidad.md`; `research.md`; `docs/glosario.md`.
 **IDs que atiende:** CE-00-01, CE-00-02, CE-00-03, CE-00-04, RF-00-01, RF-00-03, RF-00-04, RF-00-07, RF-00-09, RNF-00-03, RNF-00-04 · Componentes C-00-08, C-00-13, C-00-15, C-00-18 a C-00-23 · Tareas T-00-24, T-00-25, T-00-34, T-00-36, T-00-47 y T-00-48 (Const. XIII.4, XIII.5, XI).
 
@@ -47,7 +47,7 @@
 | PN07 | D | Validada | Dario Andres Bernate Canas | 2026-10-19 |
 | PN11 | D | Validada | Dario Andres Bernate Canas | 2026-10-19 |
 
-**Resultado:** 7 de 7 en «Validada» con nombre y fecha (2026-10-19); CE-00-03 se cumple. La aprobación de negocio y documental la ejerció Dario Andres Bernate Canas en los dos roles que fija DQ-10 (T-00-23). Falta la firma de Oro (punto 5) para CE-00-04.
+**Resultado:** 7 de 7 en «Validada» con nombre y fecha (2026-10-19); CE-00-03 se cumple. La aprobación de negocio y documental la ejerció Dario Andres Bernate Canas en los dos roles que fija DQ-10 (T-00-23). La firma del insumo de Oro (punto 5, responsable de la 00 por DQ-34) cubre CE-00-04.
 
 ## 4. Revisión de la spec §6.1 y §6.2 (RNF-00-03)
 
@@ -74,9 +74,9 @@ Nivel de detalle mínimo (§6.1): **una reseña individual**, revisado: **Sí**.
 
 | Revisó | Rol | Fecha | Firma |
 |---|---|---|---|
-| Jose Julio Gomez Palmera | Responsable de Oro | Pendiente | Pendiente |
+| Dario Andres Bernate Canas | Responsable de la 00 (spec DQ-34) | 2026-10-19 | Firmado |
 
-**Resultado:** pendiente. La firma cubre la spec §6.1 y la tabla de la spec §6.2 (T-00-25). Mientras falte, CE-00-04 no se cumple.
+**Resultado:** firmado el 2026-10-19 sobre la spec §6.1 y la tabla de la spec §6.2, tal como quedaron tras las aclaraciones de legibilidad del mismo día (T-00-25); CE-00-04 se cumple. El responsable de Oro (Jose Julio Gomez Palmera) acepta la sección 6 o pide cambios en el `/clarify` de la `04` (spec §13).
 
 ## 6. Resultado de las verificaciones V-00-01 a V-00-10
 
@@ -90,18 +90,18 @@ Ejecución mecánica del 2026-10-19 sobre los documentos; la confirmación final
 | V-00-04 | 12 de 12 PN revisadas; 0 identifican a una persona; PN09, PN10 y PN11 figuran como solo agregadas | Sí |
 | V-00-05 | 12 de 12 PN con el tablero de la spec §7; T1 = 5, T2 = 2, T3 = 5 | Sí |
 | V-00-06 | `corte_por_mes = sí` en 6 (PN01, PN02, PN03, PN04, PN07, PN11); `cuenta_usuarios = sí` en 3 (PN02, PN09, PN10) con el informe de anónimas; `solo_agregada = sí` en 3 (PN09, PN10, PN11) | Sí |
-| V-00-07 | «Basada en» de `plan.md` y `task.md` = 2026-10-19, igual al último cambio de PN, requisitos o spec §6–§7; los cambios entraron juntos en el commit `556bbc0`, sin desorden | Sí |
+| V-00-07 | «Basada en» de `plan.md` y `task.md` = 2026-10-19, igual al último cambio de PN, requisitos o spec §6–§7 (DQ-34 a DQ-36 y PN11 `time`); los cambios se hicieron en `spec.md` antes que en plan, tareas, matriz y `research.md`, y entran juntos en el commit de cierre; 0 cambios de PN antes que en la spec. Repetida tras las correcciones finales del 2026-10-19 | Sí |
 | V-00-08 | 7 de 7 PN de prioridad D en «Validada» el 2026-10-19, en la spec §11 y en el punto 3 de esta lista | Sí |
-| V-00-09 | Lista completa en sus puntos 1 a 4; firma del responsable de Oro pendiente | No: pendiente T-00-25 (humano) |
-| V-00-10 | Pendiente: se ejecuta después de la lectura en frío (T-00-31) | Pendiente |
+| V-00-09 | Lista completa en sus puntos 1 a 4; firma del responsable de la 00 (DQ-34) con fecha 2026-10-19; Oro acepta la sección 6 en el `/clarify` de la 04 | Sí |
+| V-00-10 | 7 de 7 documentos con encabezado e IDs; glosario con G-01 a G-54; 0 IDs citados en `plan.md` y `task.md` fuera de los rangos de plan §2.3 (DQ-01 a DQ-36 sin DQ-09; RF, RNF, CE, PN, U, C, V, T, S, D y G dentro de rango); 0 IDs inexistentes; 35 de 35 DQ definidas en spec §12. Repetida tras las correcciones finales del 2026-10-19 | Sí |
 
 ## 7. Estado de la compuerta de cierre (D-00-01)
 
 | # | Condición | Estado |
 |---|---|---|
-| 1 | CE-00-01 a CE-00-04 cumplidos y spec §11 firmada | Parcial: CE-00-01, CE-00-02 y CE-00-03 cumplen (7 PN D en «Validada» el 2026-10-19); CE-00-04 pendiente de la firma de Oro |
+| 1 | CE-00-01 a CE-00-04 cumplidos y spec §11 firmada | Cumplida: CE-00-01 a CE-00-04 cumplen; spec §11 firmada (7 de 7 PN D en «Validada» el 2026-10-19); CE-00-04 firmada por el responsable de la 00 (DQ-34) |
 | 2 | Cuadre exacto | No aplica (la spec 00 no mueve datos) |
-| 3 | Verificación humana V-00-01 a V-00-10 | Parcial: V-00-01 a V-00-08 cumplen; V-00-09 depende de la firma de Oro; V-00-10 va tras la lectura en frío (T-00-31) |
-| 4 | Documentación actualizada | En curso: glosario, `research.md`, matriz y esta lista creados; plan §4 al día (T-00-33); faltan el ADR-0012 firmado y la fila S-00 al cierre (T-00-37) |
-| 5 | Checklist de legibilidad firmado | Pendiente: `checklists/legibilidad.md` creado el 2026-10-19 y sin llenar; faltan T-00-38 y T-00-55 |
-| 6 | Pull Request integrado a `main` | Cumplida (fuera de orden): Pull Request #1 (`567ad89`) integrado el 2026-10-19; T-00-39 se marcará cuando el PR de cierre registre las seis condiciones |
+| 3 | Verificación humana V-00-01 a V-00-10 | Cumplida: V-00-01 a V-00-10 con resultado igual al esperado; 10 de 10 (T-00-36 y T-00-31) |
+| 4 | Documentación actualizada | Cumplida: glosario, `research.md`, matriz y listas al día; ADR-0012 firmado el 2026-10-19; fila S-00 actualizada (T-00-37) |
+| 5 | Checklist de legibilidad firmado | Cumplida: `checklists/legibilidad.md` lleno y firmado el 2026-10-19; 2 de 2 bloques con 5 de 5 cada uno (T-00-38 y T-00-55) |
+| 6 | Pull Request integrado a `main` | Pendiente: PR de cierre #2 abierto desde `00-preguntas-negocio-cierre`; se marca al integrar (T-00-39) |

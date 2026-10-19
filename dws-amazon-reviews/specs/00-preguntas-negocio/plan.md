@@ -1,8 +1,8 @@
 # Plan técnico — 00-preguntas-negocio
 
-**Rama**: `00-preguntas-negocio` | **Fecha**: 2026-10-19 | **Spec**: `specs/00-preguntas-negocio/spec.md` | **Constitución**: v1.1.0
-**Basada en**: `spec.md` última actualización 2026-10-19, que es también la fecha del último cambio de PN, requisitos o spec §6–§7 (DQ-32 acota RF-00-10 y DQ-33 acota la verificación de RF-00-06; estado «Revisada» por el responsable el 2026-10-19, ADR-0006, ADR-0007 y D-00-01 firmados; aclaraciones DQ-01 a DQ-32)
-**Estado**: borrador | **Responsable**: Dario Andres Bernate Canas | **Segundo validador**: Dario Andres Bernate Canas (spec DQ-10; `docs/gestion/roles.md`)
+**Rama**: `00-preguntas-negocio-cierre` | **Fecha**: 2026-10-19 | **Spec**: `specs/00-preguntas-negocio/spec.md` | **Constitución**: v1.1.0
+**Basada en**: `spec.md` última actualización 2026-10-19, que es también la fecha del último cambio de PN, requisitos o spec §6–§7 (DQ-32 acota RF-00-10 y DQ-33 acota la verificación de RF-00-06; estado «Revisada» por el responsable el 2026-10-19, ADR-0006, ADR-0007 y D-00-01 firmados; aclaraciones DQ-01 a DQ-36; DQ-34 cambia CE-00-04 y quién lee en frío, DQ-35 fija los cortes de PN07 y DQ-36 la ventana de datos)
+**Estado**: en cierre (41 de 42; falta el merge del PR #2) | **Responsable**: Dario Andres Bernate Canas | **Segundo validador**: Dario Andres Bernate Canas (spec DQ-10; `docs/gestion/roles.md`)
 **Generado por**: skill `/plan` (`skill-plan`, agente `architect`)
 
 ---
@@ -17,7 +17,7 @@ El plan define cómo se **comprueba** el catálogo de preguntas contra los requi
 
 Fuera de este plan: diseñar hechos, dimensiones o claves (spec 04); definir reglas del EDA, umbrales con datos, la definición de «palabra», los rangos de longitud o el corte del grupo más activo (spec 02); tocar `raw`; escribir cualquier script o prueba.
 
-**Requisitos que cubre este plan** (IDs tal como existen en la spec, sin renumerar): RF-00-01 a RF-00-11, RNF-00-01 a RNF-00-04, CE-00-01 a CE-00-05 (20 requisitos). Preguntas de negocio: PN01 a PN12. Decisiones de la spec que el plan respeta: DQ-01 a DQ-32 (spec §12; el número DQ-09 no existe en la spec y no se reutiliza).
+**Requisitos que cubre este plan** (IDs tal como existen en la spec, sin renumerar): RF-00-01 a RF-00-11, RNF-00-01 a RNF-00-04, CE-00-01 a CE-00-05 (20 requisitos). Preguntas de negocio: PN01 a PN12. Decisiones de la spec que el plan respeta: DQ-01 a DQ-36 (spec §12; el número DQ-09 no existe en la spec y no se reutiliza).
 
 ---
 
@@ -60,7 +60,7 @@ Fuera de este plan: diseñar hechos, dimensiones o claves (spec 04); definir reg
 | Requisito no funcional | `RNF-NN-MM` | `RNF-00-01` … `RNF-00-04` | Coincide (DQ-21) |
 | Criterio de éxito | `CE-NN-MM` | `CE-00-01` … `CE-00-05` | CE-00-01 incluye RF-00-09 desde DQ-30 |
 | Pregunta de negocio | `PNnn` | `PN01` … `PN12` | Coincide |
-| Decisión de la spec | — | `DQ-01` … `DQ-32` (sin DQ-09) | Propio de la spec (spec §12) |
+| Decisión de la spec | — | `DQ-01` … `DQ-36` (sin DQ-09) | Propio de la spec (spec §12) |
 | Regla de calidad del EDA | `Rnn` | — | No nacen en esta spec |
 | Umbral | `U-NN-MM` | `U-00-01` … `U-00-18` | §15.2 |
 | Componente del plan | `C-NN-MM` | `C-00-01` … `C-00-30` | §8 |
@@ -109,7 +109,7 @@ Estados: ✅ cumple · ⚠️ cumple con riesgo (explicado) · ❌ incumple · �
 
 | Principio | Qué exige (resumen) | ¿Aplica? | Cómo lo cumple el diseño | Evidencia o verificación | Estado |
 |---|---|---|---|---|---|
-| I. Kimball | Grano, claves subrogadas, fila especial, medidas clasificadas | No directamente | La spec solo entrega insumos (§6.1 nivel de detalle mínimo = una reseña; §6.4 advertencias de aditividad). El plan los traspasa a la spec 04 sin diseñar el modelo y sin reutilizar nada del modelo anterior | Tabla «Traspasos explícitos» (§7.4–7.9); firma del responsable de Oro (C-00-21) | — |
+| I. Kimball | Grano, claves subrogadas, fila especial, medidas clasificadas | No directamente | La spec solo entrega insumos (§6.1 nivel de detalle mínimo = una reseña; §6.4 advertencias de aditividad). El plan los traspasa a la spec 04 sin diseñar el modelo y sin reutilizar nada del modelo anterior | Tabla «Traspasos explícitos» (§7.4–7.9); firma del responsable de la 00 (C-00-21, DQ-34) | — |
 | II. Medallion | Un esquema por capa; Parquet; README con DDL | No | No existen capas en esta spec | — | — |
 | III. Bronce inmutable | Sin `UPDATE`/`DELETE`/`TRUNCATE` sobre `raw` | No | No se toca ningún dato | — | — |
 | IV. Transformación con regla | Toda transformación nace de una regla `Rnn` | No | No hay ETL. Las decisiones que exigen regla (anónimas DQ-04 y DQ-15, cero votos totales, meses parciales, palabra de PN08) se traspasan a la spec 02 | Tabla «Traspasos explícitos» | — |
@@ -120,21 +120,23 @@ Estados: ✅ cumple · ⚠️ cumple con riesgo (explicado) · ❌ incumple · �
 | IX. Orquestación manual | Pasos numerados y reproducibles | Sí | Pasos 01–09 de §7.2; `quickstart.md` (T-00-22) permite que otra persona repita la revisión | §7.2; `quickstart.md` (9 de 9 pasos, 2026-10-19) | ✅ |
 | X. Gestión en el repositorio | Tareas con responsable, estado y evidencia | Sí | ADR-0006 (`task.md`) y ADR-0007 firmados el 2026-10-19. `task.md` se regenera desde este plan el 2026-10-19 y la fila S-00 entra en `docs/gestion/tareas.md` | `memory/adr/README.md`; `task.md` | ✅ |
 | XI. Verificación humana | La persona responsable verifica con sus consultas | Sí, adaptado | No hay tablas para consultar con SQL. Se sustituye por las verificaciones `V-00-01` a `V-00-10` sobre los documentos y por la firma de la spec §11, según D-00-01 (firmada el 2026-10-19) | D-00-01; §10.2 | ✅ |
-| XII. Spec primero y en orden | Spec antes que plan; orden 00 → 06 | Sí | El plan usa la spec con última actualización 2026-10-19 (DQ-01 a DQ-32): primero cambió la spec (DQ-32 acota RF-00-10) y después se regeneran plan y tareas (T-00-56). Los cambios 4, 6, 9, 11 y 12 de §5.4 ya están en la spec y `specs/README.md` cita D-00-01 (cambio 5); los cambios 5 y 11, confirmados por el responsable el 2026-10-19 (T-00-41, T-00-44). La spec 01 sigue en borrador pausado hasta cerrar la 00 | §5.4; `spec.md` (encabezado, §9 y §12); `specs/README.md` («Compuerta de cierre»); «Basada en» de este plan | ✅ |
-| XIII. Legibilidad y trazabilidad | Siete reglas XIII.1–XIII.7 | Sí | Ver filas siguientes y §9; XIII.4, XIII.5 y XIII.6 ya tienen evidencia (documentos y glosario); XIII.7 sigue abierta hasta la lectura en frío | §9 | ⚠️ |
+| XII. Spec primero y en orden | Spec antes que plan; orden 00 → 06 | Sí | El plan usa la spec con última actualización 2026-10-19 (DQ-01 a DQ-36): primero cambió la spec (DQ-32 acota RF-00-10; DQ-34 a DQ-36 cierran firmas, cortes y ventana) y después se regeneran plan y tareas (T-00-56). Los cambios 4, 6, 9, 11 y 12 de §5.4 ya están en la spec y `specs/README.md` cita D-00-01 (cambio 5); los cambios 5 y 11, confirmados por el responsable el 2026-10-19 (T-00-41, T-00-44). La spec 01 sigue en borrador pausado hasta cerrar la 00 | §5.4; `spec.md` (encabezado, §9 y §12); `specs/README.md` («Compuerta de cierre»); «Basada en» de este plan | ✅ |
+| XIII. Legibilidad y trazabilidad | Siete reglas XIII.1–XIII.7 | Sí | Ver filas siguientes y §9; XIII.4 a XIII.6 tienen evidencia (documentos y glosario) y XIII.7 se cerró con la lectura en frío firmada (T-00-38 y T-00-55) | §9 | ✅ |
 | ↳ XIII.1 SQL | CTEs, sin `SELECT *`, comentarios | No | Esta spec no tiene SQL | — | — |
 | ↳ XIII.2 DDL | Comentarios de tabla y columna; llaves explícitas | No | Esta spec no tiene DDL | — | — |
 | ↳ XIII.3 Pruebas | Docstring, nombres, mensajes, constantes | No | Esta spec no tiene pruebas de Python (spec DQ-31) | — | — |
 | ↳ XIII.4 General | Nombres completos, porqué, español, encabezado | Sí | Todo documento nuevo abre con encabezado (propósito, autor, fecha, dependencias) y usa nombres completos (C-00-08, C-00-23) | `research.md`, `quickstart.md`, `matriz-trazabilidad.md`, `checklists/validacion.md` y `docs/glosario.md` (encabezados del 2026-10-19); `V-00-10` los comprueba | ✅ |
 | ↳ XIII.5 Trazabilidad | Todo artefacto cita IDs `RF-NN-MM`/`RNF-NN-MM` que existen | Sí | La spec usa `RF-00-MM`, `RNF-00-MM` y `CE-00-MM`; el plan, `task.md` y los documentos nuevos citan esos mismos IDs, incluidos RF-00-09 a RF-00-11 | C-00-08, C-00-28; documentos del 2026-10-19; `V-00-02`, `V-00-04` y `V-00-10` (IDs citados en este plan y en `task.md` existen) | ✅ |
 | ↳ XIII.6 Glosario | Términos y siglas definidos, un nombre por concepto | Sí | `docs/glosario.md` creado con los 39 términos de §15.1 más las siglas y los términos de `spec.md` y `plan.md` (49 entradas en total); la spec fija «usuario» como término único (DQ-20) | C-00-07; `docs/glosario.md` (2026-10-19); `V-00-10` | ✅ |
-| ↳ XIII.7 Lectura en frío | Persona junior distinta del autor responde cinco preguntas | Sí | La otra persona del equipo (Jose Julio Gomez Palmera) lee en frío las 12 PN, la matriz y el glosario (§9) y registra las respuestas; si falla, se corrige y se repite (C-00-11, C-00-24). U-00-08 = 5 de 5, provisional para la 00, firmado como anexo de D-00-01. Motivo del ⚠️: `checklists/legibilidad.md` está creado y sin llenar; faltan T-00-38 y T-00-55 (lectura en frío) y la firma de Oro; U-00-09 queda fijado en el ADR-0012 propuesto (45 minutos por bloque, pendiente de firma) | C-00-11, C-00-24; U-00-08 (anexo de D-00-01) | ⚠️ |
+| ↳ XIII.7 Lectura en frío | Persona junior distinta del autor responde cinco preguntas | Sí | Un agente sin historial ni acceso al resto del repositorio (anexo 2 de D-00-01, spec DQ-34) leyó en frío las 12 PN, la matriz y el glosario (§9) y registró las respuestas; 2 de 2 bloques con 5 de 5 (10 de 10), sin tropiezos que impidieran responder (C-00-11, C-00-24). U-00-08 = 5 de 5, fijado para la 00 en el anexo de D-00-01 y extendido a todas las especificaciones por el ADR-0012; U-00-09 = 45 minutos por bloque (ADR-0012 firmado el 2026-10-19). Evidencia: `checklists/legibilidad.md` firmado por el responsable el 2026-10-19 | C-00-11, C-00-24; U-00-08 (anexo de D-00-01), U-00-09 (ADR-0012) | ✅ |
 
 **Resultado de la compuerta antes de la Fase 0**: pasa con advertencias en IX y XIII (XIII.4, XIII.5, XIII.6 y XIII.7). Ninguna fila en ❌. X y XI están en ✅ por la firma de ADR-0006, ADR-0007 y D-00-01; XII, por la confirmación de los cambios 5 y 11 y por el orden spec → plan de DQ-32. Ninguna advertencia bloquea `/analyze` ni `/tasks`.
 **Resultado de la compuerta después de la Fase 1**: pasa con las mismas advertencias. El diseño (§7 y §8) cubre los 20 requisitos de la spec, no introduce código ni herramientas, no toca capas y deja cada advertencia con su salida: `quickstart.md` (T-00-22), C-00-07 (glosario) y la evidencia que producen las tareas y la lectura en frío.
-**Resultado tras producir los documentos (2026-10-19)**: IX, XIII.4, XIII.5 y XIII.6 pasan a ✅ con su evidencia (`quickstart.md` y `docs/glosario.md`, T-00-22 y T-00-12); XIII.7 sigue en ⚠️ hasta la lectura en frío (T-00-38 y T-00-55). Ninguna fila queda en ❌, y la compuerta de cierre sigue abierta por las condiciones 1, 3, 4, 5 y 6 (firmas humanas, verificación final y Pull Request).
+**Resultado histórico tras producir los documentos (2026-10-19; superado por los párrafos siguientes)**: IX, XIII.4, XIII.5 y XIII.6 pasan a ✅ con su evidencia (`quickstart.md` y `docs/glosario.md`, T-00-22 y T-00-12); XIII.7 sigue en ⚠️ hasta la lectura en frío (T-00-38 y T-00-55). Ninguna fila queda en ❌, y la compuerta de cierre sigue abierta por las condiciones 1, 3, 4, 5 y 6 (firmas humanas, verificación final y Pull Request).
 
-**Resultado tras los documentos del cierre (2026-10-19)**: la spec §11 queda firmada por el responsable (7 PN D en «Validada», DQ-10), `checklists/legibilidad.md` está creado (falta la lectura en frío de T-00-38 y T-00-55) y el ADR-0012 queda propuesto (U-00-09 = 45 minutos por bloque). La compuerta de cierre sigue abierta por las condiciones 1 (falta la firma de Oro), 3, 4 y 5; la condición 6 se cumplió fuera de orden con el Pull Request #1 (`567ad89`). Ninguna fila queda en ❌.
+**Resultado histórico tras los documentos del cierre (2026-10-19; superado por el párrafo siguiente)**: la spec §11 queda firmada por el responsable (7 PN D en «Validada», DQ-10), `checklists/legibilidad.md` está creado (falta la lectura en frío de T-00-38 y T-00-55) y el ADR-0012 queda propuesto (U-00-09 = 45 minutos por bloque). La compuerta de cierre sigue abierta por las condiciones 1 (falta la firma de Oro), 3, 4 y 5; la condición 6 se cumplió fuera de orden con el Pull Request #1 (`567ad89`). Ninguna fila queda en ❌.
+
+**Resultado tras la firma del ADR-0012 y la lectura en frío (2026-10-19)**: el ADR-0012 queda firmado (opción A; U-00-09 = 45 minutos por bloque), CE-00-04 queda firmada por el responsable de la 00 (DQ-34), `checklists/legibilidad.md` queda lleno y firmado (2 de 2 bloques, 5 de 5 cada uno) y la compuerta cierra las condiciones 1, 3, 4 y 5; la condición 6 queda a la espera de integrar el PR de cierre #2. XIII.7 pasa a ✅.
 
 ---
 
@@ -150,19 +152,19 @@ Estados: ✅ cumple · ⚠️ cumple con riesgo (explicado) · ❌ incumple · �
 | 0009 | Dónde vive la bitácora de calidad | No | Es de la spec 03. La matriz solo anota qué PN dependerán de reglas con conteo en bitácora (anónimas, cero votos) |
 | 0010 | Umbral de latencia | No | Es de la spec 04 |
 | 0011 | Cómo llega Oro a Tableau Public | No | Es de la spec 05 |
-| 0012 | Herramienta y umbrales de legibilidad | No para esta spec | Sigue pendiente y sin archivo en `memory/adr/`. La lectura en frío usa un criterio provisional de cinco de cinco respuestas (U-00-08), firmado como anexo de D-00-01 el 2026-10-19; el tiempo queda `[POR DEFINIR: ADR-0012]` |
+| 0012 | Herramienta y umbrales de legibilidad | No para esta spec | Firmado el 2026-10-19 (opción A): 5 de 5 aciertos y 45 minutos por bloque; fija U-00-09. U-00-08 sigue como anexo de D-00-01 |
 | 0013 | Ponytail como modo de trabajo de los agentes | No: firmado el 2026-10-19 | No cambia el diseño; no autoriza a omitir nada del Principio XIII |
 
 ### 5.2 Decisiones nuevas que propone este plan
 
 | ID | Decisión propuesta | Alternativas descartadas | Motivo | Estado |
 |---|---|---|---|---|
-| D-00-01 | Compuerta de cierre de la spec 00: condición 1 sustituida por CE-00-01 a CE-00-04 cumplidos y spec §11 firmada, sin `pytest`; condición 2 «no aplica»; condición 3 cumplida con `V-00-01` a `V-00-10`; condición 4 con el glosario y los documentos de la spec al día; condiciones 5 y 6 sin cambio | Enmendar la constitución; exigir SQL sin tablas; saltarse la compuerta | La constitución v1.1.0 no contiene variantes de compuerta | **Firmada** el 2026-10-19: `specs/00-preguntas-negocio/adr/D-00-01-compuerta-de-cierre-sin-datos.md`. Anexo firmado: U-00-08 = 5 de 5, provisional solo para la 00. Fecha de revisión: al hacer el `/plan` de `02-exploracion-eda` o de `05-dashboards-bi`, lo que ocurra primero |
+| D-00-01 | Compuerta de cierre de la spec 00: condición 1 sustituida por CE-00-01 a CE-00-04 cumplidos y spec §11 firmada, sin `pytest`; condición 2 «no aplica»; condición 3 cumplida con `V-00-01` a `V-00-10`; condición 4 con el glosario y los documentos de la spec al día; condiciones 5 y 6 sin cambio | Enmendar la constitución; exigir SQL sin tablas; saltarse la compuerta | La constitución v1.1.0 no contiene variantes de compuerta | **Firmada** el 2026-10-19: `specs/00-preguntas-negocio/adr/D-00-01-compuerta-de-cierre-sin-datos.md`. Anexo firmado: U-00-08 = 5 de 5 para la 00; el ADR-0012 extiende el 5 de 5 a todas las especificaciones. Fecha de revisión: al hacer el `/plan` de `02-exploracion-eda` o de `05-dashboards-bi`, lo que ocurra primero |
 | D-00-02 | `/analyze` corre **dos veces**: una antes de `/tasks` (coherencia constitución ↔ spec ↔ plan) y otra después, en modo completo, para los puntos (b) toda verificación tiene tarea y (c) existe la tarea final de legibilidad de la tabla XIII-C. Si una pasada da un hallazgo crítico o alto, se repite una vez corregido (decisión del responsable del 2026-10-19; tercera pasada de la `00`) | Una sola pasada antes de `/tasks` con (b) y (c) a mano (aceptada y revertida el mismo día); una sola pasada después | (b) y (c) necesitan `task.md`; el responsable comprobó que la segunda pasada hace falta | **Aceptada** por el responsable el 2026-10-19 (dos pasadas) |
 | D-00-03 | Validador del catálogo en `tests/` | — | — | **Rechazada** el 2026-10-19 (spec DQ-31): basta la verificación humana `V-00-01`; C-00-10 retirado |
 | D-00-04 | El glosario vive en `docs/glosario.md` y se siembra en esta spec | Glosario por spec; glosario en el README raíz | XIII.6 pide un glosario único y la spec 00 es la primera que define términos | **Aceptada** por el responsable el 2026-10-19 |
 | D-00-05 | La trazabilidad PN → campos → tablero → especificaciones destino vive en `matriz-trazabilidad.md`. La matriz no copia las medidas ni los cortes de la spec §6.2 (la spec manda); solo los cita por ID | Usar `data-model.md`; copiar §6.2 dentro de la matriz | Esta spec no tiene modelo de datos; copiar §6.2 crearía dos fuentes de verdad | **Aceptada** por el responsable el 2026-10-19 |
-| D-00-06 | La evidencia de CE-00-01 a CE-00-04 (revisión por lista, conteo por tablero, estado de las PN D y firma del responsable de Oro sobre §6.1 y §6.2) vive en `checklists/validacion.md` | Firmar dentro de `spec.md`; usar el Pull Request como evidencia | La spec no dice dónde queda la firma de CE-00-04; dónde se guarda una evidencia es parte del cómo | **Aceptada** por el responsable el 2026-10-19 |
+| D-00-06 | La evidencia de CE-00-01 a CE-00-04 (revisión por lista, conteo por tablero, estado de las PN D y firma del responsable de la 00 sobre §6.1 y §6.2, DQ-34) vive en `checklists/validacion.md` | Firmar dentro de `spec.md`; usar el Pull Request como evidencia | La spec no dice dónde queda la firma de CE-00-04; dónde se guarda una evidencia es parte del cómo | **Aceptada** por el responsable el 2026-10-19 |
 | D-00-07 | Formato de los IDs de la spec `RF-00-MM`, `RNF-00-MM` y `CE-00-MM`, con `DEBE` como único modal | Mantener `RF-01` con un ADR de excepción | La constitución («Flujo de desarrollo», XIII.5) fija `RF-NN-MM` | **Decidida** el 2026-10-15 (spec DQ-21) y aplicada |
 | D-00-08 | En `task.md`, citan `Const. XIII.n` solo las tareas que crean o editan un documento (XIII.4 encabezado y nombres, XIII.5 IDs citados); las que solo ejecutan una verificación V-00-MM no la citan | Todas las tareas citan XIII.n; ninguna | La cita sirve a quien escribe el documento; en una tarea de comprobar no aporta (hallazgo 7 de `/analyze` T-00-10) | **Aceptada** por el responsable el 2026-10-19 |
 
@@ -171,8 +173,8 @@ Estados: ✅ cumple · ⚠️ cumple con riesgo (explicado) · ❌ incumple · �
 - **S-00-01**: la spec 00 no carga datos, no ejecuta SQL y no tiene pruebas de Python. Verificado contra la spec §2, §12 (DQ-31) y §13 (2026-10-19).
 - **S-00-02**: los diez campos de la spec §3 son la única fuente de datos de las preguntas. Se confirma en la spec 01 (spec DQ-12).
 - **S-00-03**: las preguntas se redactan en español y sin tecnología. Verificado contra la spec §5 y §9 (2026-10-19): ningún enunciado de requisito nombra productos, lenguajes, objetos físicos ni rutas.
-- **S-00-04**: en un equipo de dos, la lectura en frío la hace la persona que no escribió el artefacto (Jose Julio Gomez Palmera, porque el autor es Dario Andres Bernate Canas).
-- **S-00-05**: el trabajo de la 00 se integra a `main` por la rama `00-preguntas-negocio`, aunque parte de los cambios se hayan hecho en la rama `01-ingesta-bronce` (ver §12).
+- **S-00-04**: Jose Julio Gomez Palmera no firma ni verifica las especificaciones `00` a `03` (spec DQ-34); la lectura en frío de la `00` la hace un agente en contexto limpio y el responsable firma su resultado (anexo 2 de D-00-01).
+- **S-00-05**: el trabajo de la 00 se integra a `main` por la rama `00-preguntas-negocio-cierre` (PR #2); `specs/01-ingesta-bronce/` queda fuera del commit de cierre (ver §12).
 
 ### 5.4 Cambios que este plan exige a `spec.md`
 
@@ -188,7 +190,7 @@ Principio XII: estos cambios se aplican primero en la spec y después se regener
 | 4 | Partir RF-00-03, RF-00-06 y RF-00-08, que tenían dos respuestas | §2.2 regla 1 | **Hecho** el 2026-10-19 (spec DQ-30): nacen RF-00-09, RF-00-10 y RF-00-11; CE-00-01 incluye RF-00-09 |
 | 5 | Origen de la variante de compuerta de la 00 | Constitución, «Compuerta de cierre»; XIII.7 | **Hecho**: D-00-01 firmada el 2026-10-19 y `specs/README.md` (sección «Compuerta de cierre», seis condiciones) la cita como origen de la variante de la 00; confirmado por el responsable el 2026-10-19 (T-00-44) |
 | 6 | RNF-00-03 sin lugar verificable para el nivel de detalle | RNF-00-03 sin criterio verificable completo | **Hecho**: la verificación de RNF-00-03 remite ahora a §6.1 (nivel de detalle) y §6.2 (medida y cortes) |
-| 7 | CE-00-04 no dice dónde queda la firma del responsable de Oro | CE-00-04 sin evidencia definida | **Resuelto en el plan** si se aprueba D-00-06 (`checklists/validacion.md`): el lugar de la evidencia es parte del cómo. No exige cambio en la spec |
+| 7 | CE-00-04 no decía dónde quedaba la firma del insumo | CE-00-04 sin evidencia definida | **Resuelto** el 2026-10-19: firma el responsable de la 00 (DQ-34) en `checklists/validacion.md`; Oro acepta en el `/clarify` de la 04. D-00-06 sigue siendo el lugar de la evidencia |
 | 8 | Extender RF-00-08 a PN02 (DQ-15) | Decisión sin requisito | **Hecho** el 2026-10-15 (DQ-21) |
 | 9 | Escribir «Prioridad» en lugar de «Prio.» | XIII.4 (nombres completos) | **Hecho**: la spec §5 usa «Prioridad» |
 | 10 | Un solo nombre para quien escribe la reseña | XIII.6 | **Hecho** el 2026-10-15: «usuario» (DQ-20); el glosario debe registrarlo (C-00-07) |
@@ -233,7 +235,7 @@ specs/00-preguntas-negocio/
 ├── matriz-trazabilidad.md     # Fase 1: PN → campos → tablero → marcas → especificaciones destino
 ├── quickstart.md              # Fase 1: pasos para que otra persona repita la revisión
 ├── checklists/
-│   ├── validacion.md          # evidencia de CE-00-01 a CE-00-04 y firma del responsable de Oro (D-00-06)
+│   ├── validacion.md          # evidencia de CE-00-01 a CE-00-04 y firma del insumo de Oro (D-00-06, DQ-34)
 │   ├── legibilidad.md         # lectura en frío firmada (RNF-00-01, CE-00-05, Const. XIII.7)
 │   └── analisis.md            # informe de /analyze en modo completo (T-00-10, D-00-02)
 ├── adr/
@@ -256,9 +258,9 @@ docs/
 | 03 | `/plan`, `/tasks` y segunda `/analyze` | Regenera `plan.md` y `task.md` (2026-10-19, de nuevo tras DQ-32) y corre la segunda pasada de `/analyze` en modo completo, con los puntos (a) a (d) de la tabla XIII-C (D-00-02); el primer informe dio NO LISTO y se repite | `spec.md`, `plan.md`, `task.md` | `checklists/analisis.md` | Todos | Sí |
 | 04 | Producir documentos | Las personas producen glosario, `research.md`, matriz, `quickstart.md` y `checklists/validacion.md` siguiendo `task.md` (`/implement` no aplica en la 00) | `task.md` | Documentos | RF-00-01 a RF-00-11, RNF-00-02 a RNF-00-04 | Sí |
 | 05 | Validación de las PN | El responsable y el segundo validador aprueban cada PN en la spec §11 | Spec §3, §5, §11, matriz | Spec §11 con nombre, fecha y estado | RF-00-07, CE-00-03 | Sí |
-| 06 | Firma del insumo de Oro | El responsable de Oro firma la spec §6.1 y §6.2 | Spec §6 | `checklists/validacion.md` firmado | CE-00-04 | Sí |
+| 06 | Firma del insumo de Oro | El responsable de la 00 firma la spec §6.1 y §6.2; Oro la acepta en la 04 (DQ-34) | Spec §6 | `checklists/validacion.md` firmado | CE-00-04 | Sí |
 | 07 | Verificación humana | La persona responsable ejecuta `V-00-01` a `V-00-09` (`V-00-10` va en el paso 09) | Documentos | Resultados en la evidencia de las tareas | Compuerta (condición 3) | Sí |
-| 08 | Lectura en frío | La otra persona del equipo lee la muestra y responde las cinco preguntas | Muestra de §9 | `checklists/legibilidad.md` | RNF-00-01, CE-00-05 | Sí |
+| 08 | Lectura en frío | El agente en contexto limpio lee la muestra y responde las cinco preguntas; el responsable revisa y firma (DQ-34) | Muestra de §9 | `checklists/legibilidad.md` | RNF-00-01, CE-00-05 | Sí |
 | 09 | Cierre | La persona responsable ejecuta `V-00-10` sobre los documentos ya leídos en frío, recorre la compuerta (§14) e integra el Pull Request | Todo lo anterior | Pull Request a `main` | Compuerta | Sí |
 
 **Reproducibilidad**: partiendo de `spec.md` y de `quickstart.md`, otra persona obtiene la misma matriz (12 filas) con las mismas marcas de viabilidad, tablero, respuesta agregada, corte por mes y conteo de usuarios.
@@ -295,7 +297,7 @@ No hay tablas de base de datos. Si la spec y un documento difieren, gana la spec
 | Conteo por tablero | Número de PN en T1, T2 y T3 frente a U-00-02 y U-00-03 | CE-00-02 |
 | Preguntas D | Las siete PN de prioridad D (PN01, PN02, PN03, PN04, PN05, PN07, PN11) con su estado en la spec §11 | CE-00-03 |
 | Revisión de §6.1 y §6.2 | Cada fila nombra medida, cortes y nivel de detalle con nombres completos | RNF-00-03 |
-| Firma del insumo de Oro | Nombre y fecha del responsable de Oro sobre la spec §6.1 y §6.2 | CE-00-04 |
+| Firma del insumo de Oro | Nombre y fecha del responsable de la 00 sobre la spec §6.1 y §6.2 | CE-00-04 |
 
 Reglas: las columnas salen solo de la spec; no se copian dimensiones, nombres de tablas de Oro ni requerimientos del modelo anterior.
 
@@ -315,6 +317,7 @@ Reglas: las columnas salen solo de la spec; no se copian dimensiones, nombres de
 | Traspaso | Destino | Qué debe confirmar o decidir |
 |---|---|---|
 | Los diez campos de la spec §3, su nombre exacto en el archivo y que el título llega | Spec 01 | Confirmar contra los datos (DQ-12, DQ-13) |
+| Ventana cerrada 2010-03-04 a 2013-03-04, ambos extremos incluidos (DQ-36) | Spec 01 | Confirmar que el 2013-03-04 completo entra en la carga y que el conteo 9.707.634 cuadra antes de cerrar Bronce |
 | DDL documentado y flujo de los scripts SQL de Bronce | Spec 01 | Lo pide la spec §13 |
 | Cómo aparece una reseña anónima (campo ausente o valor repetido) | Specs 01 y 02 | Regla del EDA con acción y conteo en la bitácora (DQ-04, DQ-12, DQ-15) |
 | Exclusión de anónimas en PN02, PN09 y PN10 | Specs 02 y 04 | Regla y medida que excluya (RF-00-08) |
@@ -360,8 +363,8 @@ Reglas: las columnas salen solo de la spec; no se copian dimensiones, nombres de
 | C-00-18 | CUANDO el responsable y el segundo validador aprueben una PN, la tabla de la spec §11 DEBE registrar el nombre de quien aprueba, la fecha y el estado «Validada». | RF-00-07, CE-00-03 | `V-00-08` |
 | C-00-19 | SI una PN de prioridad D no puede pasar a «Validada», ENTONCES la persona responsable DEBE registrar en la spec §12 la reapertura de esa pregunta (RF-00-06) antes del cierre. | CE-00-03 | `V-00-08` |
 | C-00-20 | La lista de validación DEBE registrar, para cada una de las doce PN, el cumplimiento de RF-00-01, RF-00-02, RF-00-03, RF-00-04 y RF-00-09 (U-00-05). | CE-00-01 | `V-00-09` |
-| C-00-21 | CUANDO se prepare el cierre de la spec 00, la lista de validación DEBE contener el nombre y la fecha del responsable de Oro como firma de la spec §6.1 y §6.2. | CE-00-04 | `V-00-09` |
-| C-00-22 | SI el responsable de Oro pide cambios a la spec §6.1 o §6.2, ENTONCES la persona responsable DEBE actualizar primero `spec.md` y volver a pedir la firma. | CE-00-04 | `V-00-09` |
+| C-00-21 | CUANDO se prepare el cierre de la spec 00, la lista de validación DEBE contener el nombre y la fecha del responsable de la 00 como firma de la spec §6.1 y §6.2 (DQ-34). | CE-00-04 | `V-00-09` |
+| C-00-22 | SI la revisión de la spec §6.1 o §6.2 encuentra cambios, ENTONCES la persona responsable DEBE actualizar primero `spec.md` y firmar después; los cambios que pida Oro se tratan en el `/clarify` de la 04 (DQ-34). | CE-00-04 | `V-00-09` |
 | C-00-23 | La lista de validación DEBE registrar, para cada fila de la spec §6.2, si nombra medida, cortes y nivel de detalle (§6.1) con nombres completos y sin abreviaturas. | RNF-00-03 | `V-00-09` |
 | C-00-24 | SI quien lee en frío no responde correctamente alguna de las cinco preguntas estándar, ENTONCES el autor DEBE corregir el artefacto y repetir la lectura antes del cierre. | RNF-00-01, CE-00-05 | Checklist firmado |
 | C-00-25 | SI al preparar el cierre una PN marcada «no viable con esta fuente» no tiene decisión registrada en la spec §12, ENTONCES la persona responsable DEBE mantener abierta la spec 00. | RF-00-02 | `V-00-03` |
@@ -385,7 +388,7 @@ Pares de flujo y error: C-00-02 ↔ C-00-26; C-00-11 ↔ C-00-24; C-00-18 ↔ C-
 | XIII.4 General | `research.md`, `matriz-trazabilidad.md`, `quickstart.md`, `checklists/validacion.md`, `checklists/legibilidad.md`, `checklists/analisis.md`, `docs/glosario.md` | Encabezado presente; español; nombres completos | Inspección con esta tabla (`V-00-10`, después de la lectura en frío T-00-55 y antes del Pull Request T-00-39, para alcanzar `legibilidad.md`) | U-00-07 = 0 documentos sin encabezado | Dario Andres Bernate Canas |
 | XIII.5 Trazabilidad | Los mismos documentos, este plan y `task.md` | Todo documento cita IDs que existen en la spec; todo ID citado en este plan y en `task.md` existe en la spec, en §2.3 de este plan o en `task.md` | Inspección (`V-00-07`, `V-00-10`, este último tras T-00-55 y antes de T-00-39) | 0 documentos sin ID; 0 IDs inexistentes | Dario Andres Bernate Canas |
 | XIII.6 Glosario | `spec.md`, este plan y los documentos nuevos | Todo término y sigla está en `docs/glosario.md`, con un solo nombre por concepto | Inspección (`V-00-10`) | U-00-06 = 0 términos o siglas sin definir | Dario Andres Bernate Canas |
-| XIII.7 Lectura en frío | Muestra (artefactos de tipo documento; capa tocada: ninguna): la matriz, el glosario y las 12 PN de la spec (PN01 a PN12), porque RNF-00-01 pide «cada pregunta» (decisión del responsable del 2026-10-19) | Las cinco preguntas estándar | `checklists/legibilidad.md` | U-00-08 = cinco de cinco sin consultar al autor; tiempo U-00-09 `[POR DEFINIR: ADR-0012]` | Jose Julio Gomez Palmera (persona distinta del autor, S-00-04) |
+| XIII.7 Lectura en frío | Muestra (artefactos de tipo documento; capa tocada: ninguna): la matriz, el glosario y las 12 PN de la spec (PN01 a PN12), porque RNF-00-01 pide «cada pregunta» (decisión del responsable del 2026-10-19) | Las cinco preguntas estándar | `checklists/legibilidad.md` | U-00-08 = cinco de cinco sin consultar al autor; tiempo U-00-09 = 45 minutos por bloque (ADR-0012 firmado el 2026-10-19) | Agente en contexto limpio; firma Dario Andres Bernate Canas (DQ-34, anexo 2 de D-00-01) |
 
 **Las cinco preguntas aplicadas a una PN**: (1) ¿Qué pregunta de negocio plantea? (2) ¿Qué campos de la fuente entran y qué respuesta debe salir? (3) ¿Qué requisito o decisión atiende? (4) ¿Por qué se pide cada medida, corte y condición de tiempo? (5) ¿Cómo se sabrá que está bien respondida y en qué especificación?
 
@@ -415,7 +418,7 @@ No hay tablas para consultar con SQL (D-00-01). La persona responsable ejecuta e
 | V-00-06 | Marcas de la matriz | Matriz | `corte_por_mes = sí` exactamente en PN01, PN02, PN03, PN04, PN07, PN11; `cuenta_usuarios = sí` exactamente en PN02, PN09, PN10, cada una con la obligación de informar las anónimas excluidas; `solo_agregada = sí` exactamente en PN09, PN10, PN11 |
 | V-00-07 | Versión de la spec usada y orden de cambios | Encabezados de `plan.md` y `task.md` frente a la fecha del último cambio de PN, requisitos o spec §6–§7 (spec §12 «Decisiones tomadas» e historial de commits de `spec.md`) | Ambos declaran en «Basada en» una fecha igual o posterior a ese último cambio; los cambios solo de la spec §11 (aprobaciones, firmas, fechas) no cuentan (DQ-32); 0 cambios de PN que aparezcan en un documento antes que en la spec |
 | V-00-08 | Validación de las PN | Spec §11 | U-00-04: siete de siete PN de prioridad D en «Validada», con nombre y fecha |
-| V-00-09 | Lista de validación completa | `checklists/validacion.md` | U-00-05 de cumplimiento de RF-00-01 a RF-00-04 y RF-00-09; §6.1 y §6.2 revisadas; firma del responsable de Oro con fecha |
+| V-00-09 | Lista de validación completa | `checklists/validacion.md` | U-00-05 de cumplimiento de RF-00-01 a RF-00-04 y RF-00-09; §6.1 y §6.2 revisadas; firma del responsable de la 00 con fecha (DQ-34) |
 | V-00-10 | Glosario, encabezados e IDs citados | `research.md`, `matriz-trazabilidad.md`, `quickstart.md`, `checklists/validacion.md`, `checklists/legibilidad.md`, `checklists/analisis.md` y `docs/glosario.md`; IDs citados en `plan.md` y `task.md` | U-00-06 y U-00-07 en cero; 0 IDs citados en `plan.md` y `task.md` que no existan en la spec, en §2.3 de este plan o en `task.md`. Se ejecuta después de la lectura en frío (T-00-55) y antes del Pull Request (T-00-39) |
 
 **Requisitos que la 00 solo verifica en parte.** RF-00-05 (marca de «mes parcial»), RF-00-08 (excluir anónimas al contar usuarios) y RF-00-11 (informar cuántas anónimas se excluyeron) hablan de lo que muestra el tablero o de cómo se calcula, y en la 00 no hay tablero ni cálculo. Aquí `V-00-06` solo comprueba que la matriz deja escrita la consigna en las PN correctas. La verificación completa es un traspaso que la spec §13 nombra: la regla y su conteo en la spec 02, la medida en la 04 y la marca o cifra visible en la 05 (ver «Traspasos explícitos», §7.4–7.9). Mientras esas specs no los verifiquen, estos tres requisitos cuentan como «cubiertos en la 00 en lo que le toca».
@@ -457,9 +460,9 @@ No hay tablas para consultar con SQL (D-00-01). La persona responsable ejecuta e
 |---|---|---|---|---|
 | La spec vuelve a cambiar y plan o tareas quedan con una fecha de spec anterior | Media | Medio | C-00-17, C-00-28 y `V-00-07`, comparados contra el último cambio de PN, requisitos o spec §6–§7 (DQ-32); regenerar con `/plan` y `/tasks` | Dario Andres Bernate Canas |
 | La matriz y la spec divergen (dos fuentes de verdad) | Media | Medio | La matriz cita la spec §6.2 en lugar de copiarla (D-00-05); C-00-02 y C-00-26 | Dario Andres Bernate Canas |
-| Un mismo concepto recibe varios nombres en documentos nuevos | Media | Medio | Glosario con «usuario» como único término (C-00-07); `V-00-10` | Jose Julio Gomez Palmera (lectura en frío) |
+| Un mismo concepto recibe varios nombres en documentos nuevos | Media | Medio | Glosario con «usuario» como único término (C-00-07); `V-00-10` | Agente en contexto limpio (lectura en frío, anexo 2 de D-00-01) |
 | Se pierde un traspaso (anónimas, cero votos, meses parciales, DQ-11, DQ-17, DQ-23, DQ-24) | Media | Alto | Tabla «Traspasos explícitos»; cada spec destino los copia en su §5 | Dario Andres Bernate Canas |
-| Cambios de la 00 hechos en la rama `01-ingesta-bronce` quedan fuera del Pull Request de la 00 o entran a `main` con la 01 | Media | Medio | Llevar los cambios de la 00 a la rama `00-preguntas-negocio` antes del Pull Request (S-00-05) | Dario Andres Bernate Canas |
+| Cambios de la 00 hechos en la rama `01-ingesta-bronce` quedan fuera del Pull Request de la 00 o entran a `main` con la 01 | Media | Medio | Mitigado: el commit y el PR de cierre (`00-preguntas-negocio-cierre`) excluyen `specs/01-ingesta-bronce/`; los cambios de la 00 se hacen en esta rama (S-00-05) | Dario Andres Bernate Canas |
 | RF-00-05, RF-00-08 o RF-00-11 se dan por verificados en la 00 aunque solo se comprobó la consigna de la matriz | Media | Medio | Nota de §10.2 y columna «Prueba o consulta» de §11 marcadas «parcial»; traspasos de spec §13 que las specs 02, 04 y 05 copian | Dario Andres Bernate Canas |
 | `AGENTS.md` y `README.md` remiten a principios (XIV, XV) que la constitución v1.1.0 no define | Alta | Bajo | Corregirlo fuera de esta spec por Pull Request; este plan solo cita los principios I–XIII | Dario Andres Bernate Canas |
 | Una PN hereda un requerimiento del modelo anterior | Baja | Alto | Cada PN declara su decisión de negocio (spec §5); la constitución lo prohíbe | Dario Andres Bernate Canas |
@@ -468,7 +471,7 @@ No hay tablas para consultar con SQL (D-00-01). La persona responsable ejecuta e
 
 ## 13. Seguimiento de complejidad
 
-No hay filas en ❌. Las advertencias del Constitution Check (IX, XIII.4, XIII.5, XIII.6, XIII.7) no son incumplimientos que justificar con excepción: se cierran con `quickstart.md` (T-00-22), el glosario (C-00-07) y la evidencia de las tareas y de la lectura en frío.
+No hay filas en ❌ ni advertencias pendientes: IX y XIII.4 a XIII.7 se cerraron con `quickstart.md` (T-00-22), el glosario (C-00-07), la lectura en frío (T-00-38 y T-00-55) y la evidencia de las tareas.
 
 La variante de compuerta de la 00 (condiciones 1 a 4) no es un incumplimiento: es la decisión firmada D-00-01, con su fecha de revisión (al hacer el `/plan` de la 02 o de la 05, lo que ocurra primero) y su anexo U-00-08.
 
@@ -482,12 +485,12 @@ La variante de compuerta de la 00 (condiciones 1 a 4) no es un incumplimiento: e
 
 | # | Condición | Cómo se comprueba en esta spec | Estado |
 |---|---|---|---|
-| 1 | Tests en verde (variante D-00-01) | CE-00-01 a CE-00-04 cumplidos y spec §11 firmada (`V-00-05`, `V-00-08`, `V-00-09`); sin `pytest` (spec DQ-31) | Parcial: CE-00-01, CE-00-02 y CE-00-03 cumplen (7 PN D en «Validada» el 2026-10-19); CE-00-04 pendiente de la firma de Oro |
+| 1 | Tests en verde (variante D-00-01) | CE-00-01 a CE-00-04 cumplidos y spec §11 firmada (`V-00-05`, `V-00-08`, `V-00-09`); sin `pytest` (spec DQ-31) | Cumplida: CE-00-01 a CE-00-04 cumplen; spec §11 firmada (7 de 7 PN D en «Validada» el 2026-10-19); CE-00-04 firmada por el responsable de la 00 (DQ-34) |
 | 2 | Cuadre exacto | No aplica: no hay filas (D-00-01) | — |
-| 3 | Verificación humana | Sustituida por `V-00-01` a `V-00-10` ejecutadas por la persona responsable (D-00-01); `V-00-10` corre después de la lectura en frío (T-00-55) y antes del Pull Request (T-00-39) | Parcial: V-00-01 a V-00-08 cumplen; V-00-09 depende de la firma de Oro; V-00-10 va tras la lectura en frío |
-| 4 | README de la capa actualizado | No aplica: no hay capa. Se verifica que `docs/glosario.md` y los documentos de la spec estén al día (D-00-01) | En curso: glosario, `research.md`, matriz y listas al día (T-00-33); faltan el ADR-0012 firmado y la fila S-00 al cierre (T-00-37) |
-| 5 | Checklist de legibilidad firmado | `checklists/legibilidad.md` tras la lectura en frío (CE-00-05, Const. XIII.7) | Pendiente: checklist creado el 2026-10-19; falta la lectura en frío (T-00-38 y T-00-55) |
-| 6 | Pull Request integrado a `main` | Rama `00-preguntas-negocio` | Cumplida (fuera de orden): Pull Request #1 (`567ad89`) integrado a `main` el 2026-10-19 |
+| 3 | Verificación humana | Sustituida por `V-00-01` a `V-00-10` ejecutadas por la persona responsable (D-00-01); `V-00-10` corre después de la lectura en frío (T-00-55) y antes del Pull Request (T-00-39) | Cumplida: V-00-01 a V-00-09 con resultado igual al esperado y V-00-10 ejecutada tras la lectura en frío; 10 de 10 en `checklists/validacion.md` §6 |
+| 4 | README de la capa actualizado | No aplica: no hay capa. Se verifica que `docs/glosario.md` y los documentos de la spec estén al día (D-00-01) | Cumplida: glosario (G-50 a G-54), `research.md`, matriz y listas al día; ADR-0012 firmado; fila S-00 actualizada (T-00-37) |
+| 5 | Checklist de legibilidad firmado | `checklists/legibilidad.md` tras la lectura en frío (CE-00-05, Const. XIII.7) | Cumplida: 2 de 2 bloques con 5 de 5 cada uno; firmado por el responsable el 2026-10-19 (T-00-38 y T-00-55) |
+| 6 | Pull Request integrado a `main` | Rama `00-preguntas-negocio-cierre` (PR de cierre #2) | Pendiente: PR de cierre #2 abierto; se marca al integrar (T-00-39) |
 
 Las seis condiciones coinciden con la spec §13 y con D-00-01, firmada el 2026-10-19 (fecha de revisión: `/plan` de la 02 o de la 05; anexo U-00-08).
 
@@ -519,7 +522,7 @@ Términos para sembrar `docs/glosario.md` (C-00-07). El ID de glosario se asigna
 | Nivel de detalle mínimo | Unidad más pequeña que exigen las preguntas: una reseña (spec §6.1); insumo del grano |
 | Grano | Qué representa una fila de un hecho, dicho en una frase (lo declara la spec 04) |
 | Campo de la fuente | Cada uno de los diez campos de la spec §3 |
-| Ventana de datos | Periodo del 2010-03-04 al 2013-03-04 que cubre la fuente |
+| Ventana de datos | Periodo del 2010-03-04 al 2013-03-04 que cubre la fuente; ambos extremos incluidos (DQ-36) |
 | Reseña anónima | Reseña sin usuario identificable; la forma exacta de reconocerla `[POR DEFINIR en las specs 01 y 02, DQ-12]` |
 | Usuario | Persona seudónima que escribe reseñas (campo `userId`); término único fijado por la spec DQ-20. No se usan «reseñador» ni «cliente» en ese sentido; «cliente» solo aparece en el rol «analista de experiencia del cliente» |
 | Usuario de una sola vez | Usuario con exactamente 1 reseña en la ventana completa (PN10, DQ-26) |
@@ -537,7 +540,7 @@ Términos para sembrar `docs/glosario.md` (C-00-07). El ID de glosario se asigna
 | Matriz de trazabilidad | Documento con una fila por PN que la une con sus campos, su tablero y las especificaciones que la atienden |
 | Lista de validación | Documento `checklists/validacion.md` con la evidencia de CE-00-01 a CE-00-04 |
 | Perfil junior | Persona que conoce SQL básico y Python básico, pero no el repositorio ni el dataset (Const. XIII) |
-| Lectura en frío | Revisión por una persona distinta del autor, que responde las cinco preguntas estándar sin consultarlo |
+| Lectura en frío | Revisión por una persona distinta del autor, que responde las cinco preguntas estándar sin consultarlo; en la `00`, la hace un agente en contexto limpio con la firma del responsable (anexo 2 de D-00-01, DQ-34) |
 | Capa (Bronce, Plata, Oro) | Cada etapa del modelo Medallion: `raw`, `silver`, `gold` |
 | Regla del EDA (`Rnn`) | Hallazgo del EDA convertido en regla con acción (descarta, corrige o marca) y conteo en la bitácora |
 
@@ -552,8 +555,8 @@ Términos para sembrar `docs/glosario.md` (C-00-07). El ID de glosario se asigna
 | U-00-05 | PN que cumplen RF-00-01 a RF-00-04 y RF-00-09 | 100 % | CE-00-01 |
 | U-00-06 | Términos o siglas sin definir en el glosario | 0 | RNF-00-02, Const. XIII.6 |
 | U-00-07 | Documentos nuevos sin encabezado o sin IDs | 0 | RNF-00-04, Const. XIII.4 y XIII.5 |
-| U-00-08 | Preguntas estándar respondidas correctamente en la lectura en frío | 5 de 5, sin consultar al autor | CE-00-05, Const. XIII.7; provisional solo para la 00, firmado como anexo de D-00-01 el 2026-10-19 |
-| U-00-09 | Tiempo máximo de la lectura en frío | 45 minutos por bloque de lectura (ADR-0012, propuesto el 2026-10-19, pendiente de firma) | Propuesto |
+| U-00-08 | Preguntas estándar respondidas correctamente en la lectura en frío | 5 de 5, sin consultar al autor | CE-00-05, Const. XIII.7; fijado para la 00 en el anexo de D-00-01 el 2026-10-19 y extendido a todas las especificaciones por el ADR-0012 |
+| U-00-09 | Tiempo máximo de la lectura en frío | 45 minutos por bloque de lectura (ADR-0012, firmado el 2026-10-19) | Firmado |
 | U-00-10 | Calificación baja de PN06 | Promedio ≤ 2,5 | Spec DQ-18 |
 | U-00-11 | Volumen mínimo de reseñas por producto, solo en PN06 | `[POR DEFINIR: spec 02, DQ-11]` | Diferido; DQ-28 lo limita a PN06 |
 | U-00-12 | Corte del grupo más activo de PN09 | `[POR DEFINIR: spec 02, DQ-17]` | Diferido |
@@ -577,6 +580,7 @@ Términos para sembrar `docs/glosario.md` (C-00-07). El ID de glosario se asigna
 | 2026-10-19 | Actualización T-00-42 tras la última `/analyze`, conservando lo decidido por el responsable (§5.2 D-00-02 dos pasadas, D-00-03 rechazada, D-00-04/05/06 aceptadas; §9 lectura en frío de las 12 PN; U-00-08 anexo de D-00-01): §5.4 cambios 5 y 11 marcados hechos (falta confirmación, T-00-41 y T-00-44); fila IX del Constitution Check pasa a ⚠️ porque `quickstart.md` aún no existe; fila XII y XIII.7 actualizadas; C-00-06 satisface RNF-00-04 (no RF-00-06 ni CE-00-04, que siguen cubiertos); §10.2 y §11 marcan RF-00-05, RF-00-08 y RF-00-11 como verificación parcial con traspaso a 02, 04 y 05 (spec §13); D-00-01 citada con fecha de revisión y anexo U-00-08; §7.2, §12 y §13 al día; «Basada en» = spec con última actualización 2026-10-19 | Hallazgos de la última `/analyze`; RF-00-10 | Claude (skill `/plan`, agente `architect`) |
 | 2026-10-19 | Actualización T-00-56 por DQ-32 (RF-00-10 acotado) y por `checklists/analisis.md` (T-00-10), conservando §5.2 D-00-01 a D-00-08, el anexo U-00-08 y la lectura en frío de las 12 PN (T-00-38 y T-00-55): C-00-17, C-00-28 y V-00-07 comparan «Basada en» con el último cambio de PN, requisitos o spec §6–§7; §6 y §5.4 (cambio 12) registran DQ-32; §4 fila XII pasa a ✅ y §5.4 cambios 5 y 11, §7.2 paso 01 y §13 quedan confirmados por el responsable el 2026-10-19; §2.3 con T-00-01 … T-00-56, D-00-08 y el prefijo S; §11 cita T-00-55 en RNF-00-01 y CE-00-05 y T-00-56 en RF-00-10; §15.1 agrega S; §3 y §7.1 agregan `checklists/analisis.md`; V-00-10 y §9 (XIII.4, XIII.5) alcanzan `legibilidad.md`, `analisis.md` y los IDs citados en plan y tareas, y V-00-10 corre tras T-00-55 y antes de T-00-39 (§7.2 pasos 07 y 09, §14) | Spec DQ-32 y hallazgos 2, 3 y 6 y correcciones mecánicas 1, 2 y 4 de `/analyze`; RF-00-10 | Claude (skill `/plan`, agente `architect`) |
 | 2026-10-19 | Documentos del cierre de la spec: ADR-0012 propuesto (opción A: sin linter nuevo; 5 de 5 aciertos y 45 minutos por bloque), `checklists/legibilidad.md` creado y spec §11 firmada por el responsable (7 PN D en «Validada», DQ-10); §4 XIII.7 y §14 al día; U-00-09 pasa de «por definir» a propuesto | Cierre de la `00`: firmas humanas, lectura en frío y Pull Request de cierre | agente principal (OpenCode) |
+| 2026-10-19 | Cierre de la spec 00: DQ-34 a DQ-36 (firmas sin Jose Julio, cortes de PN07 y ventana), ADR-0012 firmado (opción A), CE-00-04 firmada por el responsable, PN11 con `time`, `checklists/legibilidad.md` lleno y firmado (2 de 2 bloques, 5 de 5), §2.3 a DQ-36, §4 XIII.7 en ✅ y §14 con las condiciones 1, 3, 4 y 5 cumplidas; §13 y §7.9 con la ventana cerrada (DQ-36); RNF-00-01, CE-00-05 y G-37 citan la excepción de DQ-34; V-00-07, V-00-09 y V-00-10 ejecutadas | T-00-31, T-00-34, T-00-36 a T-00-38, T-00-52, T-00-54 y T-00-55; spec DQ-34 a DQ-36; ADR-0012 | agente principal (OpenCode) |
 
 ---
 
@@ -590,4 +594,4 @@ Términos para sembrar `docs/glosario.md` (C-00-07). El ID de glosario se asigna
 - [x] La sección 9 existe y cada regla XIII.n que aplica tiene método, umbral y responsable.
 - [x] Los pendientes ADR que afectan a la spec están en §5.1, sin resolverlos.
 - [x] El plan no contiene código ni sentencias SQL y no reutiliza dimensiones ni nombres del modelo anterior.
-- [ ] Una persona junior que lea solo este plan y el glosario puede decir qué se va a construir y cómo se comprueba: pendiente de la lectura en frío (C-00-11, T-00-38 y T-00-55).
+- [x] Una persona junior que lea solo este plan y el glosario puede decir qué se va a construir y cómo se comprueba: no aplica en la `00`; la muestra de XIII.7 es el catálogo y el glosario (RNF-00-01, DQ-34), no el plan, y la lectura en frío los cubrió (T-00-38 y T-00-55).

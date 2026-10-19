@@ -2,10 +2,10 @@
 
 **Propósito**: lista de trabajo verificable para validar el catálogo de preguntas de negocio de la spec 00, dejar su trazabilidad y pasar su compuerta de cierre (D-00-01) | **Autor**: skill `tasks` (agente `task-breaker`) | **Fecha**: 2026-10-19
 **Dependencias**: `spec.md`, `plan.md`, ninguna especificación anterior (es la primera), ADR-0006 y ADR-0007 firmados el 2026-10-19, D-00-01 firmada el 2026-10-19 (`adr/D-00-01-compuerta-de-cierre-sin-datos.md`)
-**Rama**: `00-preguntas-negocio` | **Constitución**: v1.1.0 | **Estado**: borrador
+**Rama**: `00-preguntas-negocio-cierre` | **Constitución**: v1.1.0 | **Estado**: en cierre (41 de 42; falta el merge del PR #2)
 **Responsable**: Dario Andres Bernate Canas | **Segundo validador**: Dario Andres Bernate Canas (spec DQ-10; `docs/gestion/roles.md`)
 **Generado por**: skill `/tasks` (estructura de `templates/task-template.md`, autorizada por el responsable en lugar de `templates/task-list-template.md`)
-**Basada en**: `spec.md` (última actualización 2026-10-19, «Revisada» por el responsable el 2026-10-19; último cambio de PN, requisitos o §6–§7: 2026-10-19, DQ-32 y DQ-33) · `plan.md` (2026-10-19, borrador, actualizado por T-00-56)
+**Basada en**: `spec.md` (última actualización 2026-10-19, «Revisada» por el responsable el 2026-10-19; último cambio de PN, requisitos o §6–§7: 2026-10-19, DQ-32 a DQ-36: DQ-34 cambia CE-00-04 y quién lee en frío, DQ-35 fija los cortes de PN07 y DQ-36 la ventana) · `plan.md` (2026-10-19, actualizado por T-00-52)
 
 ---
 
@@ -172,13 +172,13 @@ Formato de cada tarea (idéntico en todas):
   - Evidencia: `research.md` §3 (2026-10-19): 12 de 12 PN revisadas; 0 identifican a una persona; PN09, PN10 y PN11 solo agregadas (RF-00-09)
 
 **Punto de verificación de la Fase 1**:
-- [ ] `research.md` tiene 12 de 12 PN con campos, viabilidad e identificación de personas.
-- [ ] Todo término y sigla de `spec.md` y `plan.md` está en `docs/glosario.md`.
-- [ ] `quickstart.md` tiene los 9 pasos de plan §7.2.
+- [x] `research.md` tiene 12 de 12 PN con campos, viabilidad e identificación de personas.
+- [x] Todo término y sigla de `spec.md` y `plan.md` está en `docs/glosario.md`.
+- [x] `quickstart.md` tiene los 9 pasos de plan §7.2.
 
 ### Fase 2 — Construcción
 
-**Objetivo**: construir la matriz de trazabilidad y la lista de validación, validar las PN de prioridad D y obtener la firma del responsable de Oro.
+**Objetivo**: construir la matriz de trazabilidad y la lista de validación, validar las PN de prioridad D y obtener la firma del responsable de la 00 (DQ-34).
 **Entregable**: `matriz-trazabilidad.md` con 12 filas completas, `checklists/validacion.md` firmado, spec §11 con las PN D «Validadas».
 
 - [x] T-00-16 [P] Crear `specs/00-preguntas-negocio/matriz-trazabilidad.md` con encabezado y 12 filas con `id_pregunta`, `enunciado_resumido` y `prioridad` · 45 min · Dario Andres Bernate Canas
@@ -235,11 +235,11 @@ Formato de cada tarea (idéntico en todas):
   - Hecho cuando: 12 de 12 filas citan su fila de spec §6.2 sin copiar el cálculo, y `decisiones_diferidas` lista DQ-11 en PN06, DQ-17 en PN09, DQ-23 y DQ-24 en PN08 y DQ-12 en las PN que cuentan o comparan reseñas anónimas
   - Evidencia: `matriz-trazabilidad.md` (2026-10-19): 12 de 12 filas citan «§6.2, fila PNnn» sin copiar el cálculo; DQ-11 en PN06, DQ-17 y DQ-12 en PN09, DQ-23 y DQ-24 en PN08, y DQ-12 en PN02, PN10 y PN11
 
-- [ ] T-00-25 [P] Firmar en `checklists/validacion.md`, como responsable de Oro, el insumo del grano (spec §6.1) y la tabla de cálculos (spec §6.2) · 30 min · Jose Julio Gomez Palmera
+- [x] T-00-25 [P] Firmar en `checklists/validacion.md`, como responsable de la 00 (spec DQ-34), el insumo del grano (spec §6.1) y la tabla de cálculos (spec §6.2) · 30 min · Dario Andres Bernate Canas
   - Cubre: CE-00-04 · Componente: C-00-21, C-00-22 · Const. XIII.4, XIII.5
   - Depende de: T-00-48
-  - Hecho cuando: la lista trae nombre y fecha de Jose Julio Gomez Palmera; si pidió cambios, `spec.md` cambió antes y la fecha de la firma es posterior a ese cambio
-  - Evidencia:
+  - Hecho cuando: la lista trae nombre y fecha del responsable de la 00; si hubo cambios, `spec.md` cambió antes y la fecha de la firma es igual o posterior a ese cambio
+  - Evidencia: `checklists/validacion.md` §5 (2026-10-19), firmado por Dario Andres Bernate Canas por decisión DQ-34; Oro acepta en la `04`
 
 - [x] T-00-20 Completar `especificaciones_destino` y `criterio_de_aceptacion` en las 12 filas de la matriz · 45 min · Dario Andres Bernate Canas
   - Cubre: RNF-00-04 · Componente: C-00-06 · plan §7.4 a 7.9 (traspasos de RF-00-05, RF-00-08 y RF-00-11, spec §13) · Const. XIII.5
@@ -250,7 +250,7 @@ Formato de cada tarea (idéntico en todas):
 **Punto de verificación de la Fase 2**:
 - [x] La matriz tiene 12 filas y ninguna columna obligatoria vacía.
 - [x] Las siete PN de prioridad D están en «Validada».
-- [ ] `checklists/validacion.md` tiene la revisión por pregunta, el conteo por tablero, la revisión de §6 y la firma del responsable de Oro.
+- [x] `checklists/validacion.md` tiene la revisión por pregunta, el conteo por tablero, la revisión de §6 y la firma del responsable de la 00 (DQ-34).
 
 ### Fase 3 — Pruebas
 
@@ -295,11 +295,11 @@ No aplica `pytest`: la spec 00 no tiene pruebas de Python (spec DQ-31; D-00-03 r
   - Hecho cuando: `corte_por_mes = sí` exactamente en 6 PN (PN01, PN02, PN03, PN04, PN07, PN11), `cuenta_usuarios = sí` exactamente en 3 (PN02, PN09, PN10) con el informe de anónimas excluidas, y `solo_agregada = sí` exactamente en 3 (PN09, PN10, PN11); el resultado queda en Evidencia
   - Evidencia: verificación mecánica del 2026-10-19: 6 de 6, 3 de 3 y 3 de 3 con los informes de anónimas excluidas; resultado en `checklists/validacion.md` §6 (V-00-06)
 
-- [ ] T-00-52 Ejecutar V-00-07: comparar la línea «Basada en» de `plan.md` y `task.md` con la fecha del último cambio de PN, requisitos o spec §6–§7 y revisar el orden de los cambios de PN · 30 min · Dario Andres Bernate Canas
+- [x] T-00-52 Ejecutar V-00-07: comparar la línea «Basada en» de `plan.md` y `task.md` con la fecha del último cambio de PN, requisitos o spec §6–§7 y revisar el orden de los cambios de PN · 30 min · Dario Andres Bernate Canas
   - Cubre: RF-00-06, RF-00-10 · Componente: C-00-17, C-00-27, C-00-28 · DQ-32 · Const. XI
   - Depende de: T-00-56, T-00-20, T-00-23, T-00-25
   - Hecho cuando: ambos encabezados declaran una fecha igual o posterior al último cambio de PN, requisitos o spec §6–§7 (spec §12 «Decisiones tomadas» e historial de commits de `spec.md`); los cambios solo de spec §11 (aprobaciones, firmas, fechas) no cuentan (DQ-32); 0 cambios de PN aparecen en un documento antes que en `spec.md`; el resultado queda en Evidencia
-  - Evidencia:
+  - Evidencia: V-00-07 del 2026-10-19: `plan.md` y `task.md` declaran 2026-10-19, igual al último cambio de PN, requisitos o §6–§7 (DQ-34 a DQ-36 y PN11 `time`); «Basada en» cita DQ-34 a DQ-36; 0 cambios de PN antes que en `spec.md`; resultado en `checklists/validacion.md` §6 (V-00-07)
 
 - [x] T-00-53 Ejecutar V-00-08: revisar en spec §11 el estado de las siete PN de prioridad D · 30 min · Dario Andres Bernate Canas
   - Cubre: RF-00-07, CE-00-03 · Componente: C-00-18, C-00-19 · Const. XI
@@ -307,15 +307,15 @@ No aplica `pytest`: la spec 00 no tiene pruebas de Python (spec DQ-31; D-00-03 r
   - Hecho cuando: 7 de 7 PN D en «Validada» con nombre y fecha (U-00-04); el resultado queda en Evidencia
   - Evidencia: verificación mecánica del 2026-10-19: 7 de 7 PN D en «Validada» con nombre y fecha en spec §11 y en `checklists/validacion.md` §3 (U-00-04 = 100 %); resultado en `checklists/validacion.md` §6 (V-00-08)
 
-- [ ] T-00-54 Ejecutar V-00-09: revisar que `checklists/validacion.md` esté completa y firmada · 30 min · Dario Andres Bernate Canas
+- [x] T-00-54 Ejecutar V-00-09: revisar que `checklists/validacion.md` esté completa y firmada · 30 min · Dario Andres Bernate Canas
   - Cubre: CE-00-01, CE-00-04, RNF-00-03 · Componente: C-00-20, C-00-21, C-00-22, C-00-23 · Const. XI
   - Depende de: T-00-25
-  - Hecho cuando: 100 % de las PN cumplen RF-00-01 a RF-00-04 y RF-00-09 (U-00-05), spec §6.1 y §6.2 están revisadas y la firma del responsable de Oro tiene fecha; el resultado queda en Evidencia
-  - Evidencia:
+  - Hecho cuando: 100 % de las PN cumplen RF-00-01 a RF-00-04 y RF-00-09 (U-00-05), spec §6.1 y §6.2 están revisadas y la firma del responsable de la 00 (DQ-34) tiene fecha; el resultado queda en Evidencia
+  - Evidencia: V-00-09 del 2026-10-19: 12 de 12 PN cumplen RF-00-01 a RF-00-04 y RF-00-09; §6.1 y §6.2 revisadas; firma del responsable de la 00 (DQ-34) con fecha 2026-10-19; resultado en `checklists/validacion.md` §6 (V-00-09)
 
 **Punto de verificación de la Fase 3**:
-- [ ] Las nueve tareas de esta fase tienen su resultado en Evidencia.
-- [ ] Cada resultado coincide con el esperado de plan §10.2.
+- [x] Las nueve tareas de esta fase tienen su resultado en Evidencia.
+- [x] Cada resultado coincide con el esperado de plan §10.2.
 
 ### Fase 4 — Documentación y cierre
 
@@ -324,17 +324,17 @@ No aplica `pytest`: la spec 00 no tiene pruebas de Python (spec DQ-31; D-00-03 r
 
 La compuerta de la constitución tiene seis condiciones; la variante de la 00 la fija D-00-01 (firmada el 2026-10-19). Un agente no da la especificación por cerrada.
 
-- [ ] T-00-36 Registrar en `checklists/validacion.md` el resultado conjunto de V-00-01 a V-00-09 como condición 3 de la compuerta (verificación humana) · 30 min · Dario Andres Bernate Canas
+- [x] T-00-36 Registrar en `checklists/validacion.md` el resultado conjunto de V-00-01 a V-00-09 como condición 3 de la compuerta (verificación humana) · 30 min · Dario Andres Bernate Canas
   - Cubre: Const. XI, XIII.5 · D-00-01 · plan §10.2, §14
   - Depende de: T-00-28, T-00-29, T-00-30, T-00-49, T-00-50, T-00-51, T-00-52, T-00-53, T-00-54
   - Hecho cuando: la lista registra 9 de 9 verificaciones (V-00-01 a V-00-09) con resultado igual al esperado de plan §10.2, con fecha y nombre de quien verificó; V-00-10 lo agrega T-00-31 después de la lectura en frío
-  - Evidencia:
+  - Evidencia: 2026-10-19: 9 de 9 verificaciones V-00-01 a V-00-09 con resultado igual al esperado de plan §10.2, con fecha y nombre; `checklists/validacion.md` §7, condición 3 (V-00-10 se registra en T-00-31)
 
-- [ ] T-00-34 [P] Registrar en `checklists/validacion.md` la condición 1 de la compuerta: CE-00-01 a CE-00-04 cumplidos y spec §11 firmada, sin `pytest` · 30 min · Dario Andres Bernate Canas
+- [x] T-00-34 [P] Registrar en `checklists/validacion.md` la condición 1 de la compuerta: CE-00-01 a CE-00-04 cumplidos y spec §11 firmada, sin `pytest` · 30 min · Dario Andres Bernate Canas
   - Cubre: CE-00-01, CE-00-02, CE-00-03, CE-00-04 · D-00-01 · Const. VI, XIII.5
   - Depende de: T-00-36
   - Hecho cuando: la lista dice «condición 1 cumplida» y cita el resultado de V-00-05, V-00-08 y V-00-09
-  - Evidencia:
+  - Evidencia: 2026-10-19: condición 1 cumplida; CE-00-01 a CE-00-04 cumplen; spec §11 firmada (7 de 7 PN D); CE-00-04 firmada por el responsable de la 00 (DQ-34); sin `pytest` (D-00-01); `checklists/validacion.md` §7
 
 - — T-00-35 Confirmar cuadre exacto (condición 2) · No aplica
   - Cubre: Const. VI · D-00-01
@@ -346,44 +346,44 @@ La compuerta de la constitución tiene seis condiciones; la variante de la 00 la
   - Cubre: plan §4 · Const. IX, XII, XIII.5
   - Depende de: T-00-36
   - Hecho cuando: cada una de esas seis filas pasa a ✅ con su evidencia o conserva ⚠️ con su motivo, y plan §4 registra el resultado de la compuerta
-  - Evidencia: `plan.md` §4 (2026-10-19): IX, XIII.4, XIII.5 y XIII.6 en ✅ con evidencia (`quickstart.md`, glosario y documentos); XII ya estaba en ✅; XIII.7 conserva ⚠️ hasta la lectura en frío (T-00-38 y T-00-55); se agregó el «Resultado tras producir los documentos»
+  - Evidencia: `plan.md` §4 (2026-10-19): IX, XII y XIII.4 a XIII.6 en ✅ con evidencia (`quickstart.md`, glosario y documentos); XIII.7 se cerró con la lectura en frío (T-00-38 y T-00-55); se agregó el «Resultado tras producir los documentos» y el párrafo de cierre
 
-- [ ] T-00-37 Actualizar la documentación de la entrega (condición 4): glosario, documentos de la spec y fila S-00 de `docs/gestion/tareas.md` · 45 min · Dario Andres Bernate Canas
+- [x] T-00-37 Actualizar la documentación de la entrega (condición 4): glosario, documentos de la spec y fila S-00 de `docs/gestion/tareas.md` · 45 min · Dario Andres Bernate Canas
   - Cubre: Const. X, XIII.4, XIII.6 · D-00-01 · plan §14
   - Depende de: T-00-33, T-00-34
   - Hecho cuando: 0 términos sin definir (U-00-06), 0 documentos sin encabezado (U-00-07) y la fila S-00 de `docs/gestion/tareas.md` trae su evidencia
-  - Evidencia:
+  - Evidencia: 2026-10-19: glosario con G-50 a G-54 y 0 términos sin definir (U-00-06); 0 documentos sin encabezado ni IDs (U-00-07); fila S-00 de `docs/gestion/tareas.md` actualizada con el cierre
 
-- [ ] T-00-38 Revisión de legibilidad por una persona junior distinta del autor, parte 1: PN01 a PN06 y la matriz (lectura en frío, condición 5) · 45 min · Jose Julio Gomez Palmera
+- [x] T-00-38 Revisión de legibilidad por un lector en frío distinto del autor (agente en contexto limpio, DQ-34), parte 1: PN01 a PN06 y la matriz (lectura en frío, condición 5) · 45 min · agente en contexto limpio; firma Dario Andres Bernate Canas (anexo 2 de D-00-01)
   - Cubre: RNF-00-01, CE-00-05 · Componente: C-00-11, C-00-24 · U-00-08 · Const. XIII.7
   - Depende de: T-00-37
-  - Hecho cuando: `specs/00-preguntas-negocio/checklists/legibilidad.md` registra, para PN01 a PN06 y `matriz-trazabilidad.md`, las cinco preguntas respondidas 5 de 5 sin consultar al autor (U-00-08, provisional según el anexo de D-00-01); el tiempo queda sin umbral (U-00-09 `[POR DEFINIR: ADR-0012]`); si alguna falla, el artefacto se corrigió y la lectura se repitió
-  - Evidencia:
+  - Hecho cuando: `specs/00-preguntas-negocio/checklists/legibilidad.md` registra, para PN01 a PN06 y `matriz-trazabilidad.md`, las cinco preguntas respondidas 5 de 5 sin consultar al autor (U-00-08, fijado para la 00 en el anexo de D-00-01 y extendido por el ADR-0012); el tiempo máximo es de 45 minutos (U-00-09, ADR-0012 firmado el 2026-10-19); si alguna falla, el artefacto se corrigió y la lectura se repitió
+  - Evidencia: `checklists/legibilidad.md` bloque 1 (2026-10-19): 5 de 5 sin consultar al autor; lector en contexto limpio (DQ-34); 0 tropiezos que impidan responder
 
-- [ ] T-00-55 Revisión de legibilidad por una persona junior distinta del autor, parte 2: PN07 a PN12 y el glosario, y firma del checklist (lectura en frío, condición 5) · 45 min · Jose Julio Gomez Palmera
+- [x] T-00-55 Revisión de legibilidad por un lector en frío distinto del autor (agente en contexto limpio, DQ-34), parte 2: PN07 a PN12 y el glosario, y firma del checklist (lectura en frío, condición 5) · 45 min · agente en contexto limpio; firma Dario Andres Bernate Canas (anexo 2 de D-00-01)
   - Cubre: RNF-00-01, CE-00-05 · Componente: C-00-11, C-00-24 · U-00-08 · Const. XIII.7
   - Depende de: T-00-38
   - Hecho cuando: `specs/00-preguntas-negocio/checklists/legibilidad.md` registra PN07 a PN12 y `docs/glosario.md` con 5 de 5 sin consultar al autor y está firmado; entre T-00-38 y T-00-55 se cubren las 12 PN (RNF-00-01 dice «cada pregunta», decisión del responsable del 2026-10-19)
-  - Evidencia:
+  - Evidencia: `checklists/legibilidad.md` bloque 2 (2026-10-19): 5 de 5 sin consultar al autor; PN11 (`time`) corregido antes de firmar; checklist firmado por el responsable (DQ-34); 12 de 12 PN cubiertas entre T-00-38 y T-00-55
 
-- [ ] T-00-31 Ejecutar V-00-10: revisar glosario, encabezados e IDs citados de los documentos de la spec y registrar su resultado en `checklists/validacion.md` · 30 min · Dario Andres Bernate Canas
+- [x] T-00-31 Ejecutar V-00-10: revisar glosario, encabezados e IDs citados de los documentos de la spec y registrar su resultado en `checklists/validacion.md` · 30 min · Dario Andres Bernate Canas
   - Cubre: RNF-00-02, RNF-00-04 · Componente: C-00-07, C-00-08 · plan §9 (XIII.4, XIII.5), §10.2 · Const. XI, XIII.5
   - Depende de: T-00-55
   - Hecho cuando: 0 términos o siglas sin definir (U-00-06) y 0 documentos sin encabezado ni IDs (U-00-07) entre `research.md`, `matriz-trazabilidad.md`, `quickstart.md`, `checklists/validacion.md`, `checklists/legibilidad.md`, `checklists/analisis.md` y `docs/glosario.md`, y 0 IDs citados en `plan.md` y `task.md` que no existan en `spec.md`, en plan §2.3 o en `task.md`; el resultado queda en Evidencia y en `checklists/validacion.md`, junto a los de T-00-36 (condición 3)
-  - Evidencia:
+  - Evidencia: V-00-10 del 2026-10-19: 7 de 7 documentos con encabezado e IDs; 0 términos o siglas sin definir (U-00-06); 0 IDs citados en `plan.md` y `task.md` fuera de los rangos de plan §2.3 (U-00-07); resultado en `checklists/validacion.md` §6 (V-00-10)
 
-- [ ] T-00-39 Integrar a `main` el Pull Request de la rama `00-preguntas-negocio` (condición 6) · 30 min · Dario Andres Bernate Canas
+- [ ] T-00-39 Integrar a `main` el Pull Request de la rama `00-preguntas-negocio-cierre` (PR #2, condición 6) · 30 min · Dario Andres Bernate Canas
   - Cubre: Const. XII · compuerta, condición 6
   - Depende de: T-00-31
-  - Hecho cuando: el Pull Request desde la rama `00-preguntas-negocio` (con los cambios de la 00 que se hicieron en `01-ingesta-bronce`, plan S-00-05) está integrado a `main` con las seis condiciones marcadas
-  - Evidencia:
+  - Hecho cuando: el Pull Request desde la rama `00-preguntas-negocio-cierre` está integrado a `main` con las seis condiciones marcadas
+  - Evidencia: PR #2 abierto desde `00-preguntas-negocio-cierre` el 2026-10-19; pendiente de integrar
 
 **Punto de verificación de la Fase 4** (compuerta de cierre de la spec, variante D-00-01):
-- [ ] 1. Tests en verde: sustituido por CE-00-01 a CE-00-04 cumplidos y spec §11 firmada (T-00-34)
-- [ ] 2. Cuadre exacto: no aplica (T-00-35)
-- [ ] 3. Verificación humana: V-00-01 a V-00-09 (T-00-36) y V-00-10 (T-00-31)
-- [ ] 4. Documentación actualizada: glosario y documentos de la spec (T-00-37)
-- [ ] 5. Checklist de legibilidad firmado (T-00-38 y T-00-55)
+- [x] 1. Tests en verde: sustituido por CE-00-01 a CE-00-04 cumplidos y spec §11 firmada (T-00-34)
+- [x] 2. Cuadre exacto: no aplica (T-00-35)
+- [x] 3. Verificación humana: V-00-01 a V-00-09 (T-00-36) y V-00-10 (T-00-31)
+- [x] 4. Documentación actualizada: glosario y documentos de la spec (T-00-37)
+- [x] 5. Checklist de legibilidad firmado (T-00-38 y T-00-55)
 - [ ] 6. Pull Request integrado a `main` (T-00-39)
 
 ### Tareas retiradas
@@ -416,12 +416,12 @@ No cuentan en el seguimiento. Sus IDs no se reutilizan.
 |---|---|---|---|---|---|
 | 0 — Preparación | 8 | 8 | 100 % | 0 % | 285 |
 | 1 — Fundamentos | 6 | 6 | 100 % | 0 % | 270 |
-| 2 — Construcción | 11 | 10 | 91 % | 9 % | 480 |
-| 3 — Pruebas (verificación humana) | 9 | 7 | 78 % | 22 % | 270 |
-| 4 — Documentación y cierre | 8 | 1 | 13 % | 87 % | 285 |
-| **Total** | **42** | **32** | **76 %** | **24 %** | **1590** |
+| 2 — Construcción | 11 | 11 | 100 % | 0 % | 480 |
+| 3 — Pruebas (verificación humana) | 9 | 9 | 100 % | 0 % | 270 |
+| 4 — Documentación y cierre | 8 | 7 | 88 % | 13 % | 285 |
+| **Total** | **42** | **41** | **98 %** | **2 %** | **1590** |
 
-Recalculado el 2026-10-19 desde las casillas: 42 activas, 32 en `[x]`. Quedan abiertas la firma y la lectura en frío de Jose Julio (T-00-25, T-00-38 y T-00-55) y sus dependientes (T-00-31, T-00-34, T-00-36, T-00-37, T-00-39, T-00-52 y T-00-54).
+Recalculado el 2026-10-19 desde las casillas: 42 activas, 41 en `[x]`. Queda abierta T-00-39 (integrar el PR de cierre #2); al integrarlo, la spec queda 42 de 42.
 
 ---
 
@@ -457,7 +457,7 @@ Recalculado el 2026-10-19 desde las casillas: 42 activas, 32 en `[x]`. Quedan ab
 2. Toda tarea cita al menos un requisito, una decisión o un principio: 42 de 42.
 3. Toda regla `Rnn` tiene una tarea de construcción y una de prueba: no aplica (sin reglas).
 4. Existen las tareas finales de verificación humana (T-00-36 y T-00-31), lectura en frío (T-00-38 y T-00-55) y Pull Request (T-00-39).
-5. D-00-08: las 24 tareas abiertas que crean o editan un documento citan `Const. XIII.n`; las 9 de verificación pura (T-00-28, T-00-29, T-00-30, T-00-49 a T-00-54) no la citan; T-00-39 no edita documentos y las 8 hechas conservan su texto.
+5. D-00-08: las 24 tareas de creación o edición citan `Const. XIII.n`; las 9 de verificación pura (T-00-28, T-00-29, T-00-30, T-00-49 a T-00-54) no la citan; T-00-39 no edita documentos.
 
 ---
 
@@ -468,7 +468,7 @@ Recalculado el 2026-10-19 desde las casillas: 42 activas, 32 en `[x]`. Quedan ab
 - [x] **Independiente**: cada dependencia está declarada; las tareas `[P]` de una misma ola no comparten archivo.
 - [x] **Limitada**: ninguna tarea supera 60 minutos.
 - [x] **Trazable**: cada tarea cita al menos un requisito, y cada requisito tiene al menos una tarea.
-- [x] **Legible**: los encabezados se crean con el documento que los lleva; están las tareas finales de lectura en frío (T-00-38 y T-00-55, Const. XIII.7), asignada a una persona distinta del autor.
+- [x] **Legible**: los encabezados se crean con el documento que los lleva; están las tareas finales de lectura en frío (T-00-38 y T-00-55, Const. XIII.7), asignadas a un lector distinto del autor (agente en contexto limpio, DQ-34).
 - [x] **Ordenada**: ninguna tarea depende de otra de una ola posterior.
 - [x] Toda tarea que crea una transformación cita su regla `Rnn` (Const. IV): no aplica, la spec 00 no tiene transformaciones.
 - [x] Ninguna tarea propone algo fuera de alcance (Airflow, Dagster, dbt, nube, Notion, Python fuera de `tests/`); no hay tareas de `pytest` (spec DQ-31).
@@ -492,3 +492,5 @@ Recalculado el 2026-10-19 desde las casillas: 42 activas, 32 en `[x]`. Quedan ab
 | 2026-10-19 | Fases 1 y 2 producidas y cerradas con evidencia: `research.md` §2 y §3 (viabilidad y personas, T-00-13 y T-00-14), `docs/glosario.md` (T-00-12 y T-00-15), `quickstart.md` (T-00-22), `matriz-trazabilidad.md` (T-00-16 a T-00-20, T-00-45 y T-00-46), `checklists/validacion.md` (T-00-24, T-00-47 y T-00-48) y `plan.md` §4 (T-00-33). Verificaciones mecánicas V-00-01 a V-00-07 ejecutadas: T-00-28, T-00-29, T-00-49, T-00-50 y T-00-51 en `[x]`. Quedan abiertas T-00-23, T-00-25, T-00-38 y T-00-55 (firmas y lectura en frío del responsable y del responsable de Oro), sus dependientes y T-00-31. §5 recalculado: 29 de 42 (69 %) | Continuación de `/implement` sobre la spec 00 a pedido del responsable; el Pull Request se hará al final de la spec | agente principal e implementer (OpenCode) |
 | 2026-10-19 | PR #1 de la rama `00-preguntas-negocio` integrado a `main` (commit `567ad89`, merge de GitHub, PR #1). Condición 6 de la compuerta en hecho; T-00-39 sigue `[ ]` porque su «Hecho cuando» exige el PR con las seis condiciones marcadas. Se abre la rama `00-preguntas-negocio-cierre` para las firmas (spec §11 y Oro), la lectura en frío, el ADR-0012 y el PR de cierre (ruta elegida por el responsable: D1 Dario en doble rol, D2 y D3 Jose Julio, D4 PR pequeño de cierre, D5 resolver ADR-0012, D6 configuración dentro del PR de cierre) | El PR inicial se integró antes que las firmas; el cierre se hará en un PR aparte, por decisión del responsable del 2026-10-19 | agente implementer (OpenCode) |
 | 2026-10-19 | Firmas del responsable registradas y aplicadas: spec §11 con las 7 PN D en «Validada» (2026-10-19, doble rol DQ-10) y documentos del cierre al día (ADR-0012 propuesto, `checklists/legibilidad.md`, `checklists/validacion.md` §1 a §7 y `plan.md` §4, §14 y §15). Se cierran T-00-23, T-00-30 y T-00-53 con su evidencia; §5 recalculado: 32 de 42 (76 %). El bloque de tareas de `specs/README.md` lo actualiza el agente principal (permiso del implementer: solo `task.md` y `tareas.md`) | Decisión D1 del responsable y documentos del cierre del 2026-10-19; el cierre sigue abierto por las condiciones 1 (firma de Oro), 4 (ADR-0012 y S-00) y 5 (lectura en frío) | agente implementer (OpenCode) |
+| 2026-10-19 | Cierre de la spec 00: DQ-34 (firmas sin Jose Julio), DQ-35 (PN07 en dos cortes separados) y DQ-36 (ventana cerrada en ambos extremos); ADR-0012 firmado (opción A); PN11 con `time`; `checklists/legibilidad.md` lleno y firmado (2 de 2 bloques, 5 de 5); V-00-07, V-00-09 y V-00-10 ejecutadas; T-00-31, T-00-34, T-00-36 a T-00-38, T-00-52, T-00-54 y T-00-55 en `[x]`; §5 en 41 de 42 (98 %); queda T-00-39 (merge del PR #2) | Cierre de la spec 00 y decisión del responsable sobre la lectura en frío (DQ-34) y las dos aclaraciones de la relectura | agente principal (OpenCode) |
+| 2026-10-19 | Correcciones de la auditoría de cierre (pasada 4): encabezados con la rama `00-preguntas-negocio-cierre`; DQ-34 en RNF-00-01, CE-00-05, G-37, plan y tareas; DQ-35 en matriz y `research.md`; DQ-36 en spec §13, plan §7.9 y G-19; Constitution Check y estados al día; S-04 y S-05; V-00-10 repetida (7 de 7 documentos, 0 IDs fuera de rango). Pasada 4 LISTO | Segunda pasada de `/analyze` sobre el estado corregido; T-00-31 | agente principal (OpenCode) |
