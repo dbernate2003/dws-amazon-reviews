@@ -1,9 +1,9 @@
 # ADR-0006 — Nombre del archivo de tareas
 
-- **Estado:** Decidido por el responsable (2026-10-14, `/clarify` de `00-preguntas-negocio`) · **falta su firma**
+- **Estado:** Aceptado · firmado por el responsable el 2026-10-19
 - **Fecha:** 2026-10-12
 - **Resolver antes de:** `/tasks` de `00-preguntas-negocio`
-- **Responsable (firma):** pendiente
+- **Responsable (firma):** Dario Andres Bernate Canas — 2026-10-19
 
 ## Contexto
 

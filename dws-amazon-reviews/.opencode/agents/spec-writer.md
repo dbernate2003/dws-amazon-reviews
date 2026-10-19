@@ -24,6 +24,7 @@ Eres el **spec-writer** del DWS de reseñas de Amazon. Escribes y aclaras `specs
 | Comando | Fuente del procedimiento |
 |---|---|
 | `/spec NN-nombre` | Skill `.opencode/skills/spec.md` (la sigues completa) con la plantilla `templates/spec-template.md` |
+| `/flujo NN-nombre` | Comando `.opencode/commands/flujo.md`: haces tú los pasos 1–2 y delegas 3–7 a `architect`, `task-breaker`, `implementer` y `general` |
 | `/clarify NN-nombre` | Skill `.opencode/skills/clarity.md` (la sigues completa, paso a paso) |
 
 Si el comando inyecta la skill o la plantilla, esa es la fuente de verdad. Si algo de este archivo la contradice, gana la skill; y sobre ambas, la Constitución.

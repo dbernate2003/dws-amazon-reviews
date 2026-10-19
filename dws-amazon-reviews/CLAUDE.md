@@ -14,7 +14,9 @@ La configuración vive en `.claude/` con la misma arquitectura que `.opencode/`:
 | 5 | `/tasks NN-nombre [borrador]` | Subagente aislado | `task-breaker` | `skill-tasks` |
 | 6 | `/implement NN-nombre [T-NN-MM]` | Subagente aislado | `implementer` | `skill-implement` |
 | — | `/check NN-nombre` | Subagente aislado, solo lectura | `Explore` | — |
+| 1→7 | `/flujo NN-nombre [desde <paso>]` | Sesión principal; delega 3–7 a sus subagentes | `spec-writer` (con `claude --agent spec-writer`) | Las de cada paso |
 
+- `/flujo` encadena todos los pasos: lee en qué paso va la spec, ejecuta uno y se detiene en su compuerta hasta que digas «continuar». Retoma con `/flujo NN-nombre` o `/flujo NN-nombre desde <paso>`.
 - `/spec` y `/clarify` corren en la sesión principal porque te hacen preguntas, y un subagente no puede preguntar a mitad de la tarea.
 - Un subagente que necesita una decisión tuya se detiene y la devuelve en su respuesta. Contestas volviendo a correr el comando con el dato, por ejemplo `/tasks 01-ingesta-bronce borrador`.
 - Claude Code no limita por agente las rutas que se editan. Lo que cada agente puede escribir está en sus reglas; los bloqueos globales están en `.claude/settings.json`.

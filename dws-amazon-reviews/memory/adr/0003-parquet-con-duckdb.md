@@ -1,9 +1,9 @@
 # ADR-0003 — Parquet exportado con DuckDB
 
-- **Estado:** Aceptado (decisión citada por la constitución v1.0.0; falta la firma del responsable)
+- **Estado:** Aceptado · firmado por el responsable el 2026-10-19
 - **Fecha:** 2026-10-12
 - **Resolver antes de:** —
-- **Responsable (firma):** pendiente
+- **Responsable (firma):** Dario Andres Bernate Canas — 2026-10-19
 
 ## Contexto
 
