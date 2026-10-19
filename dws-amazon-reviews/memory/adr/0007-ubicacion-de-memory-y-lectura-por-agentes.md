@@ -1,9 +1,9 @@
 # ADR-0007 — Ubicación de `memory/` y cómo la leen los agentes
 
-- **Estado:** Decidido por el responsable (2026-10-14, `/clarify` de `00-preguntas-negocio`) · **falta su firma**
+- **Estado:** Aceptado · firmado por el responsable el 2026-10-19
 - **Fecha:** 2026-10-12
 - **Resolver antes de:** `/tasks` de `00-preguntas-negocio`
-- **Responsable (firma):** pendiente
+- **Responsable (firma):** Dario Andres Bernate Canas — 2026-10-19
 
 ## Contexto
 
@@ -23,6 +23,6 @@ La constitución obliga a todo agente a leerla antes de actuar. Faltaba fijar d�
 
 ## Consecuencias
 
-- Comprobar en OpenCode (agente principal, un comando y un subagente) que cita una regla de la constitución. La documentación no confirma que los subagentes reciban `instructions`.
+- Comprobar en OpenCode (agente principal, un comando y un subagente) que cita una regla de la constitución. La documentación no confirma que los subagentes reciban `instructions`. **Comprobado el 2026-10-19:** un subagente de OpenCode citó la constitución; en Claude Code la sesión la recibe cargada por `CLAUDE.md`.
 - Mantener la constitución corta: viaja completa en cada petición.
 - Revisar `AGENTS.md`, los prompts de `.opencode/agents/` y las rutas citadas en `templates/` y `specs/`.
