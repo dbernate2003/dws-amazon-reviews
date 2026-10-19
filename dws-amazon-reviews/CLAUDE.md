@@ -20,3 +20,16 @@ La configuración vive en `.claude/` con la misma arquitectura que `.opencode/`:
 - `/spec` y `/clarify` corren en la sesión principal porque te hacen preguntas, y un subagente no puede preguntar a mitad de la tarea.
 - Un subagente que necesita una decisión tuya se detiene y la devuelve en su respuesta. Contestas volviendo a correr el comando con el dato, por ejemplo `/tasks 01-ingesta-bronce borrador`.
 - Claude Code no limita por agente las rutas que se editan. Lo que cada agente puede escribir está en sus reglas; los bloqueos globales están en `.claude/settings.json`.
+
+## Ponytail: siempre activo (ahorro de tokens)
+
+Claude Code trabaja siempre en modo **Ponytail** (<https://github.com/dietrichgebert/ponytail>), el «senior perezoso»: el cambio más pequeño que resuelve el problema completo. Se instala una sola vez, con dos prompts separados:
+
+```text
+/plugin marketplace add DietrichGebert/ponytail
+```
+```text
+/plugin install ponytail@ponytail
+```
+
+El ruleset entra en cada turno de la sesión principal y de sus subagentes (los hooks necesitan `node` en el PATH) y añade los comandos `/ponytail`, `/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`, `/ponytail-gain` y `/ponytail-help`. Nivel `full` por defecto (`/ponytail lite|full|ultra|off`); no se apaga en este repositorio. La convivencia con la constitución y lo que no se poda están en la sección «Ponytail: siempre activo» de `AGENTS.md`.

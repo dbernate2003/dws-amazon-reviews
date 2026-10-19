@@ -1,6 +1,6 @@
 # DWS de Reseñas de Amazon
 
-> **ALTO: lee primero [`memory/constitution.md`](memory/constitution.md).** Este README y `AGENTS.md` se leen DESPUÉS de la constitución (principio XIV). Si algo de aquí la contradice, gana la constitución.
+> **ALTO: lee primero [`memory/constitution.md`](memory/constitution.md).** Este README y `AGENTS.md` se leen DESPUÉS de la constitución (preámbulo de la constitución). Si algo de aquí la contradice, gana la constitución.
 
 Data Warehouse sobre reseñas de Amazon, construido desde cero con Spec-Driven Development ([GitHub Spec Kit](https://github.com/github/spec-kit)) para el curso de Bases de Datos Avanzadas. Modelo analítico con Kimball, capas con Medallion (`raw` → `silver` → `gold`), PostgreSQL local y costo $0.
 
@@ -48,7 +48,8 @@ dws-amazon-reviews/
 │   ├── adr/                               # Decisiones que afectan a todo el proyecto
 │   │   ├── README.md                      # Índice de ADR
 │   │   ├── 0003-parquet-con-duckdb.md
-│   │   └── 0006 … 0011                    # Un ADR por decisión pendiente
+│   │   ├── 0006 … 0011                    # Un ADR por decisión pendiente
+│   │   └── 0013-ponytail-ahorro-de-tokens.md
 ├── scripts/
 │   ├── README.md
 │   └── new-spec.sh                        # Crea la rama y la carpeta NN-nombre; rechaza nombres inválidos
@@ -132,15 +133,27 @@ La constitución (`/speckit-constitution`) se redactó una vez con `templates/co
 
 Los agentes no dan una especificación por cerrada: la cierra el responsable de la capa tras verificar con sus propias consultas SQL (principio XI).
 
+## Ahorro de tokens (Ponytail)
+
+Todo agente que trabaje en este repositorio —el principal y los subagentes, en OpenCode y en Claude Code— usa **Ponytail** (<https://github.com/dietrichgebert/ponytail>), el «senior perezoso»: escribe el cambio más pequeño que resuelve el problema completo, reutiliza lo que ya existe y no añade código que nadie pidió. Reduce código, tiempo y tokens; no recorta validación, seguridad ni los artefactos que exige la constitución (principio XIII).
+
+| Herramienta | Instalación (una sola vez por persona) | Qué añade |
+|---|---|---|
+| OpenCode | `opencode plugin add @dietrichgebert/ponytail` (global). Alternativa por proyecto: `"plugins": ["@dietrichgebert/ponytail"]` en `opencode.json` | El ruleset en cada turno y en los subagentes, más los comandos `/ponytail…` |
+| Claude Code | `/plugin marketplace add DietrichGebert/ponytail` y `/plugin install ponytail@ponytail`, en dos prompts separados | Lo mismo en la sesión y sus subagentes; requiere `node` en el PATH |
+
+Nivel `full` por defecto; se ajusta con `/ponytail lite|full|ultra|off` y no se apaga en este repositorio. La convivencia con la constitución (la constitución gana; Ponytail no poda el principio XIII) está en la sección «Ponytail: siempre activo» de [`AGENTS.md`](AGENTS.md), y la decisión, en el [ADR-0013](memory/adr/0013-ponytail-ahorro-de-tokens.md).
+
 ## Puesta en marcha
 
 1. Instala PostgreSQL, pgAdmin, DuckDB, Python (pytest) y OpenCode. Todo local y gratis.
-2. Copia `.env.example` a `.env` y completa `PGHOST`, `PGDATABASE` y `PGUSER`. La contraseña vive solo en tu `.env` local, que Git ignora.
-3. Carga el entorno (Git Bash): `set -a; source .env; set +a`.
-4. Descarga `all_3y.txt.gz` a `data/raw/`.
-5. Ejecuta los scripts de cada capa en orden numérico: `psql -f src/<capa>/NN_nombre.sql`. El Parquet sale con `duckdb < src/<capa>/NN_export_parquet.sql`.
-6. Valida con `pytest tests/`.
-7. Para empezar una especificación nueva: `bash scripts/new-spec.sh NN-nombre`, y sigue el flujo de trabajo de arriba.
+2. Instala el plugin Ponytail en tu agente (ver «Ahorro de tokens (Ponytail)»); desde ahí todos los agentes del repositorio trabajan en ese modo.
+3. Copia `.env.example` a `.env` y completa `PGHOST`, `PGDATABASE` y `PGUSER`. La contraseña vive solo en tu `.env` local, que Git ignora.
+4. Carga el entorno (Git Bash): `set -a; source .env; set +a`.
+5. Descarga `all_3y.txt.gz` a `data/raw/`.
+6. Ejecuta los scripts de cada capa en orden numérico: `psql -f src/<capa>/NN_nombre.sql`. El Parquet sale con `duckdb < src/<capa>/NN_export_parquet.sql`.
+7. Valida con `pytest tests/`.
+8. Para empezar una especificación nueva: `bash scripts/new-spec.sh NN-nombre`, y sigue el flujo de trabajo de arriba.
 
 ## Decisiones pendientes
 
