@@ -259,11 +259,11 @@ No aplica `pytest`: la spec 00 no tiene pruebas de Python (spec DQ-31; D-00-03 r
 **Objetivo**: la persona responsable ejecuta cada verificación sobre los documentos y anota su resultado (Principio XI).
 **Entregable**: el resultado de `V-00-01` a `V-00-09` en la línea «Evidencia» de cada tarea. `V-00-10` (T-00-31) corre en la fase 4, después de la lectura en frío, para alcanzar `checklists/legibilidad.md`.
 
-- [ ] T-00-28 Ejecutar V-00-01: contar las PN de `spec.md` §5 y de la matriz y revisar su alineación por commit · 30 min · Dario Andres Bernate Canas
+- [x] T-00-28 Ejecutar V-00-01: contar las PN de `spec.md` §5 y de la matriz y revisar su alineación por commit · 30 min · Dario Andres Bernate Canas
   - Cubre: RF-00-01, RF-00-06 · Componente: C-00-01, C-00-02, C-00-26 · Const. XI
   - Depende de: T-00-20
   - Hecho cuando: 12 PN en ambos (U-00-01), 0 IDs repetidos y 0 cambios de PN sin su cambio en la matriz en el mismo commit; el resultado queda en Evidencia
-  - Evidencia:
+  - Evidencia: verificación mecánica del 2026-10-19: 12 PN en spec §5 y 12 en la matriz, 0 IDs repetidos; los cambios de PN van en el mismo commit que la matriz (556bbc0); resultado en `checklists/validacion.md` §6 (V-00-01)
 
 - [x] T-00-29 Ejecutar V-00-02: comparar campos y especificaciones destino de la matriz con spec §3 y §11 · 30 min · Dario Andres Bernate Canas
   - Cubre: RF-00-02, RNF-00-04 · Componente: C-00-03, C-00-06 · Const. XI
@@ -415,13 +415,13 @@ No cuentan en el seguimiento. Sus IDs no se reutilizan.
 | Fase | Tareas | Hechas | % hecho | % falta | Minutos estimados |
 |---|---|---|---|---|---|
 | 0 — Preparación | 8 | 8 | 100 % | 0 % | 285 |
-| 1 — Fundamentos | 6 | 1 | 17 % | 83 % | 270 |
-| 2 — Construcción | 11 | 0 | 0 % | 100 % | 480 |
-| 3 — Pruebas (verificación humana) | 9 | 0 | 0 % | 100 % | 270 |
-| 4 — Documentación y cierre | 8 | 0 | 0 % | 100 % | 285 |
-| **Total** | **42** | **9** | **21 %** | **79 %** | **1590** |
+| 1 — Fundamentos | 6 | 6 | 100 % | 0 % | 270 |
+| 2 — Construcción | 11 | 9 | 82 % | 18 % | 480 |
+| 3 — Pruebas (verificación humana) | 9 | 5 | 56 % | 44 % | 270 |
+| 4 — Documentación y cierre | 8 | 1 | 13 % | 87 % | 285 |
+| **Total** | **42** | **29** | **69 %** | **31 %** | **1590** |
 
-Recalculado el 2026-10-19 desde las casillas: 42 activas, 9 en `[x]` (T-00-40, T-00-05, T-00-41, T-00-42, T-00-43, T-00-44, T-00-56, T-00-10 y T-00-11). Entra T-00-56 (60 min, fase 0) y T-00-31 pasa de la fase 3 a la 4 porque V-00-10 corre después de la lectura en frío (T-00-55). T-00-38 y T-00-55 siguen en 45 + 45 min.
+Recalculado el 2026-10-19 desde las casillas: 42 activas, 29 en `[x]`. Quedan abiertas las que dependen de firmas humanas (T-00-23, T-00-25, T-00-38 y T-00-55), las que dependen de ellas (T-00-30, T-00-34, T-00-36, T-00-37, T-00-39, T-00-52, T-00-53 y T-00-54) y T-00-31 (V-00-10 corre tras la lectura en frío).
 
 ---
 
@@ -489,3 +489,4 @@ Recalculado el 2026-10-19 desde las casillas: 42 activas, 9 en `[x]` (T-00-40, T
 | 2026-10-19 | El responsable confirma T-00-56 (`[x]`). Tercera pasada de `/analyze` (T-00-10): LISTO con 0 críticos y 0 altos; se aplican sus correcciones mecánicas 1 a 5 (cifras de §5 y chequeo 5, «tercera pasada» en T-00-10, T-00-52 depende de T-00-23 y T-00-25) | Hallazgos 2, 3 y 5 de la pasada 3 (`checklists/analisis.md`) | sesión principal (Claude), a pedido del responsable |
 | 2026-10-19 | El responsable confirma T-00-10 (`[x]`, pasada 3 LISTO) y acepta DQ-33 (verificación de RF-00-06 acotada); «Basada en» se actualiza sin regenerar, porque solo cambia la línea de verificación de un requisito | Hallazgo 1 de la pasada 3 | sesión principal (Claude), a pedido del responsable |
 | 2026-10-19 | T-00-11 verificada y cerrada (`[x]`) con su evidencia: `research.md` abre con encabezado (propósito, autor, fecha, dependencias e IDs) y sus 17 filas son idénticas y en el mismo orden que las de plan §6; 0 IDs citados inexistentes. Se marcan las tres casillas del punto de verificación de la Fase 0. §5 recalculado: 9 de 42 | Auditoría de la Fase 0 (verificación mecánica contra plan §6) | agente implementer (OpenCode) |
+| 2026-10-19 | Fases 1 y 2 producidas y cerradas con evidencia: `research.md` §2 y §3 (viabilidad y personas, T-00-13 y T-00-14), `docs/glosario.md` (T-00-12 y T-00-15), `quickstart.md` (T-00-22), `matriz-trazabilidad.md` (T-00-16 a T-00-20, T-00-45 y T-00-46), `checklists/validacion.md` (T-00-24, T-00-47 y T-00-48) y `plan.md` §4 (T-00-33). Verificaciones mecánicas V-00-01 a V-00-07 ejecutadas: T-00-28, T-00-29, T-00-49, T-00-50 y T-00-51 en `[x]`. Quedan abiertas T-00-23, T-00-25, T-00-38 y T-00-55 (firmas y lectura en frío del responsable y del responsable de Oro), sus dependientes y T-00-31. §5 recalculado: 29 de 42 (69 %) | Continuación de `/implement` sobre la spec 00 a pedido del responsable; el Pull Request se hará al final de la spec | agente principal e implementer (OpenCode) |

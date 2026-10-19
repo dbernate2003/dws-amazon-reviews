@@ -76,7 +76,7 @@ Son las seis condiciones de la constitución (sección «Flujo de desarrollo y c
 <!-- tareas-resumen:inicio -->
 | Spec | Archivo | Tareas | Hechas | % hecho | % falta | Min estimados | Bloqueos |
 |---|---|---|---|---|---|---|---|
-| `00-preguntas-negocio` | [task.md](00-preguntas-negocio/task.md) | 42 | 8 | 19 % | 81 % | 1590 | U-00-09 `[POR DEFINIR: ADR-0012]` |
+| `00-preguntas-negocio` | [task.md](00-preguntas-negocio/task.md) | 42 | 29 | 69 % | 31 % | 1590 | U-00-09 `[POR DEFINIR: ADR-0012]` · firmas humanas (T-00-23, T-00-25, T-00-38 y T-00-55) |
 <!-- tareas-resumen:fin -->
 
 ### 00-preguntas-negocio
@@ -92,41 +92,41 @@ Son las seis condiciones de la constitución (sección «Flujo de desarrollo y c
 | T-00-43 | [x] | Regenerar `task.md` con `/tasks 00-preguntas-negocio` sobre el plan regenerado | Dario Andres Bernate Canas | T-00-42 | `task.md` (2026-10-19) (confirmada 2026-10-19) |
 | T-00-56 | [x] | Regenerar `plan.md` y `task.md` sobre la spec con DQ-32 (RF-00-10 acotado) y los hallazgos de `checklists/analisis.md` | Dario Andres Bernate Canas | T-00-43 | `plan.md` (§16) y `task.md` (§8). Confirmada por el responsable el 2026-10-19 |
 | T-00-10 | [x] | Correr `/analyze 00-preguntas-negocio` en modo completo (tercera pasada de D-00-02: se repitió porque la segunda dio un hallazgo alto) y guardar su informe en `specs/00-preguntas-negocio/checklists/analisis.md` | Dario Andres Bernate Canas | T-00-43, T-00-44, T-00-56 | `checklists/analisis.md`, pasada 3 LISTO (2026-10-19) |
-| T-00-11 | [ ] [P] | Crear `specs/00-preguntas-negocio/research.md` con encabezado y las 17 decisiones de plan §6 | Dario Andres Bernate Canas | T-00-10 | |
-| T-00-12 | [ ] [P] | Crear `docs/glosario.md` con encabezado y los 39 términos de plan §15.1 | Dario Andres Bernate Canas | T-00-10 | |
-| T-00-22 | [ ] [P] | Crear `specs/00-preguntas-negocio/quickstart.md` con encabezado y los pasos 01 a 09 de plan §7.2 | Dario Andres Bernate Canas | T-00-10 | |
-| T-00-13 | [ ] [P] | Analizar en `research.md`, para cada una de las 12 PN, qué campos de la fuente necesita y si la fuente puede responderla | Dario Andres Bernate Canas | T-00-11 | |
-| T-00-15 | [ ] [P] | Agregar a `docs/glosario.md` los términos y siglas de `spec.md` y `plan.md` que no estén en plan §15.1 | Dario Andres Bernate Canas | T-00-12 | |
-| T-00-14 | [ ] [P] | Registrar en `research.md`, para cada una de las 12 PN, si su respuesta identifica a una persona o se entrega solo de forma agregada | Dario Andres Bernate Canas | T-00-13 | |
-| T-00-16 | [ ] [P] | Crear `specs/00-preguntas-negocio/matriz-trazabilidad.md` con encabezado y 12 filas con `id_pregunta`, `enunciado_resumido` y `prioridad` | Dario Andres Bernate Canas | T-00-13 | |
-| T-00-17 | [ ] [P] | Completar `campos_fuente`, `viabilidad` y `motivo_viabilidad` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-16 | |
-| T-00-47 | [ ] [P] | Crear `specs/00-preguntas-negocio/checklists/validacion.md` con encabezado y la revisión por pregunta de las 12 PN | Dario Andres Bernate Canas | T-00-05, T-00-14 | |
-| T-00-18 | [ ] [P] | Completar `corte_por_mes` y `cuenta_usuarios` en las 12 filas de la matriz, con la obligación de informar las anónimas excluidas | Dario Andres Bernate Canas | T-00-17 | |
-| T-00-24 | [ ] [P] | Registrar en `checklists/validacion.md` el número de PN de cada tablero frente a U-00-02 y U-00-03 | Dario Andres Bernate Canas | T-00-47 | |
-| T-00-23 | [ ] [P] | Validar en `spec.md` §11 las siete PN de prioridad D (PN01, PN02, PN03, PN04, PN05, PN07 y PN11) | Dario Andres Bernate Canas (responsable y segundo validador) | T-00-14, T-00-17 | |
-| T-00-45 | [ ] [P] | Completar `solo_agregada` y `tablero` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-18 | |
-| T-00-48 | [ ] [P] | Registrar en `checklists/validacion.md` la revisión de spec §6.1 y §6.2 (medida, cortes y nivel de detalle con nombres completos) | Dario Andres Bernate Canas | T-00-24 | |
-| T-00-46 | [ ] [P] | Completar `calculo_en_spec` y `decisiones_diferidas` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-45 | |
-| T-00-25 | [ ] [P] | Firmar en `checklists/validacion.md`, como responsable de Oro, el insumo del grano (spec §6.1) y la tabla de cálculos (spec §6.2) | Jose Julio Gomez Palmera | T-00-48 | |
-| T-00-20 | [ ] | Completar `especificaciones_destino` y `criterio_de_aceptacion` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-46 | |
-| T-00-28 | [ ] | Ejecutar V-00-01: contar las PN de `spec.md` §5 y de la matriz y revisar su alineación por commit | Dario Andres Bernate Canas | T-00-20 | |
-| T-00-29 | [ ] | Ejecutar V-00-02: comparar campos y especificaciones destino de la matriz con spec §3 y §11 | Dario Andres Bernate Canas | T-00-20 | |
-| T-00-30 | [ ] | Ejecutar V-00-03: revisar las PN marcadas «no viable con esta fuente» en la matriz | Dario Andres Bernate Canas | T-00-20, T-00-23 | |
-| T-00-49 | [ ] | Ejecutar V-00-04: revisar identificación de personas y respuesta agregada en `research.md` y en la lista de validación | Dario Andres Bernate Canas | T-00-47 | |
-| T-00-50 | [ ] | Ejecutar V-00-05: comparar el tablero de cada PN en la matriz, spec §7 y la lista de validación | Dario Andres Bernate Canas | T-00-20, T-00-24 | |
-| T-00-51 | [ ] | Ejecutar V-00-06: revisar las marcas `corte_por_mes`, `cuenta_usuarios` y `solo_agregada` de la matriz | Dario Andres Bernate Canas | T-00-20 | |
-| T-00-52 | [ ] | Ejecutar V-00-07: comparar la línea «Basada en» de `plan.md` y `task.md` con la fecha del último cambio de PN, requisitos o spec §6–§7 y revisar el orden de los cambios de PN | Dario Andres Bernate Canas | T-00-56, T-00-20, T-00-23, T-00-25 | |
-| T-00-53 | [ ] | Ejecutar V-00-08: revisar en spec §11 el estado de las siete PN de prioridad D | Dario Andres Bernate Canas | T-00-23 | |
-| T-00-54 | [ ] | Ejecutar V-00-09: revisar que `checklists/validacion.md` esté completa y firmada | Dario Andres Bernate Canas | T-00-25 | |
-| T-00-36 | [ ] | Registrar en `checklists/validacion.md` el resultado conjunto de V-00-01 a V-00-09 como condición 3 de la compuerta (verificación humana) | Dario Andres Bernate Canas | T-00-28, T-00-29, T-00-30, T-00-49, T-00-50, T-00-51, T-00-52, T-00-53, T-00-54 | |
-| T-00-34 | [ ] [P] | Registrar en `checklists/validacion.md` la condición 1 de la compuerta: CE-00-01 a CE-00-04 cumplidos y spec §11 firmada, sin `pytest` | Dario Andres Bernate Canas | T-00-36 | |
+| T-00-11 | [x] [P] | Crear `specs/00-preguntas-negocio/research.md` con encabezado y las 17 decisiones de plan §6 | Dario Andres Bernate Canas | T-00-10 | `research.md` (17 de 17 filas de plan §6, 2026-10-19) |
+| T-00-12 | [x] [P] | Crear `docs/glosario.md` con encabezado y los 39 términos de plan §15.1 | Dario Andres Bernate Canas | T-00-10 | `docs/glosario.md` (39 de 39 términos, 2026-10-19) |
+| T-00-22 | [x] [P] | Crear `specs/00-preguntas-negocio/quickstart.md` con encabezado y los pasos 01 a 09 de plan §7.2 | Dario Andres Bernate Canas | T-00-10 | `quickstart.md` (9 de 9 pasos, 2026-10-19) |
+| T-00-13 | [x] [P] | Analizar en `research.md`, para cada una de las 12 PN, qué campos de la fuente necesita y si la fuente puede responderla | Dario Andres Bernate Canas | T-00-11 | `research.md` §2 (12 de 12 PN con campos y viabilidad; 0 no viables) |
+| T-00-15 | [x] [P] | Agregar a `docs/glosario.md` los términos y siglas de `spec.md` y `plan.md` que no estén en plan §15.1 | Dario Andres Bernate Canas | T-00-12 | `docs/glosario.md` G-40 a G-49 (0 siglas sin definir) |
+| T-00-14 | [x] [P] | Registrar en `research.md`, para cada una de las 12 PN, si su respuesta identifica a una persona o se entrega solo de forma agregada | Dario Andres Bernate Canas | T-00-13 | `research.md` §3 (12 de 12; PN09, PN10 y PN11 solo agregadas) |
+| T-00-16 | [x] [P] | Crear `specs/00-preguntas-negocio/matriz-trazabilidad.md` con encabezado y 12 filas con `id_pregunta`, `enunciado_resumido` y `prioridad` | Dario Andres Bernate Canas | T-00-13 | `matriz-trazabilidad.md` (12 filas, 2026-10-19) |
+| T-00-17 | [x] [P] | Completar `campos_fuente`, `viabilidad` y `motivo_viabilidad` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-16 | `matriz-trazabilidad.md` (campos de spec §11 y viabilidad en 12 de 12 filas) |
+| T-00-47 | [x] [P] | Crear `specs/00-preguntas-negocio/checklists/validacion.md` con encabezado y la revisión por pregunta de las 12 PN | Dario Andres Bernate Canas | T-00-05, T-00-14 | `checklists/validacion.md` §1 (12 de 12 PN, 0 descartes) |
+| T-00-18 | [x] [P] | Completar `corte_por_mes` y `cuenta_usuarios` en las 12 filas de la matriz, con la obligación de informar las anónimas excluidas | Dario Andres Bernate Canas | T-00-17 | `matriz-trazabilidad.md` (6 con corte por mes y 3 con conteo de usuarios, con el informe de anónimas) |
+| T-00-24 | [x] [P] | Registrar en `checklists/validacion.md` el número de PN de cada tablero frente a U-00-02 y U-00-03 | Dario Andres Bernate Canas | T-00-47 | `checklists/validacion.md` §2 (T1 = 5, T2 = 2, T3 = 5) |
+| T-00-23 | [ ] [P] | Validar en `spec.md` §11 las siete PN de prioridad D (PN01, PN02, PN03, PN04, PN05, PN07 y PN11) | Dario Andres Bernate Canas (responsable y segundo validador) | T-00-14, T-00-17 | Pendiente: spec §11 sin validar (firma humana) |
+| T-00-45 | [x] [P] | Completar `solo_agregada` y `tablero` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-18 | `matriz-trazabilidad.md` (`solo_agregada` en PN09, PN10 y PN11; tablero en 12 de 12) |
+| T-00-48 | [x] [P] | Registrar en `checklists/validacion.md` la revisión de spec §6.1 y §6.2 (medida, cortes y nivel de detalle con nombres completos) | Dario Andres Bernate Canas | T-00-24 | `checklists/validacion.md` §4 (12 de 12 filas de spec §6.2; 0 cambios) |
+| T-00-46 | [x] [P] | Completar `calculo_en_spec` y `decisiones_diferidas` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-45 | `matriz-trazabilidad.md` (§6.2 citada sin copiar; DQ-11, DQ-12, DQ-17, DQ-23 y DQ-24) |
+| T-00-25 | [ ] [P] | Firmar en `checklists/validacion.md`, como responsable de Oro, el insumo del grano (spec §6.1) y la tabla de cálculos (spec §6.2) | Jose Julio Gomez Palmera | T-00-48 | Pendiente: firma del responsable de Oro |
+| T-00-20 | [x] | Completar `especificaciones_destino` y `criterio_de_aceptacion` en las 12 filas de la matriz | Dario Andres Bernate Canas | T-00-46 | `matriz-trazabilidad.md` (destinos y criterio de aceptación en 12 de 12) |
+| T-00-28 | [x] | Ejecutar V-00-01: contar las PN de `spec.md` §5 y de la matriz y revisar su alineación por commit | Dario Andres Bernate Canas | T-00-20 | `checklists/validacion.md` §6 (V-00-01: 12 PN, 0 repetidos, commit 556bbc0) |
+| T-00-29 | [x] | Ejecutar V-00-02: comparar campos y especificaciones destino de la matriz con spec §3 y §11 | Dario Andres Bernate Canas | T-00-20 | `checklists/validacion.md` §6 (V-00-02) |
+| T-00-30 | [ ] | Ejecutar V-00-03: revisar las PN marcadas «no viable con esta fuente» en la matriz | Dario Andres Bernate Canas | T-00-20, T-00-23 | Pendiente: depende de T-00-23 |
+| T-00-49 | [x] | Ejecutar V-00-04: revisar identificación de personas y respuesta agregada en `research.md` y en la lista de validación | Dario Andres Bernate Canas | T-00-47 | `checklists/validacion.md` §6 (V-00-04) |
+| T-00-50 | [x] | Ejecutar V-00-05: comparar el tablero de cada PN en la matriz, spec §7 y la lista de validación | Dario Andres Bernate Canas | T-00-20, T-00-24 | `checklists/validacion.md` §6 (V-00-05) |
+| T-00-51 | [x] | Ejecutar V-00-06: revisar las marcas `corte_por_mes`, `cuenta_usuarios` y `solo_agregada` de la matriz | Dario Andres Bernate Canas | T-00-20 | `checklists/validacion.md` §6 (V-00-06) |
+| T-00-52 | [ ] | Ejecutar V-00-07: comparar la línea «Basada en» de `plan.md` y `task.md` con la fecha del último cambio de PN, requisitos o spec §6–§7 y revisar el orden de los cambios de PN | Dario Andres Bernate Canas | T-00-56, T-00-20, T-00-23, T-00-25 | Pendiente: depende de T-00-23 y T-00-25 |
+| T-00-53 | [ ] | Ejecutar V-00-08: revisar en spec §11 el estado de las siete PN de prioridad D | Dario Andres Bernate Canas | T-00-23 | Pendiente: 0 de 7 PN D validadas |
+| T-00-54 | [ ] | Ejecutar V-00-09: revisar que `checklists/validacion.md` esté completa y firmada | Dario Andres Bernate Canas | T-00-25 | Pendiente: firma del responsable de Oro |
+| T-00-36 | [ ] | Registrar en `checklists/validacion.md` el resultado conjunto de V-00-01 a V-00-09 como condición 3 de la compuerta (verificación humana) | Dario Andres Bernate Canas | T-00-28, T-00-29, T-00-30, T-00-49, T-00-50, T-00-51, T-00-52, T-00-53, T-00-54 | Pendiente: faltan V-00-08 y V-00-09 (firmas) |
+| T-00-34 | [ ] [P] | Registrar en `checklists/validacion.md` la condición 1 de la compuerta: CE-00-01 a CE-00-04 cumplidos y spec §11 firmada, sin `pytest` | Dario Andres Bernate Canas | T-00-36 | Pendiente: condición 1 sin firmar |
 | T-00-35 | — | Confirmar cuadre exacto (condición 2) · No aplica | — | — | — |
-| T-00-33 | [ ] [P] | Actualizar en `plan.md` §4 el estado de las filas IX, XII y XIII.4 a XIII.7 con la evidencia producida | Dario Andres Bernate Canas | T-00-36 | |
-| T-00-37 | [ ] | Actualizar la documentación de la entrega (condición 4): glosario, documentos de la spec y fila S-00 de `docs/gestion/tareas.md` | Dario Andres Bernate Canas | T-00-33, T-00-34 | |
-| T-00-38 | [ ] | Revisión de legibilidad por una persona junior distinta del autor, parte 1: PN01 a PN06 y la matriz (lectura en frío, condición 5) | Jose Julio Gomez Palmera | T-00-37 | |
-| T-00-55 | [ ] | Revisión de legibilidad por una persona junior distinta del autor, parte 2: PN07 a PN12 y el glosario, y firma del checklist (lectura en frío, condición 5) | Jose Julio Gomez Palmera | T-00-38 | |
-| T-00-31 | [ ] | Ejecutar V-00-10: revisar glosario, encabezados e IDs citados de los documentos de la spec y registrar su resultado en `checklists/validacion.md` | Dario Andres Bernate Canas | T-00-55 | |
-| T-00-39 | [ ] | Integrar a `main` el Pull Request de la rama `00-preguntas-negocio` (condición 6) | Dario Andres Bernate Canas | T-00-31 | |
+| T-00-33 | [x] [P] | Actualizar en `plan.md` §4 el estado de las filas IX, XII y XIII.4 a XIII.7 con la evidencia producida | Dario Andres Bernate Canas | T-00-36 | `plan.md` §4 (IX, XIII.4, XIII.5 y XIII.6 en ✅; XIII.7 en ⚠️) |
+| T-00-37 | [ ] | Actualizar la documentación de la entrega (condición 4): glosario, documentos de la spec y fila S-00 de `docs/gestion/tareas.md` | Dario Andres Bernate Canas | T-00-33, T-00-34 | Parcial: glosario y documentos al día; falta la condición 1 |
+| T-00-38 | [ ] | Revisión de legibilidad por una persona junior distinta del autor, parte 1: PN01 a PN06 y la matriz (lectura en frío, condición 5) | Jose Julio Gomez Palmera | T-00-37 | Pendiente: lectura en frío |
+| T-00-55 | [ ] | Revisión de legibilidad por una persona junior distinta del autor, parte 2: PN07 a PN12 y el glosario, y firma del checklist (lectura en frío, condición 5) | Jose Julio Gomez Palmera | T-00-38 | Pendiente: lectura en frío |
+| T-00-31 | [ ] | Ejecutar V-00-10: revisar glosario, encabezados e IDs citados de los documentos de la spec y registrar su resultado en `checklists/validacion.md` | Dario Andres Bernate Canas | T-00-55 | Pendiente: corre tras la lectura en frío |
+| T-00-39 | [ ] | Integrar a `main` el Pull Request de la rama `00-preguntas-negocio` (condición 6) | Dario Andres Bernate Canas | T-00-31 | Pendiente: Pull Request al final de la spec |
 | T-00-01 | retirada | Firmar el ADR-0006 | — | — | — |
 | T-00-02 | retirada | Firmar el ADR-0007 | — | — | — |
 | T-00-03 | retirada | Actualizar el estado de ADR-0006 y ADR-0007 en el índice | — | — | — |
